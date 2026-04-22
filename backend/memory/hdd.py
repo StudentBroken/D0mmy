@@ -2,7 +2,7 @@ import logging
 import time
 import uuid
 from datetime import datetime, timezone
-from functools import lru_cache
+from pathlib import Path
 
 import chromadb
 from chromadb import EmbeddingFunction, Documents, Embeddings
@@ -33,22 +33,32 @@ class GoogleQueryEmbeddingFunction(EmbeddingFunction):
         return embed(list(input), task_type="RETRIEVAL_QUERY")
 
 
-@lru_cache(maxsize=1)
+_clients: dict[str, chromadb.ClientAPI] = {}
+_collections: dict[str, chromadb.Collection] = {}
+
+
 def _client() -> chromadb.ClientAPI:
     cfg = get_settings()
-    return chromadb.PersistentClient(
-        path=cfg.chroma_persist_dir,
-        settings=ChromaSettings(anonymized_telemetry=False),
-    )
+    path = cfg.chroma_persist_dir
+    if path not in _clients:
+        Path(path).mkdir(parents=True, exist_ok=True)
+        _clients[path] = chromadb.PersistentClient(
+            path=path,
+            settings=ChromaSettings(anonymized_telemetry=False),
+        )
+    return _clients[path]
 
 
-@lru_cache(maxsize=1)
 def _collection() -> chromadb.Collection:
-    return _client().get_or_create_collection(
-        name="d0mmy",
-        embedding_function=GoogleEmbeddingFunction(),
-        metadata={"hnsw:space": "cosine"},
-    )
+    cfg = get_settings()
+    path = cfg.chroma_persist_dir
+    if path not in _collections:
+        _collections[path] = _client().get_or_create_collection(
+            name="d0mmy",
+            embedding_function=GoogleEmbeddingFunction(),
+            metadata={"hnsw:space": "cosine"},
+        )
+    return _collections[path]
 
 
 def store(text: str, metadata: dict | None = None) -> str:

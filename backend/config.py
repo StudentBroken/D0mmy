@@ -1,7 +1,11 @@
 from functools import lru_cache
+from pathlib import Path
 from typing import Literal
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_DEFAULT_CHROMA   = "./data/chroma"
+_DEFAULT_SPRINTS  = "./data/sprints.json"
 
 
 class Settings(BaseSettings):
@@ -27,11 +31,11 @@ class Settings(BaseSettings):
     # Empty = D0mmy's own directory (default, self-hosted mode).
     target_repo: str = ""
 
-    # ChromaDB
-    chroma_persist_dir: str = "./data/chroma"
+    # ChromaDB — auto-derived to {target_repo}/.d0mmy/chroma when target_repo is set
+    chroma_persist_dir: str = _DEFAULT_CHROMA
 
-    # Sprints — per-project backends point this at their own sprints.json
-    sprints_path: str = "./data/sprints.json"
+    # Sprints — auto-derived to {target_repo}/.d0mmy/sprints.json when target_repo is set
+    sprints_path: str = _DEFAULT_SPRINTS
 
     # Logging
     log_level: str = "INFO"
@@ -44,6 +48,18 @@ class Settings(BaseSettings):
                 "GOOGLE_API_KEY is not set. Run `python scripts/setup_keys.py`."
             )
         return v
+
+    @model_validator(mode="after")
+    def derive_project_paths(self) -> "Settings":
+        """Auto-point data paths into {target_repo}/.d0mmy/ when target_repo is set
+        and the user hasn't explicitly overridden the paths in .env."""
+        if self.target_repo:
+            d0mmy = Path(self.target_repo) / ".d0mmy"
+            if self.chroma_persist_dir == _DEFAULT_CHROMA:
+                self.chroma_persist_dir = str(d0mmy / "chroma")
+            if self.sprints_path == _DEFAULT_SPRINTS:
+                self.sprints_path = str(d0mmy / "sprints.json")
+        return self
 
 
 @lru_cache(maxsize=1)

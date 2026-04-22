@@ -17,6 +17,7 @@ async def call_model(
     schema: dict | None = None,
     agent: str = "",
     goal: str = "",
+    run_version_hook: bool = True,
 ) -> dict:
     from backend.models.google import call_google, _role_to_model
     from backend.ws_manager import manager
@@ -43,7 +44,7 @@ async def call_model(
     )
 
     try:
-        result = await call_google(role=role, messages=messages, schema=schema)
+        result = await call_google(role=role, messages=messages, schema=schema, run_version_hook=run_version_hook)
         duration_ms = int((time.monotonic() - t_start) * 1000)
 
         await manager.broadcast(

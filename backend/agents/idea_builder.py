@@ -7,7 +7,7 @@ from pathlib import Path
 from backend.models.client import call_model
 from backend.memory.rom import get_prompt, get_schema
 from backend.memory.hdd import fetch_context
-from backend.agents.module_indexer.index_writer import INDEX_MD
+from backend.agents.module_indexer.index_writer import get_index_md_path
 
 logger = logging.getLogger(__name__)
 
@@ -95,8 +95,9 @@ async def run(intent: str, session_id: str = "", on_status=None) -> tuple[dict, 
 
     # Load local project map if indexed
     repo_map = ""
-    if INDEX_MD.exists():
-        repo_map = INDEX_MD.read_text(encoding="utf-8", errors="replace")
+    _index_md = get_index_md_path()
+    if _index_md.exists():
+        repo_map = _index_md.read_text(encoding="utf-8", errors="replace")
         # Cap at 15k chars for planning safety; Phase 3 execution handles full file reads
         if len(repo_map) > 15000:
             repo_map = repo_map[:15000] + "\n... (project map truncated)"

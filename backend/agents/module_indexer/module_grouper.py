@@ -64,6 +64,7 @@ async def group_modules(file_summaries: dict[str, dict]) -> list[dict]:
             schema=get_schema("module_group"),
             agent="module_grouper",
             goal="group files into logical modules",
+            run_version_hook=False,
         )
         parsed = result.get("parsed") or {}
         modules = parsed.get("modules", [])

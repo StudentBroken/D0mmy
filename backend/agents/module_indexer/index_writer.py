@@ -11,17 +11,45 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-_ROOT       = Path(__file__).resolve().parents[3]   # project root
-INDEX_JSON  = _ROOT / "data" / "module_index.json"
-INDEX_MD    = _ROOT / "data" / "module_index.md"
+_GLOBAL_DATA = Path(__file__).resolve().parents[3] / "data"
+
+# Backward-compat constants — point to global data dir (used when no target_repo set)
+INDEX_JSON = _GLOBAL_DATA / "module_index.json"
+INDEX_MD   = _GLOBAL_DATA / "module_index.md"
 
 
-def load_index() -> dict:
-    if INDEX_JSON.exists():
+def _d0mmy_dir(workspace_root: str | None = None) -> Path:
+    """Return the .d0mmy data directory for the given workspace.
+    Falls back to the global data/ dir when no workspace or target_repo is set."""
+    root = workspace_root
+    if not root:
         try:
-            return json.loads(INDEX_JSON.read_text())
+            from backend.config import get_settings
+            root = get_settings().target_repo
+        except Exception:
+            pass
+    if root:
+        d = Path(root) / ".d0mmy"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+    return _GLOBAL_DATA
+
+
+def get_index_json_path(workspace_root: str | None = None) -> Path:
+    return _d0mmy_dir(workspace_root) / "module_index.json"
+
+
+def get_index_md_path(workspace_root: str | None = None) -> Path:
+    return _d0mmy_dir(workspace_root) / "module_index.md"
+
+
+def load_index(workspace_root: str | None = None) -> dict:
+    path = get_index_json_path(workspace_root)
+    if path.exists():
+        try:
+            return json.loads(path.read_text())
         except Exception as exc:
-            logger.warning("Corrupt module_index.json: %s — starting fresh", exc)
+            logger.warning("Corrupt module_index.json at %s: %s — starting fresh", path, exc)
     return {"version": 1, "files": {}, "modules": []}
 
 
@@ -30,24 +58,25 @@ def write_index(
     modules: list[dict],
     workspace_root: str,
 ) -> None:
-    index = load_index()
+    index = load_index(workspace_root)
     index["version"]        = 1
     index["last_indexed"]   = datetime.now(timezone.utc).isoformat()
     index["workspace_root"] = workspace_root
     index["files"].update(file_summaries)
     index["modules"]        = modules
 
-    INDEX_JSON.parent.mkdir(parents=True, exist_ok=True)
-    INDEX_JSON.write_text(json.dumps(index, indent=2))
-    _write_md(index)
+    json_path = get_index_json_path(workspace_root)
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    json_path.write_text(json.dumps(index, indent=2))
+    _write_md(index, workspace_root)
     logger.info(
-        "module_index written: %d files, %d modules",
-        len(index["files"]), len(modules),
+        "module_index written to %s: %d files, %d modules",
+        json_path.parent, len(index["files"]), len(modules),
     )
 
 
-def _write_md(index: dict) -> None:
-    ts  = index.get("last_indexed", "unknown")
+def _write_md(index: dict, workspace_root: str | None = None) -> None:
+    ts   = index.get("last_indexed", "unknown")
     root = index.get("workspace_root", "")
     lines = [
         "# Module Index",
@@ -68,7 +97,6 @@ def _write_md(index: dict) -> None:
         if mod.get("deps"):
             lines.append(f"**Deps:** {', '.join(str(d) for d in mod['deps'][:8])}")
 
-        # Per-file symbol trees
         for f in mod.get("files", []):
             fdata = index["files"].get(f["path"]) or {}
             tree = fdata.get("tree", "")
@@ -82,7 +110,7 @@ def _write_md(index: dict) -> None:
         lines.append("---")
         lines.append("")
 
-    INDEX_MD.write_text("\n".join(lines))
+    get_index_md_path(workspace_root).write_text("\n".join(lines))
 
 
 def get_module_by_id(module_id: str) -> dict | None:
@@ -102,4 +130,4 @@ def invalidate_file(rel_path: str) -> None:
     """Remove a file entry so it gets re-indexed on next run."""
     index = load_index()
     index.get("files", {}).pop(rel_path, None)
-    INDEX_JSON.write_text(json.dumps(index, indent=2))
+    get_index_json_path().write_text(json.dumps(index, indent=2))

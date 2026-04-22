@@ -1,0 +1,3254 @@
+{
+  "version": 1,
+  "files": {
+    "dev.py": {
+      "path": "dev.py",
+      "checksum": "59bac400a8af3085",
+      "tldr": "dev.py is a bootstrapper script that launches the D0mmy process launcher and dashboard in parallel.",
+      "tree": "dev.py\n\u251c\u2500\u2500 kill_port_processes:17 \u2014 kills processes using a specific port\n\u2514\u2500\u2500 main:39 \u2014 orchestrates cleanup, starts launcher and dashboard",
+      "symbols": [
+        {
+          "name": "kill_port_processes",
+          "line": 17,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "main",
+          "line": 39,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "subprocess",
+        "signal",
+        "urllib.request"
+      ]
+    },
+    "extension/popup.js": {
+      "path": "extension/popup.js",
+      "checksum": "2f4d0313ed2f99a3",
+      "tldr": "popup.js: Manages the browser extension popup's connection status display for the Orchestrator.",
+      "tree": "extension/popup.js\n\u2514\u2500\u2500 checkConnection:3 \u2014 checks health endpoint to update UI status",
+      "symbols": [
+        {
+          "name": "checkConnection",
+          "line": 3,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "extension/background.js": {
+      "path": "extension/background.js",
+      "checksum": "958b759a0014e799",
+      "tldr": "extension/background.js: Service worker managing WebSocket connection to a harvester orchestrator and handling content harvesting via chrome commands.",
+      "tree": "extension/background.js\n\u251c\u2500\u2500 connect:7 \u2014 Establishes WebSocket connection and handles reconnection\n\u251c\u2500\u2500 send:36 \u2014 Sends messages to the orchestrator or queues them\n\u251c\u2500\u2500 htmlToMarkdown:79 \u2014 Converts HTML strings to basic Markdown format\n\u2514\u2500\u2500 stripTags:102 \u2014 Removes all HTML tags from a string",
+      "symbols": [
+        {
+          "name": "connect",
+          "line": 7,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "send",
+          "line": 36,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "htmlToMarkdown",
+          "line": 79,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "stripTags",
+          "line": 102,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "extension/content.js": {
+      "path": "extension/content.js",
+      "checksum": "1ab2ffcc8f341c2e",
+      "tldr": "extension/content.js: Content script providing visual feedback (flashing highlight) when text is harvested.",
+      "tree": "extension/content.js\n\u2514\u2500\u2500 flashSelection:8 \u2014 applies a temporary visual flash to the current text selection",
+      "symbols": [
+        {
+          "name": "flashSelection",
+          "line": 8,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "backend/config.py": {
+      "path": "backend/config.py",
+      "checksum": "b08a6c383b009485",
+      "tldr": "backend/config.py defines the Settings class for application configuration using Pydantic and a singleton get_settings function.",
+      "tree": "backend/config.py\n\u251c\u2500\u2500 Settings:11 \u2014 application configuration settings\n\u2502   \u251c\u2500\u2500 must_not_be_empty:45 \u2014 validates that google_api_key is provided\n\u2502   \u2514\u2500\u2500 derive_project_paths:53 \u2014 calculates project-specific data paths\n\u2514\u2500\u2500 get_settings:66 \u2014 returns a cached Settings instance",
+      "symbols": [
+        {
+          "name": "Settings",
+          "line": 11,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "must_not_be_empty",
+          "line": 45,
+          "kind": "method",
+          "parent": "Settings"
+        },
+        {
+          "name": "derive_project_paths",
+          "line": 53,
+          "kind": "method",
+          "parent": "Settings"
+        },
+        {
+          "name": "get_settings",
+          "line": 66,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "pydantic",
+        "pydantic_settings"
+      ]
+    },
+    "backend/settings_api.py": {
+      "path": "backend/settings_api.py",
+      "checksum": "a2f10f2077f60d21",
+      "tldr": "settings_api.py provides a FastAPI router for managing .env configuration and BOM JSON files via HTTP endpoints.",
+      "tree": "backend/settings_api.py\n\u251c\u2500\u2500 _read_env:40 \u2014 reads and parses .env file into a dictionary\n\u251c\u2500\u2500 _write_env:52 \u2014 writes key-value pairs to the .env file\n\u251c\u2500\u2500 _mask:59 \u2014 masks sensitive values for display\n\u251c\u2500\u2500 get_settings:66 \u2014 API endpoint to retrieve current settings\n\u251c\u2500\u2500 SettingsUpdate:74 \u2014 Pydantic model for settings update requests\n\u251c\u2500\u2500 update_settings:82 \u2014 API endpoint to update .env settings\n\u251c\u2500\u2500 get_mode:107 \u2014 API endpoint to get the project mode\n\u251c\u2500\u2500 ModeUpdate:112 \u2014 Pydantic model for mode update requests\n\u251c\u2500\u2500 set_mode:117 \u2014 API endpoint to set the project mode\n\u251c\u2500\u2500 get_bom:129 \u2014 API endpoint to retrieve the BOM JSON file\n\u251c\u2500\u2500 BomUpdate:138 \u2014 Pydantic model for BOM update requests\n\u2514\u2500\u2500 update_bom:143 \u2014 API endpoint to update the BOM JSON file",
+      "symbols": [
+        {
+          "name": "_read_env",
+          "line": 40,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_write_env",
+          "line": 52,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_mask",
+          "line": 59,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_settings",
+          "line": 66,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SettingsUpdate",
+          "line": 74,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "update_settings",
+          "line": 82,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_mode",
+          "line": 107,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ModeUpdate",
+          "line": 112,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "set_mode",
+          "line": 117,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_bom",
+          "line": 129,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "BomUpdate",
+          "line": 138,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "update_bom",
+          "line": 143,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "fastapi",
+        "pydantic",
+        "backend.config"
+      ]
+    },
+    "backend/terminal.py": {
+      "path": "backend/terminal.py",
+      "checksum": "a9f9b76ec3c9c557",
+      "tldr": "backend/terminal.py provides the TerminalSession class and terminal_endpoint to manage interactive shell sessions via WebSockets.",
+      "tree": "backend/terminal.py\n\u251c\u2500\u2500 TerminalSession:33 \u2014 Manages a single terminal process and its I/O\n\u2502   \u251c\u2500\u2500 run:39 \u2014 Executes a shell command and starts streaming\n\u2502   \u251c\u2500\u2500 _stream:59 \u2014 Reads process output and sends it to the WebSocket\n\u2502   \u251c\u2500\u2500 write_stdin:79 \u2014 Writes input data to the process stdin\n\u2502   \u251c\u2500\u2500 kill:84 \u2014 Terminates the active process and cancels streaming\n\u2502   \u2514\u2500\u2500 running:103 \u2014 Checks if the process is currently active\n\u2514\u2500\u2500 terminal_endpoint:110 \u2014 WebSocket handler for terminal session interactions",
+      "symbols": [
+        {
+          "name": "TerminalSession",
+          "line": 33,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "__init__",
+          "line": 34,
+          "kind": "method",
+          "parent": "TerminalSession"
+        },
+        {
+          "name": "run",
+          "line": 39,
+          "kind": "method",
+          "parent": "TerminalSession"
+        },
+        {
+          "name": "_stream",
+          "line": 59,
+          "kind": "method",
+          "parent": "TerminalSession"
+        },
+        {
+          "name": "write_stdin",
+          "line": 79,
+          "kind": "method",
+          "parent": "TerminalSession"
+        },
+        {
+          "name": "kill",
+          "line": 84,
+          "kind": "method",
+          "parent": "TerminalSession"
+        },
+        {
+          "name": "running",
+          "line": 103,
+          "kind": "method",
+          "parent": "TerminalSession"
+        },
+        {
+          "name": "terminal_endpoint",
+          "line": 110,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "signal",
+        "fastapi"
+      ]
+    },
+    "backend/index_api.py": {
+      "path": "backend/index_api.py",
+      "checksum": "8e7ccab474af161e",
+      "tldr": "index_api.py provides FastAPI endpoints for managing the project's module index, including triggering indexing runs and retrieving module data.",
+      "tree": "backend/index_api.py\n\u251c\u2500\u2500 _workspace_root:27 \u2014 determines the root directory for indexing\n\u251c\u2500\u2500 get_index:38 \u2014 returns the current state of the module index\n\u251c\u2500\u2500 RunIndexRequest:50 \u2014 schema for triggering workspace indexing\n\u251c\u2500\u2500 run_index:56 \u2014 asynchronously starts the workspace indexing process\n\u2502   \u251c\u2500\u2500 _run:59 \u2014 internal worker for indexing and broadcasting status\n\u2502   \u2514\u2500\u2500 _now:64 \u2014 returns current UTC timestamp in ISO format\n\u251c\u2500\u2500 IndexFilesRequest:90 \u2014 schema for lazy indexing specific files\n\u251c\u2500\u2500 index_files:96 \u2014 indexes a provided list of files\n\u251c\u2500\u2500 get_module:106 \u2014 retrieves a specific module entry by ID\n\u2514\u2500\u2500 InvalidateRequest:115 \u2014 schema for invalidating a file entry\n\u2514\u2500\u2500 invalidate_file_entry:120 \u2014 marks a file for re-indexing",
+      "symbols": [
+        {
+          "name": "_workspace_root",
+          "line": 27,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_index",
+          "line": 38,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "RunIndexRequest",
+          "line": 50,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "run_index",
+          "line": 56,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "IndexFilesRequest",
+          "line": 90,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "index_files",
+          "line": 96,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_module",
+          "line": 106,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "InvalidateRequest",
+          "line": 115,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "invalidate_file_entry",
+          "line": 120,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_run",
+          "line": 59,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_now",
+          "line": 64,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "fastapi",
+        "pydantic",
+        "backend.agents.module_indexer.index_writer",
+        "backend.config",
+        "backend.agents.module_indexer",
+        "backend.ws_manager"
+      ]
+    },
+    "backend/__init__.py": {
+      "path": "backend/__init__.py",
+      "checksum": "e3b0c44298fc1c14",
+      "tldr": "Initialization file for the backend package; contains no functional code.",
+      "tree": "backend/__init__.py\n(empty)",
+      "symbols": [],
+      "imports": []
+    },
+    "backend/ws_manager.py": {
+      "path": "backend/ws_manager.py",
+      "checksum": "d7300fb7190006f2",
+      "tldr": "ConnectionManager: A WebSocket connection manager for handling client connections, heartbeats, and broadcasting messages to specific client types.",
+      "tree": "backend/ws_manager.py\n\u2514\u2500\u2500 ConnectionManager:18 \u2014 Manages WebSocket lifecycles and messaging\n    \u251c\u2500\u2500 connect:24 \u2014 Accepts connection and starts keepalive task\n    \u251c\u2500\u2500 disconnect:32 \u2014 Removes client and cancels keepalive\n    \u251c\u2500\u2500 _keepalive:40 \u2014 Periodically pings clients to detect timeouts\n    \u251c\u2500\u2500 send:61 \u2014 Sends a JSON message to a specific client\n    \u251c\u2500\u2500 broadcast:72 \u2014 Sends a JSON message to all or filtered clients\n    \u2514\u2500\u2500 active:83 \u2014 Returns a map of active client IDs and types",
+      "symbols": [
+        {
+          "name": "ConnectionManager",
+          "line": 18,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "__init__",
+          "line": 19,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        },
+        {
+          "name": "connect",
+          "line": 24,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        },
+        {
+          "name": "disconnect",
+          "line": 32,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        },
+        {
+          "name": "_keepalive",
+          "line": 40,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        },
+        {
+          "name": "send",
+          "line": 61,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        },
+        {
+          "name": "broadcast",
+          "line": 72,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        },
+        {
+          "name": "active",
+          "line": 83,
+          "kind": "method",
+          "parent": "ConnectionManager"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "fastapi"
+      ]
+    },
+    "backend/pipeline.py": {
+      "path": "backend/pipeline.py",
+      "checksum": "f8d5f44008a0b2cb",
+      "tldr": "backend/pipeline.py is the Phase 2 orchestrator that manages the flow from intent classification to roadmap delivery, handling user clarifications and state broadcasting.",
+      "tree": "backend/pipeline.py\n\u251c\u2500\u2500 _now:29 \u2014 returns current UTC timestamp\n\u251c\u2500\u2500 _status:33 \u2014 creates a status update payload\n\u251c\u2500\u2500 _broadcast:42 \u2014 sends status updates to dashboard clients\n\u251c\u2500\u2500 _run_pipeline:46 \u2014 orchestrates intent, clarification, and planning\n\u251c\u2500\u2500 _deliver_sprint_graph:147 \u2014 delivers final blueprint and sprints to client\n\u251c\u2500\u2500 start:177 \u2014 initiates a new planning pipeline task\n\u251c\u2500\u2500 cancel:184 \u2014 cancels an active pipeline task\n\u251c\u2500\u2500 inject_interrupt:193 \u2014 sends user input to a pending clarification\n\u251c\u2500\u2500 resolve_clarification:199 \u2014 resolves clarification future with answers\n\u251c\u2500\u2500 resolve_improve:208 \u2014 resolves improvement feedback future\n\u251c\u2500\u2500 restart_with_improve:217 \u2014 restarts pipeline with improvement feedback\n\u2514\u2500\u2500 status_relay:114 \u2014 relays internal agent status to broadcast",
+      "symbols": [
+        {
+          "name": "_now",
+          "line": 29,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_status",
+          "line": 33,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_broadcast",
+          "line": 42,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_run_pipeline",
+          "line": 46,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_deliver_sprint_graph",
+          "line": 147,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "start",
+          "line": 177,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cancel",
+          "line": 184,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "inject_interrupt",
+          "line": 193,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "resolve_clarification",
+          "line": 199,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "resolve_improve",
+          "line": 208,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "restart_with_improve",
+          "line": 217,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "status_relay",
+          "line": 114,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.ws_manager",
+        "backend.agents.intent_router",
+        "backend.agents.clarifier",
+        "backend.agents.idea_builder",
+        "backend.agents.roadmap_creator",
+        "backend.exec_pipeline",
+        "backend.agents.module_indexer.index_writer"
+      ]
+    },
+    "backend/exec_pipeline.py": {
+      "path": "backend/exec_pipeline.py",
+      "checksum": "4b3ba344ce304a79",
+      "tldr": "backend/exec_pipeline.py manages the Phase 3 execution pipeline, coordinating scout agents, coder agents, and developer diff approvals for sprints.",
+      "tree": "backend/exec_pipeline.py\n\u251c\u2500\u2500 _sprints_path:17 \u2014 gets the path to the sprints.json file\n\u251c\u2500\u2500 _now:33 \u2014 returns current UTC timestamp in ISO format\n\u251c\u2500\u2500 _broadcast:37 \u2014 sends status updates to dashboard clients\n\u251c\u2500\u2500 _load_sprints:49 \u2014 loads sprint data from disk\n\u251c\u2500\u2500 _workspace_root:59 \u2014 determines the target workspace directory\n\u251c\u2500\u2500 _run_execution:69 \u2014 main loop for scouting and dispatching nodes\n\u251c\u2500\u2500 start_execution:188 \u2014 triggers an asynchronous execution task\n\u251c\u2500\u2500 cancel_execution:195 \u2014 cancels a running execution task\n\u2514\u2500\u2500 resolve_diff:203 \u2014 handles IDE diff acceptance or rejection",
+      "symbols": [
+        {
+          "name": "_sprints_path",
+          "line": 17,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_now",
+          "line": 33,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_broadcast",
+          "line": 37,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_load_sprints",
+          "line": 49,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_workspace_root",
+          "line": 59,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_run_execution",
+          "line": 69,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "start_execution",
+          "line": 188,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cancel_execution",
+          "line": 195,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "resolve_diff",
+          "line": 203,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.ws_manager",
+        "backend.config",
+        "backend.agents.scout",
+        "backend.agents.coder.dispatcher",
+        "backend.agents.module_indexer"
+      ]
+    },
+    "backend/main.py": {
+      "path": "backend/main.py",
+      "checksum": "074b73a9c5e6b762",
+      "tldr": "backend/main.py is the FastAPI application entry point, managing HTTP routes, WebSocket connections, and high-level message routing for the D0mmy Orchestrator.",
+      "tree": "backend/main.py\n\u251c\u2500\u2500 _verify_configured_models:24 \u2014 verifies LLM model IDs on startup\n\u251c\u2500\u2500 lifespan:59 \u2014 manages app startup and shutdown\n\u251c\u2500\u2500 _now:77 \u2014 returns current UTC timestamp\n\u251c\u2500\u2500 _ack:81 \u2014 creates a standardized acknowledgement response\n\u251c\u2500\u2500 health:91 \u2014 health check endpoint\n\u251c\u2500\u2500 verify_reference:96 \u2014 resolves model/API references via Version Oracle\n\u251c\u2500\u2500 terminal_ws:107 \u2014 websocket endpoint for terminal access\n\u251c\u2500\u2500 websocket_endpoint:112 \u2014 main websocket router for client messages\n\u251c\u2500\u2500 _handle_harvest:169 \u2014 processes incoming content harvesting\n\u251c\u2500\u2500 _handle_intent:181 \u2014 processes user intentions\n\u251c\u2500\u2500 _handle_interrupt:193 \u2014 handles session interruptions\n\u251c\u2500\u2500 _handle_sprint_approved:214 \u2014 handles approved sprint plans\n\u251c\u2500\u2500 _handle_clarification_answers:230 \u2014 handles user clarification answers\n\u251c\u2500\u2500 _handle_sprint_declined:239 \u2014 handles declined sprint plans\n\u251c\u2500\u2500 _handle_sprint_improve:255 \u2014 handles requested sprint improvements\n\u251c\u2500\u2500 _handle_file_context:281 \u2014 processes file context updates\n\u251c\u2500\u2500 _handle_diff_accepted:291 \u2014 handles accepted code diffs\n\u2514\u2500\u2500 _handle_diff_rejected:300 \u2014 handles rejected code diffs",
+      "symbols": [
+        {
+          "name": "_verify_configured_models",
+          "line": 24,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "lifespan",
+          "line": 59,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_now",
+          "line": 77,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ack",
+          "line": 81,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "health",
+          "line": 91,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "verify_reference",
+          "line": 96,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "terminal_ws",
+          "line": 107,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "websocket_endpoint",
+          "line": 112,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_harvest",
+          "line": 169,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_intent",
+          "line": 181,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_interrupt",
+          "line": 193,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_sprint_approved",
+          "line": 214,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_clarification_answers",
+          "line": 230,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_sprint_declined",
+          "line": 239,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_sprint_improve",
+          "line": 255,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_file_context",
+          "line": 281,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_diff_accepted",
+          "line": 291,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_handle_diff_rejected",
+          "line": 300,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "fastapi",
+        "fastapi.middleware.cors",
+        "backend.config",
+        "backend.ws_manager",
+        "backend.memory.hdd",
+        "backend.memory.ram",
+        "backend.agents.version_oracle",
+        "backend.settings_api",
+        "backend.index_api",
+        "backend.terminal",
+        "backend.pipeline",
+        "backend.exec_pipeline"
+      ]
+    },
+    "dashboard/vite.config.ts": {
+      "path": "dashboard/vite.config.ts",
+      "checksum": "3adee3fe59beb8d8",
+      "tldr": "Vite configuration file for the dashboard, setting up React plugin and API proxy rules.",
+      "tree": "vite.config.ts\n\u2514\u2500\u2500 defineConfig:4 \u2014 configures Vite server, plugins, and proxy routes",
+      "symbols": [],
+      "imports": [
+        "vite",
+        "@vitejs/plugin-react"
+      ]
+    },
+    "scratch/test_ws.py": {
+      "path": "scratch/test_ws.py",
+      "checksum": "005f927b0c5a3ea2",
+      "tldr": "test_ws.py is a websocket client test script to verify connectivity to the D0mmy backend.",
+      "tree": "scratch/test_ws.py\n\u251c\u2500\u2500 test_ws:5 \u2014 tests websocket connectivity and basic ping-pong",
+      "symbols": [
+        {
+          "name": "test_ws",
+          "line": 5,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "websockets"
+      ]
+    },
+    "scripts/attach.py": {
+      "path": "scripts/attach.py",
+      "checksum": "6b65166d149712fe",
+      "tldr": "scripts/attach.py: A utility script to attach D0mmy to an existing repository by configuring .env and VS Code settings.",
+      "tree": "scripts/attach.py\n\u251c\u2500\u2500 _load_env:28 \u2014 loads environment variables from a file\n\u251c\u2500\u2500 _write_env:40 \u2014 writes environment variables to a file\n\u251c\u2500\u2500 _merge_json:47 \u2014 merges updates into a JSON file\n\u2514\u2500\u2500 main:58 \u2014 orchestrates the attachment/detachment process",
+      "symbols": [
+        {
+          "name": "_load_env",
+          "line": 28,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_write_env",
+          "line": 40,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_merge_json",
+          "line": 47,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "main",
+          "line": 58,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "argparse"
+      ]
+    },
+    "scripts/launcher.py": {
+      "path": "scripts/launcher.py",
+      "checksum": "8f443c244233f664",
+      "tldr": "scripts/launcher.py is a tiny HTTP server that manages the uvicorn backend process for the D0mmy dashboard.",
+      "tree": "scripts/launcher.py\n\u251c\u2500\u2500 _is_running:29 \u2014 Check if the backend process is currently running\n\u251c\u2500\u2500 _stream_logs:33 \u2014 Read and store logs from a subprocess\n\u251c\u2500\u2500 _get_uv_backend_cmd:42 \u2014 Determine the command to launch the uvicorn backend\n\u251c\u2500\u2500 Handler:53 \u2014 HTTP request handler for backend management\n\u2502   \u251c\u2500\u2500 log_message:54 \u2014 Suppress standard access logs\n\u2502   \u251c\u2500\u2500 _respond:57 \u2014 Helper to send JSON responses with CORS headers\n\u2502   \u251c\u2500\u2500 do_OPTIONS:66 \u2014 Handle CORS preflight requests\n\u2502   \u251c\u2500\u2500 do_GET:72 \u2014 Handle control endpoints (/start, /stop, /restart, /status, /sync, /logs)\n\u2502   \u2514\u2500\u2500 _run_sync:127 \u2014 Run 'uv sync' in a background thread\n\u2514\u2500\u2500 main:150 \u2014 Entry point to start the HTTP management server\n\u2514\u2500\u2500 _shutdown:157 \u2014 Cleanup handler for SIGINT and SIGTERM",
+      "symbols": [
+        {
+          "name": "_is_running",
+          "line": 29,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_stream_logs",
+          "line": 33,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_get_uv_backend_cmd",
+          "line": 42,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Handler",
+          "line": 53,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "log_message",
+          "line": 54,
+          "kind": "method",
+          "parent": "Handler"
+        },
+        {
+          "name": "_respond",
+          "line": 57,
+          "kind": "method",
+          "parent": "Handler"
+        },
+        {
+          "name": "do_OPTIONS",
+          "line": 66,
+          "kind": "method",
+          "parent": "Handler"
+        },
+        {
+          "name": "do_GET",
+          "line": 72,
+          "kind": "method",
+          "parent": "Handler"
+        },
+        {
+          "name": "_run_sync",
+          "line": 127,
+          "kind": "method",
+          "parent": "Handler"
+        },
+        {
+          "name": "main",
+          "line": 150,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_shutdown",
+          "line": 157,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "subprocess",
+        "signal",
+        "http.server",
+        "threading",
+        "shutil"
+      ]
+    },
+    "scripts/projects.py": {
+      "path": "scripts/projects.py",
+      "checksum": "84c0c6e79cee148a",
+      "tldr": "scripts/projects.py is a project management CLI tool for running multiple repositories on separate ports with dedicated environments and ChromaDB collections.",
+      "tree": "scripts/projects.py\n\u251c\u2500\u2500 _load_registry:51 \u2014 loads the project registry from JSON\n\u251c\u2500\u2500 _save_registry:60 \u2014 saves the project registry to JSON\n\u251c\u2500\u2500 _load_env:65 \u2014 reads key-value pairs from an .env file\n\u251c\u2500\u2500 _write_env:77 \u2014 writes key-value pairs to an .env file\n\u251c\u2500\u2500 _merge_vscode_json:84 \u2014 updates VS Code settings JSON\n\u251c\u2500\u2500 _next_free_port:95 \u2014 finds the next available backend port\n\u251c\u2500\u2500 _pid_alive:103 \u2014 checks if a process ID is still running\n\u251c\u2500\u2500 _read_pid:111 \u2014 reads a PID from a file\n\u251c\u2500\u2500 cmd_add:122 \u2014 registers a new project and configures its env\n\u251c\u2500\u2500 cmd_start:195 \u2014 starts the backend for a registered project\n\u251c\u2500\u2500 cmd_stop:264 \u2014 stops the backend for a registered project\n\u251c\u2500\u2500 cmd_list:292 \u2014 lists all registered projects\n\u251c\u2500\u2500 cmd_remove:308 \u2014 removes a project from the registry\n\u251c\u2500\u2500 cmd_open:329 \u2014 opens a project's repo in VS Code\n\u2514\u2500\u2500 main:345 \u2014 parses CLI arguments and invokes commands",
+      "symbols": [
+        {
+          "name": "_load_registry",
+          "line": 51,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_save_registry",
+          "line": 60,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_load_env",
+          "line": 65,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_write_env",
+          "line": 77,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_merge_vscode_json",
+          "line": 84,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_next_free_port",
+          "line": 95,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_pid_alive",
+          "line": 103,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_read_pid",
+          "line": 111,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cmd_add",
+          "line": 122,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cmd_start",
+          "line": 195,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cmd_stop",
+          "line": 264,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cmd_list",
+          "line": 292,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cmd_remove",
+          "line": 308,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "cmd_open",
+          "line": 329,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "main",
+          "line": 345,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "shutil",
+        "signal",
+        "subprocess",
+        "threading"
+      ]
+    },
+    "scripts/setup_keys.py": {
+      "path": "scripts/setup_keys.py",
+      "checksum": "212ffe2cd523694b",
+      "tldr": "scripts/setup_keys.py: Interactive script to configure API keys and model IDs in a .env file for the D0mmy project.",
+      "tree": "scripts/setup_keys.py\n\u251c\u2500\u2500 load_existing:67 \u2014 reads and parses the existing .env file\n\u251c\u2500\u2500 mask:79 \u2014 obfuscates sensitive values for display\n\u251c\u2500\u2500 prompt_field:85 \u2014 interactively prompts the user for a field value\n\u251c\u2500\u2500 write_env:118 \u2014 writes configured key-value pairs to the .env file\n\u2514\u2500\u2500 main:127 \u2014 coordinates the interactive setup process",
+      "symbols": [
+        {
+          "name": "load_existing",
+          "line": 67,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "mask",
+          "line": 79,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "prompt_field",
+          "line": 85,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "write_env",
+          "line": 118,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "main",
+          "line": 127,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "backend/memory/rom.py": {
+      "path": "backend/memory/rom.py",
+      "checksum": "58fe47e82ef099b3",
+      "tldr": "rom.py provides cached utilities for loading prompt templates (.md) and JSON schemas (.json) from the filesystem.",
+      "tree": "backend/memory/rom.py\n\u251c\u2500\u2500 get_prompt:11 \u2014 loads and caches a markdown prompt file\n\u2514\u2500\u2500 get_schema:19 \u2014 loads and caches a JSON schema file",
+      "symbols": [
+        {
+          "name": "get_prompt",
+          "line": 11,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_schema",
+          "line": 19,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "backend/memory/__init__.py": {
+      "path": "backend/memory/__init__.py",
+      "checksum": "e3b0c44298fc1c14",
+      "tldr": "Package initialization file for the backend memory module.",
+      "tree": "backend/memory/__init__.py\n(empty)",
+      "symbols": [],
+      "imports": []
+    },
+    "backend/memory/hdd.py": {
+      "path": "backend/memory/hdd.py",
+      "checksum": "50cf14bdeead4aed",
+      "tldr": "backend/memory/hdd.py provides vector storage management using ChromaDB and Google embeddings for long-term memory retrieval.",
+      "tree": "backend/memory/hdd.py\n\u251c\u2500\u2500 GoogleEmbeddingFunction:20 \u2014 ChromaDB embedding function for documents\n\u2502   \u2514\u2500\u2500 __call__:23 \u2014 generates embeddings for documents\n\u251c\u2500\u2500 GoogleQueryEmbeddingFunction:28 \u2014 ChromaDB embedding function for queries\n\u2502   \u2514\u2500\u2500 __call__:31 \u2014 generates embeddings for queries\n\u251c\u2500\u2500 _now:16 \u2014 gets current UTC ISO timestamp\n\u251c\u2500\u2500 _client:40 \u2014 returns a singleton ChromaDB PersistentClient\n\u251c\u2500\u2500 _collection:52 \u2014 returns a singleton ChromaDB Collection\n\u251c\u2500\u2500 store:64 \u2014 saves text and metadata to vector storage\n\u251c\u2500\u2500 fetch_context:74 \u2014 retrieves top-n similar documents for a query\n\u2514\u2500\u2500 fetch_context_json:152 \u2014 retrieves similar documents as a JSON string",
+      "symbols": [
+        {
+          "name": "_now",
+          "line": 16,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "GoogleEmbeddingFunction",
+          "line": 20,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "__call__",
+          "line": 23,
+          "kind": "method",
+          "parent": "GoogleEmbeddingFunction"
+        },
+        {
+          "name": "GoogleQueryEmbeddingFunction",
+          "line": 28,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "__call__",
+          "line": 31,
+          "kind": "method",
+          "parent": "GoogleQueryEmbeddingFunction"
+        },
+        {
+          "name": "_client",
+          "line": 40,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_collection",
+          "line": 52,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "store",
+          "line": 64,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "fetch_context",
+          "line": 74,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "fetch_context_json",
+          "line": 152,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "chromadb",
+        "chromadb.config",
+        "backend.config",
+        "backend.ws_manager",
+        "backend.models.google"
+      ]
+    },
+    "backend/memory/ram.py": {
+      "path": "backend/memory/ram.py",
+      "checksum": "d9901e177aa21e3f",
+      "tldr": "ram.py implements the Scratchpad and ScratchpadRegistry for managing short-term session memory with automatic summarization truncation.",
+      "tree": "backend/memory/ram.py\n\u251c\u2500\u2500 Turn:13 \u2014 Data model for a single conversation turn\n\u251c\u2500\u2500 Scratchpad:19 \u2014 Session-specific memory buffer with truncation\n\u2502   \u251c\u2500\u2500 append:24 \u2014 Adds a new turn to memory\n\u2502   \u251c\u2500\u2500 maybe_truncate:27 \u2014 Checks if truncation is needed and triggers it\n\u2502   \u2514\u2500\u2500 _truncate:35 \u2014 Summarizes old turns using an AI model\n\u2502   \u2514\u2500\u2500 to_messages:54 \u2014 Converts turns to API-compatible message list\n\u2514\u2500\u2500 ScratchpadRegistry:58 \u2014 Global registry for session scratchpads\n    \u251c\u2500\u2500 get:62 \u2014 Retrieves or creates a scratchpad for a session\n    \u2514\u2500\u2500 clear:67 \u2014 Removes a scratchpad from the registry",
+      "symbols": [
+        {
+          "name": "Turn",
+          "line": 13,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Scratchpad",
+          "line": 19,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "append",
+          "line": 24,
+          "kind": "method",
+          "parent": "Scratchpad"
+        },
+        {
+          "name": "maybe_truncate",
+          "line": 27,
+          "kind": "method",
+          "parent": "Scratchpad"
+        },
+        {
+          "name": "_truncate",
+          "line": 35,
+          "kind": "method",
+          "parent": "Scratchpad"
+        },
+        {
+          "name": "to_messages",
+          "line": 54,
+          "kind": "method",
+          "parent": "Scratchpad"
+        },
+        {
+          "name": "ScratchpadRegistry",
+          "line": 58,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "__init__",
+          "line": 59,
+          "kind": "method",
+          "parent": "ScratchpadRegistry"
+        },
+        {
+          "name": "get",
+          "line": 62,
+          "kind": "method",
+          "parent": "ScratchpadRegistry"
+        },
+        {
+          "name": "clear",
+          "line": 67,
+          "kind": "method",
+          "parent": "ScratchpadRegistry"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.models.client",
+        "backend.memory.rom"
+      ]
+    },
+    "backend/agents/coordinator.py": {
+      "path": "backend/agents/coordinator.py",
+      "checksum": "3b5551b1357ca9de",
+      "tldr": "coordinator.py provides the coordinate function to manage and spawn dynamic Gemma 4 analysis worker agents based on session context.",
+      "tree": "backend/agents/coordinator.py\n\u251c\u2500\u2500 _now:14 \u2014 get current UTC ISO timestamp\n\u251c\u2500\u2500 _run_dynamic_agent:18 \u2014 execute single dynamic worker agent task\n\u2514\u2500\u2500 coordinate:38 \u2014 orchestrate analysis and spawn additional agents",
+      "symbols": [
+        {
+          "name": "_now",
+          "line": 14,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_run_dynamic_agent",
+          "line": 18,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "coordinate",
+          "line": 38,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.models.client",
+        "backend.memory.rom",
+        "backend.ws_manager"
+      ]
+    },
+    "backend/agents/intent_router.py": {
+      "path": "backend/agents/intent_router.py",
+      "checksum": "451133191a35f609",
+      "tldr": "The `classify` function provides zero-shot intent classification for routing requests into hardware, software, or mixed categories.",
+      "tree": "backend/agents/intent_router.py\n\u251c\u2500\u2500 classify:9 \u2014 Classifies input text into hardware, software, or mixed intents.",
+      "symbols": [
+        {
+          "name": "classify",
+          "line": 9,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.models.client",
+        "backend.memory.rom"
+      ]
+    },
+    "backend/agents/__init__.py": {
+      "path": "backend/agents/__init__.py",
+      "checksum": "e3b0c44298fc1c14",
+      "tldr": "Initialization file for the backend agents package; contains no logic.",
+      "tree": "backend/agents/__init__.py\n\u2514\u2500\u2500 (empty)",
+      "symbols": [],
+      "imports": []
+    },
+    "backend/agents/scout.py": {
+      "path": "backend/agents/scout.py",
+      "checksum": "95f2021748b12089",
+      "tldr": "scout.py provides the Scout agent logic for performing semantic search and technical research to gather context for Coder dispatching.",
+      "tree": "backend/agents/scout.py\n\u251c\u2500\u2500 ScoutReport:26 \u2014 data container for scout search results\n\u251c\u2500\u2500 _load_module_index:37 \u2014 loads module index from JSON file\n\u251c\u2500\u2500 _score_module:46 \u2014 scores module relevance based on keywords\n\u251c\u2500\u2500 _relevant_modules:56 \u2014 filters top relevant modules from index\n\u251c\u2500\u2500 _repo_search:66 \u2014 retrieves context from ChromaDB and module index\n\u251c\u2500\u2500 _web_search:80 \u2014 researches implementation patterns via LLM\n\u2514\u2500\u2500 run:108 \u2014 coordinates repo and web search for a sprint",
+      "symbols": [
+        {
+          "name": "ScoutReport",
+          "line": 26,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_load_module_index",
+          "line": 37,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_score_module",
+          "line": 46,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_relevant_modules",
+          "line": 56,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_repo_search",
+          "line": 66,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_web_search",
+          "line": 80,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "run",
+          "line": 108,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.memory.hdd",
+        "backend.models.client"
+      ]
+    },
+    "backend/agents/clarifier.py": {
+      "path": "backend/agents/clarifier.py",
+      "checksum": "6ff48d0467cb9ad0",
+      "tldr": "backend/agents/clarifier.py: provides generate_questions to create targeted clarifying questions based on user intent and project context.",
+      "tree": "backend/agents/clarifier.py\n\u2514\u2500\u2500 generate_questions:9 \u2014 generates clarifying questions for the given intent",
+      "symbols": [
+        {
+          "name": "generate_questions",
+          "line": 9,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.models.client",
+        "backend.memory.rom"
+      ]
+    },
+    "backend/agents/version_hook.py": {
+      "path": "backend/agents/version_hook.py",
+      "checksum": "2f5462a8184261d6",
+      "tldr": "inject_verified_context provides a pre-generation hook to verify dependency versions and model names via a version oracle and inject them into the system prompt.",
+      "tree": "backend/agents/version_hook.py\n\u251c\u2500\u2500 _extract_tokens:28 \u2014 extracts pip, npm, and model version tokens from messages\n\u2514\u2500\u2500 inject_verified_context:46 \u2014 verifies tokens and injects a VERIFIED REFERENCES block",
+      "symbols": [
+        {
+          "name": "_extract_tokens",
+          "line": 28,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "inject_verified_context",
+          "line": 46,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.agents.version_oracle"
+      ]
+    },
+    "backend/agents/idea_builder.py": {
+      "path": "backend/agents/idea_builder.py",
+      "checksum": "38b01e78a99e101e",
+      "tldr": "idea_builder.py implements the high-level orchestrator for transforming a user intent into an Application Blueprint DAG using a pipeline of worker agents.",
+      "tree": "idea_builder.py\n\u251c\u2500\u2500 load_bom:17 \u2014 loads hardware bill of materials from JSON\n\u251c\u2500\u2500 _tech_harvester:23 \u2014 extracts tech stack and deps from context\n\u251c\u2500\u2500 _rubric_aligner:44 \u2014 aligns hardware BOM against intent requirements\n\u251c\u2500\u2500 _risk_assassin:58 \u2014 enumerates hardware failure modes and mitigations\n\u251c\u2500\u2500 _emit:76 \u2014 helper to send status updates to a callback\n\u2514\u2500\u2500 run:85 \u2014 orchestrates worker agents and synthesizes final blueprint",
+      "symbols": [
+        {
+          "name": "load_bom",
+          "line": 17,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_tech_harvester",
+          "line": 23,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_rubric_aligner",
+          "line": 44,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_risk_assassin",
+          "line": 58,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_emit",
+          "line": 76,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "run",
+          "line": 85,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.models.client",
+        "backend.memory.rom",
+        "backend.memory.hdd",
+        "backend.agents.module_indexer.index_writer",
+        "backend.config",
+        "backend.agents.coordinator"
+      ]
+    },
+    "backend/agents/version_oracle.py": {
+      "path": "backend/agents/version_oracle.py",
+      "checksum": "7e4f3e321a981f31",
+      "tldr": "version_oracle.py is a version verification agent that resolves fuzzy model names and package versions to canonical identifiers using Gemini with Google Search grounding.",
+      "tree": "backend/agents/version_oracle.py\n\u251c\u2500\u2500 VerifiedRef:29 \u2014 Data model for a verified canonical reference\n\u2502   \u251c\u2500\u2500 to_dict:39 \u2014 Converts reference to dictionary\n\u2502   \u2514\u2500\u2500 unverified:43 \u2014 Creates a reference marked as unverified\n\u251c\u2500\u2500 _cache_key:59 \u2014 Normalizes input for cache lookup\n\u251c\u2500\u2500 _get_cached:63 \u2014 Retrieves reference from cache if not expired\n\u251c\u2500\u2500 _set_cached:70 \u2014 Saves reference to cache\n\u251c\u2500\u2500 resolve:96 \u2014 Resolves name to canonical form via AI search\n\u251c\u2500\u2500 resolve_many:149 \u2014 Resolves multiple names concurrently\n\u2514\u2500\u2500 assert_verified:155 \u2014 Validates verification status or raises error",
+      "symbols": [
+        {
+          "name": "VerifiedRef",
+          "line": 29,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "to_dict",
+          "line": 39,
+          "kind": "method",
+          "parent": "VerifiedRef"
+        },
+        {
+          "name": "unverified",
+          "line": 43,
+          "kind": "method",
+          "parent": "VerifiedRef"
+        },
+        {
+          "name": "_cache_key",
+          "line": 59,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_get_cached",
+          "line": 63,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_set_cached",
+          "line": 70,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "resolve",
+          "line": 96,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "resolve_many",
+          "line": 149,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "assert_verified",
+          "line": 155,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "google.genai",
+        "backend.config"
+      ]
+    },
+    "backend/models/client.py": {
+      "path": "backend/models/client.py",
+      "checksum": "7dfc67604e16ede5",
+      "tldr": "client.py provides the call_model utility to handle LLM API calls with integrated monitoring via dashboard broadcasts.",
+      "tree": "backend/models/client.py\n\u251c\u2500\u2500 _now:10 \u2014 Returns current UTC time in ISO format\n\u2514\u2500\u2500 call_model:14 \u2014 Executes LLM calls and broadcasts status to dashboard",
+      "symbols": [
+        {
+          "name": "_now",
+          "line": 10,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "call_model",
+          "line": 14,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.models.google",
+        "backend.ws_manager"
+      ]
+    },
+    "backend/models/__init__.py": {
+      "path": "backend/models/__init__.py",
+      "checksum": "e3b0c44298fc1c14",
+      "tldr": "Initialization file for the backend models package.",
+      "tree": "backend/models/__init__.py\n(empty)",
+      "symbols": [],
+      "imports": []
+    },
+    "backend/models/google.py": {
+      "path": "backend/models/google.py",
+      "checksum": "dd792590a2d630b3",
+      "tldr": "google.py provides the `call_google` function to interface with the Google Gemini API, handling model selection, schema pruning, and retries.",
+      "tree": "backend/models/google.py\n\u251c\u2500\u2500 _client:16 \u2014 cached Google GenAI client instance\n\u251c\u2500\u2500 ensure_configured:20 \u2014 validates API configuration\n\u251c\u2500\u2500 _role_to_model:24 \u2014 maps role identifiers to specific model IDs\n\u251c\u2500\u2500 _build_contents:33 \u2014 converts messages to Gemini contents format\n\u251c\u2500\u2500 _system_instruction:44 \u2014 extracts system prompts from messages\n\u251c\u2500\u2500 _clean_json_response:49 \u2014 extracts JSON from LLM text output\n\u251c\u2500\u2500 _prune_schema:104 \u2014 sanitizes JSON schemas for Gemini's API\n\u251c\u2500\u2500 _generate_with_retry:138 \u2014 handles API calls with exponential backoff\n\u251c\u2500\u2500 call_google:168 \u2014 primary entry point for interacting with Gemini\n\u2514\u2500\u2500 _token_counts:200 \u2014 calculates token usage",
+      "symbols": [
+        {
+          "name": "_client",
+          "line": 16,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ensure_configured",
+          "line": 20,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_role_to_model",
+          "line": 24,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_build_contents",
+          "line": 33,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_system_instruction",
+          "line": 44,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_clean_json_response",
+          "line": 49,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_prune_schema",
+          "line": 104,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_generate_with_retry",
+          "line": 138,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "call_google",
+          "line": 168,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "embed",
+          "line": 232,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_token_counts",
+          "line": 200,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "google.genai",
+        "backend.config",
+        "backend.agents.version_hook"
+      ]
+    },
+    "backend/agents/module_indexer/module_grouper.py": {
+      "path": "backend/agents/module_indexer/module_grouper.py",
+      "checksum": "af5425a0126a44cd",
+      "tldr": "module_grouper.py: Groups file summaries into logical modules using an LLM (worker) and import graphs, with a fallback to per-file modules.",
+      "tree": "module_grouper.py\n\u251c\u2500\u2500 _is_internal:21 \u2014 Determines if an import is part of the internal project\n\u251c\u2500\u2500 _build_grouper_input:27 \u2014 Prepares file summaries and import relations for LLM input\n\u251c\u2500\u2500 group_modules:49 \u2014 Orchestrates the module grouping process via LLM or fallback\n\u251c\u2500\u2500 _fill_missing_files:78 \u2014 Ensures all files are assigned to at least one module\n\u2514\u2500\u2500 _fallback_groups:99 \u2014 Generates a default one-module-per-file mapping",
+      "symbols": [
+        {
+          "name": "_is_internal",
+          "line": 21,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_build_grouper_input",
+          "line": 27,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "group_modules",
+          "line": 49,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_fill_missing_files",
+          "line": 78,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_fallback_groups",
+          "line": 99,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.memory.rom",
+        "backend.models.client"
+      ]
+    },
+    "backend/agents/module_indexer/__init__.py": {
+      "path": "backend/agents/module_indexer/__init__.py",
+      "checksum": "47bb71bb06c42099",
+      "tldr": "`backend/agents/module_indexer/__init__.py` exports index_workspace and index_files from the module_indexer.indexer module.",
+      "tree": "backend/agents/module_indexer/__init__.py\n\u251c\u2500\u2500 index_workspace:1 \u2014 Indexes the workspace\n\u2514\u2500\u2500 index_files:1 \u2014 Indexes specific files",
+      "symbols": [],
+      "imports": [
+        "backend.agents.module_indexer.indexer"
+      ]
+    },
+    "backend/agents/module_indexer/ast_graph.py": {
+      "path": "backend/agents/module_indexer/ast_graph.py",
+      "checksum": "6b7afede446a85a7",
+      "tldr": "ast_graph.py: AST-based symbol and import extractor for Python, TypeScript/JS, and Dart files.",
+      "tree": "ast_graph.py\n\u251c\u2500\u2500 Symbol:15 \u2014 data model for a discovered code symbol\n\u251c\u2500\u2500 FileGraph:23 \u2014 data model for file symbols and imports\n\u251c\u2500\u2500 _checksum:30 \u2014 generates a 16-char SHA256 hash of content\n\u251c\u2500\u2500 _parse_python:36 \u2014 extracts symbols and imports from Python AST\n\u251c\u2500\u2500 _parse_typescript:83 \u2014 extracts symbols and imports from TS/JS via regex\n\u251c\u2500\u2500 _parse_dart:121 \u2014 extracts symbols and imports from Dart via regex\n\u251c\u2500\u2500 parse_file:159 \u2014 dispatches parsing based on file extension\n\u2514\u2500\u2500 checksum_only:170 \u2014 computes file checksum without full parsing",
+      "symbols": [
+        {
+          "name": "Symbol",
+          "line": 15,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "FileGraph",
+          "line": 23,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_checksum",
+          "line": 30,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_parse_python",
+          "line": 36,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_parse_typescript",
+          "line": 83,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_parse_dart",
+          "line": 121,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "parse_file",
+          "line": 159,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "checksum_only",
+          "line": 170,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "ast"
+      ]
+    },
+    "backend/agents/module_indexer/indexer.py": {
+      "path": "backend/agents/module_indexer/indexer.py",
+      "checksum": "a3c17ce808c90186",
+      "tldr": "The main orchestrator for module indexing, providing functions to scan a workspace and index specific files.",
+      "tree": "indexer.py\n\u251c\u2500\u2500 _collect_files:27 \u2014 scan workspace for supported files\n\u251c\u2500\u2500 _stale_only:40 \u2014 filter files that have changed based on checksum\n\u251c\u2500\u2500 index_workspace:57 \u2014 orchestrate full workspace scan and indexing\n\u2514\u2500\u2500 index_files:94 \u2014 index a specific subset of files",
+      "symbols": [
+        {
+          "name": "_collect_files",
+          "line": 27,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_stale_only",
+          "line": 40,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "index_workspace",
+          "line": 57,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "index_files",
+          "line": 94,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.agents.module_indexer.ast_graph",
+        "backend.agents.module_indexer.file_summarizer",
+        "backend.agents.module_indexer.module_grouper",
+        "backend.agents.module_indexer.index_writer"
+      ]
+    },
+    "backend/agents/module_indexer/index_writer.py": {
+      "path": "backend/agents/module_indexer/index_writer.py",
+      "checksum": "c7c8fd6b1dc6f67b",
+      "tldr": "index_writer.py provides utility functions to read, write, and manage the module index JSON and Markdown files for workspace tracking.",
+      "tree": "index_writer.py\n\u251c\u2500\u2500 _d0mmy_dir:21 \u2014 resolve .d0mmy data directory for workspace\n\u251c\u2500\u2500 get_index_json_path:38 \u2014 get path to module_index.json\n\u251c\u2500\u2500 get_index_md_path:42 \u2014 get path to module_index.md\n\u251c\u2500\u2500 load_index:46 \u2014 load index from JSON file\n\u251c\u2500\u2500 write_index:56 \u2014 write summaries and modules to JSON and MD\n\u251c\u2500\u2500 _write_md:78 \u2014 generate human-readable markdown index\n\u251c\u2500\u2500 get_module_by_id:116 \u2014 retrieve module data by ID\n\u251c\u2500\u2500 get_file_entry:124 \u2014 retrieve file entry by relative path\n\u2514\u2500\u2500 invalidate_file:129 \u2014 remove file entry from index to force re-indexing",
+      "symbols": [
+        {
+          "name": "_d0mmy_dir",
+          "line": 21,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_index_json_path",
+          "line": 38,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_index_md_path",
+          "line": 42,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "load_index",
+          "line": 46,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "write_index",
+          "line": 56,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_write_md",
+          "line": 78,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_module_by_id",
+          "line": 116,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "get_file_entry",
+          "line": 124,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "invalidate_file",
+          "line": 129,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.config"
+      ]
+    },
+    "backend/agents/module_indexer/file_summarizer.py": {
+      "path": "backend/agents/module_indexer/file_summarizer.py",
+      "checksum": "3ca808cbb37905a7",
+      "tldr": "file_summarizer.py provides functions to generate concise summaries and symbol trees of source files using a LLM worker.",
+      "tree": "file_summarizer.py\n\u251c\u2500\u2500 _symbol_hint:24 \u2014 generates a formatted list of detected symbols for LLM context\n\u251c\u2500\u2500 summarize_file:34 \u2014 orchestrates the parsing and LLM-based summarization of a single file\n\u251c\u2500\u2500 summarize_files:88 \u2014 processes multiple files in parallel with bounded concurrency\n\u2514\u2500\u2500 _bounded:94 \u2014 internal helper to wrap summarize_file in a semaphore for rate limiting",
+      "symbols": [
+        {
+          "name": "_symbol_hint",
+          "line": 24,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "summarize_file",
+          "line": 34,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "summarize_files",
+          "line": 88,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_bounded",
+          "line": 94,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.agents.module_indexer.ast_graph",
+        "backend.memory.rom",
+        "backend.models.client"
+      ]
+    },
+    "backend/agents/coder/dispatcher.py": {
+      "path": "backend/agents/coder/dispatcher.py",
+      "checksum": "eb6f76e5f9957cb2",
+      "tldr": "dispatcher.py: A routing agent that directs sprint nodes through a tiered execution pyramid of complexity scoring and model escalation.",
+      "tree": "backend/agents/coder/dispatcher.py\n\u251c\u2500\u2500 dispatch_node:27 \u2014 Routes nodes through complexity scoring, generation, and critic review\n\u2514\u2500\u2500 _read_original:124 \u2014 Reads and truncates file content for critic review",
+      "symbols": [
+        {
+          "name": "dispatch_node",
+          "line": 27,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_read_original",
+          "line": 124,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.agents.scout",
+        "backend.agents.coder"
+      ]
+    },
+    "backend/agents/coder/complexity_scorer.py": {
+      "path": "backend/agents/coder/complexity_scorer.py",
+      "checksum": "a8abe167ab8632f1",
+      "tldr": "complexity_scorer.py: provides functions to score task complexity for dispatch routing and determine escalation needs.",
+      "tree": "backend/agents/coder/complexity_scorer.py\n\u251c\u2500\u2500 score:13 \u2014 asynchronously scores task complexity (0-10) using a daemon\n\u2514\u2500\u2500 should_escalate:47 \u2014 checks if score meets escalation threshold",
+      "symbols": [
+        {
+          "name": "score",
+          "line": 13,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "should_escalate",
+          "line": 47,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.memory.rom",
+        "backend.models.client"
+      ]
+    },
+    "backend/agents/coder/module_coder.py": {
+      "path": "backend/agents/coder/module_coder.py",
+      "checksum": "ac3faf5a673c3baf",
+      "tldr": "module_coder.py: Provides the generate function to synthesize complete file content using a language model and a constructed context from scout reports.",
+      "tree": "module_coder.py\n\u251c\u2500\u2500 _build_context:15 \u2014 assembles task, research, and file context for the LLM\n\u2514\u2500\u2500 generate:58 \u2014 coordinates context building and LLM call to produce code",
+      "symbols": [
+        {
+          "name": "_build_context",
+          "line": 15,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "generate",
+          "line": 58,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.agents.scout",
+        "backend.memory.rom",
+        "backend.models.client"
+      ]
+    },
+    "backend/agents/coder/retriever.py": {
+      "path": "backend/agents/coder/retriever.py",
+      "checksum": "6ab4110f6edf45e8",
+      "tldr": "retriever.py provides utilities to load file content from disk based on a module index for injection into the Coder agent context.",
+      "tree": "retriever.py\n\u251c\u2500\u2500 _load_index:18 \u2014 loads module index JSON from disk\n\u251c\u2500\u2500 retrieve_for_modules:27 \u2014 returns file contents for given module IDs\n\u2514\u2500\u2500 retrieve_file:74 \u2014 reads and truncates a single file",
+      "symbols": [
+        {
+          "name": "_load_index",
+          "line": 18,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "retrieve_for_modules",
+          "line": 27,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "retrieve_file",
+          "line": 74,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__"
+      ]
+    },
+    "backend/agents/coder/gemini_direct.py": {
+      "path": "backend/agents/coder/gemini_direct.py",
+      "checksum": "562a46ee8df2793d",
+      "tldr": "`gemini_direct.py` implements a high-complexity escalation path for code generation using Gemini 3.1 Pro.",
+      "tree": "gemini_direct.py\n\u251c\u2500\u2500 _build_context:16 \u2014 constructs the prompt context for Gemini\n\u2514\u2500\u2500 generate:64 \u2014 handles the escalation call to the heavy model",
+      "symbols": [
+        {
+          "name": "_build_context",
+          "line": 16,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "generate",
+          "line": 64,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.agents.scout",
+        "backend.memory.rom",
+        "backend.models.client"
+      ]
+    },
+    "backend/agents/coder/__init__.py": {
+      "path": "backend/agents/coder/__init__.py",
+      "checksum": "3a68a877190bbd75",
+      "tldr": "backend/agents/coder/__init__.py: Export module for the coder agent's dispatcher.",
+      "tree": "backend/agents/coder/__init__.py\n\u2514\u2500\u2500 dispatch_node:1 \u2014 Route tasks to appropriate coder nodes",
+      "symbols": [],
+      "imports": [
+        "backend.agents.coder.dispatcher"
+      ]
+    },
+    "backend/agents/coder/critic.py": {
+      "path": "backend/agents/coder/critic.py",
+      "checksum": "030c7d11e3a4c01b",
+      "tldr": "critic.py: Logic for reviewing code diffs before application, incorporating hardware BOM checks if applicable.",
+      "tree": "critic.py\n\u251c\u2500\u2500 _bom_context:17 \u2014 retrieves hardware BOM context for hardware+software mode\n\u2514\u2500\u2500 review:29 \u2014 validates proposed code changes against task and BOM",
+      "symbols": [
+        {
+          "name": "_bom_context",
+          "line": 17,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "review",
+          "line": 29,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "__future__",
+        "backend.config",
+        "backend.memory.rom",
+        "backend.models.client"
+      ]
+    },
+    "dashboard/src/App.tsx": {
+      "path": "dashboard/src/App.tsx",
+      "checksum": "f9a507fbf22bc02b",
+      "tldr": "App.tsx is the main React entry component for the dashboard, managing WebSocket connectivity, global state, and layout for graph and panel components.",
+      "tree": "App.tsx\n\u251c\u2500\u2500 Tab:13 \u2014 Type for active view selection\n\u251c\u2500\u2500 App:20 \u2014 Main dashboard component managing global state\n\u2502   \u251c\u2500\u2500 onDragStart:131 \u2014 Initiates terminal height resizing\n\u2502   \u251c\u2500\u2500 onMove:135 \u2014 Updates terminal height during drag\n\u2502   \u2514\u2500\u2500 onUp:140 \u2014 Finalizes terminal height resizing\n\u2514\u2500\u2500 EmptyState:237 \u2014 UI fallback for missing data",
+      "symbols": [
+        {
+          "name": "Tab",
+          "line": 13,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "App",
+          "line": 20,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "onDragStart",
+          "line": 131,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "onMove",
+          "line": 135,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "onUp",
+          "line": 140,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "EmptyState",
+          "line": 237,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "@xyflow/react",
+        "./ws",
+        "./types",
+        "./components/SprintGraph",
+        "./components/ApiFlowPanel",
+        "./components/ClarificationPanel",
+        "./components/ControlPanel",
+        "./components/Settings",
+        "./components/Header",
+        "./components/TerminalPanel"
+      ]
+    },
+    "dashboard/src/main.tsx": {
+      "path": "dashboard/src/main.tsx",
+      "checksum": "0a1101d4aad1b183",
+      "tldr": "dashboard/src/main.tsx: Entry point for the React application, rendering the App component into the root DOM element.",
+      "tree": "dashboard/src/main.tsx\n\u2514\u2500\u2500 render:1: Entry point for the React application",
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-dom/client",
+        "./App"
+      ]
+    },
+    "dashboard/src/ws.ts": {
+      "path": "dashboard/src/ws.ts",
+      "checksum": "20256796f5a38ade",
+      "tldr": "A WebSocket client utility for managing real-time communication with the dashboard backend, featuring auto-reconnection and message queuing.",
+      "tree": "ws.ts\n\u251c\u2500\u2500 Handler:13 \u2014 Type definition for WebSocket message handlers\n\u251c\u2500\u2500 _backoff:22 \u2014 Calculates exponential backoff delay for reconnection\n\u251c\u2500\u2500 _emit:26 \u2014 Dispatches messages to all registered handlers\n\u251c\u2500\u2500 connect:30 \u2014 Initializes WebSocket connection and event listeners\n\u251c\u2500\u2500 send:69 \u2014 Sends a message or queues it if disconnected\n\u251c\u2500\u2500 subscribe:77 \u2014 Registers a handler for WebSocket messages\n\u251c\u2500\u2500 isConnected:91 \u2014 Returns current connection status\n\u2514\u2500\u2500 sessionId:92 \u2014 Returns the unique session identifier",
+      "symbols": [
+        {
+          "name": "Handler",
+          "line": 13,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "_backoff",
+          "line": 22,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_emit",
+          "line": 26,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "connect",
+          "line": 30,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "send",
+          "line": 69,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "subscribe",
+          "line": 77,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "isConnected",
+          "line": 91,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sessionId",
+          "line": 92,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "./types"
+      ]
+    },
+    "dashboard/src/types.ts": {
+      "path": "dashboard/src/types.ts",
+      "checksum": "8bb7513e7a1a98fb",
+      "tldr": "dashboard/src/types.ts: Type definitions for blueprint, sprint, and agent communication in the dashboard.",
+      "tree": "dashboard/src/types.ts\n\u251c\u2500\u2500 NodeKind:1 \u2014 Task/milestone node types\n\u251c\u2500\u2500 NodeState:2 \u2014 Execution states for nodes\n\u251c\u2500\u2500 AgentRole:3 \u2014 Categories of agents (heavy, worker, etc)\n\u251c\u2500\u2500 IntentKind:4 \u2014 Hardware/software intent classification\n\u251c\u2500\u2500 BlueprintNode:6 \u2014 Structure of a node in the blueprint\n\u251c\u2500\u2500 BlueprintEdge:16 \u2014 Connection between two blueprint nodes\n\u251c\u2500\u2500 Sprint:21 \u2014 Sprint definition including node IDs and state\n\u251c\u2500\u2500 Blueprint:30 \u2014 Full project plan containing nodes, edges, and sprints\n\u251c\u2500\u2500 SprintGraph:39 \u2014 Graph representation of a sprint session\n\u251c\u2500\u2500 AgentSpawnEvent:47 \u2014 Event data for agent creation\n\u251c\u2500\u2500 WsMessage:55 \u2014 WebSocket message envelope for communication\n\u251c\u2500\u2500 ClarificationQuestion:62 \u2014 A single clarification request\n\u251c\u2500\u2500 ClarificationState:68 \u2014 State tracking for clarification questions\n\u251c\u2500\u2500 ApiCallEvent:73 \u2014 Log of an agent's API call\n\u2514\u2500\u2500 VerifiedRef:87 \u2014 Reference to a verified canonical resource",
+      "symbols": [
+        {
+          "name": "NodeKind",
+          "line": 1,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "NodeState",
+          "line": 2,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "AgentRole",
+          "line": 3,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "IntentKind",
+          "line": 4,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "BlueprintNode",
+          "line": 6,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "BlueprintEdge",
+          "line": 16,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "Sprint",
+          "line": 21,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "Blueprint",
+          "line": 30,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "SprintGraph",
+          "line": 39,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "AgentSpawnEvent",
+          "line": 47,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "WsMessage",
+          "line": 55,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ClarificationQuestion",
+          "line": 62,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ClarificationState",
+          "line": 68,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ApiCallEvent",
+          "line": 73,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "VerifiedRef",
+          "line": 87,
+          "kind": "interface",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "dashboard/src/components/Settings.tsx": {
+      "path": "dashboard/src/components/Settings.tsx",
+      "checksum": "9d665836175d285e",
+      "tldr": "Settings component for managing API keys, project modes, server configurations, and hardware BOM settings.",
+      "tree": "Settings.tsx\n\u251c\u2500\u2500 Tab:4 \u2014 Tab identifier type\n\u251c\u2500\u2500 ProjectMode:5 \u2014 Project mode configuration type\n\u251c\u2500\u2500 Settings:14 \u2014 Main settings page component\n\u2502   \u251c\u2500\u2500 load:28 \u2014 Fetches settings, BOM, and project mode\n\u2502   \u251c\u2500\u2500 switchMode:48 \u2014 Updates the project mode (software vs hardware)\n\u2502   \u251c\u2500\u2500 setField:63 \u2014 Updates specific setting field value\n\u2502   \u251c\u2500\u2500 save:67 \u2014 Persists specified setting fields to server\n\u2502   \u251c\u2500\u2500 saveApiKey:77 \u2014 Specifically saves the Google API key\n\u2502   \u251c\u2500\u2500 saveBom:86 \u2014 Validates and saves the Bill of Materials JSON\n\u2502   \u2514\u2500\u2500 flashSaved:105 \u2014 Triggers a temporary 'saved' visual state\n\u251c\u2500\u2500 FormField:356 \u2014 Renders a labeled input field\n\u251c\u2500\u2500 FieldWithVerify:366 \u2014 Renders an input field with a verification action\n\u2514\u2500\u2500 verify:370 \u2014 Verifies specific setting value with the server",
+      "symbols": [
+        {
+          "name": "Tab",
+          "line": 4,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ProjectMode",
+          "line": 5,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "Settings",
+          "line": 14,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "load",
+          "line": 28,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "switchMode",
+          "line": 48,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setField",
+          "line": 63,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "save",
+          "line": 67,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "saveApiKey",
+          "line": 77,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "saveBom",
+          "line": 86,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "flashSaved",
+          "line": 105,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FormField",
+          "line": 356,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FieldWithVerify",
+          "line": 366,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "verify",
+          "line": 370,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "../types"
+      ]
+    },
+    "dashboard/src/components/ApiFlowPanel.tsx": {
+      "path": "dashboard/src/components/ApiFlowPanel.tsx",
+      "checksum": "bd7a8f067fb2fe73",
+      "tldr": "ApiFlowPanel is a React component that visualizes API call flows and agent topologies using ReactFlow.",
+      "tree": "ApiFlowPanel.tsx\n\u251c\u2500\u2500 Props:16 \u2014 Interface for panel input props\n\u251c\u2500\u2500 makeLabel:130 \u2014 Generates formatted labels for graph nodes\n\u251c\u2500\u2500 nodeStyle:140 \u2014 Returns CSS styles for graph nodes\n\u251c\u2500\u2500 topo:181 \u2014 Creates a static structural edge for the topology\n\u251c\u2500\u2500 ApiFlowPanel:192 \u2014 Main component for visualizing API flows\n\u251c\u2500\u2500 CallLogItem:433 \u2014 Renders a single API call log entry\n\u2514\u2500\u2500 StatCell:462 \u2014 Renders a small statistics data cell",
+      "symbols": [
+        {
+          "name": "Props",
+          "line": 16,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "makeLabel",
+          "line": 130,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "nodeStyle",
+          "line": 140,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "topo",
+          "line": 181,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ApiFlowPanel",
+          "line": 192,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CallLogItem",
+          "line": 433,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "StatCell",
+          "line": 462,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "@xyflow/react",
+        "../types"
+      ]
+    },
+    "dashboard/src/components/SprintGraph.tsx": {
+      "path": "dashboard/src/components/SprintGraph.tsx",
+      "checksum": "994dffc8d95f1168",
+      "tldr": "SprintGraph is a React component that renders an interactive DAG (Directed Acyclic Graph) of project sprints using ReactFlow and dagre.",
+      "tree": "SprintGraph.tsx\n\u251c\u2500\u2500 Props:19 \u2014 Configuration for the graph component\n\u251c\u2500\u2500 PopupState:28 \u2014 State for the sprint detail popup\n\u251c\u2500\u2500 stateClass:37 \u2014 Maps node state/kind to CSS classes\n\u251c\u2500\u2500 nodeLabelColor:47 \u2014 Maps node state/kind to label colors\n\u251c\u2500\u2500 layoutGraph:57 \u2014 Calculates node positions using dagre\n\u251c\u2500\u2500 D0mmyNode:69 \u2014 Custom ReactFlow node renderer\n\u251c\u2500\u2500 SprintGraph:108 \u2014 Main component for visualizing the sprint graph\n\u2502   \u251c\u2500\u2500 handler:125 \u2014 Closes popup on outside click\n\u2502   \u2514\u2500\u2500 s:193 \u2014 Internal helper for handling sprint actions\n\u251c\u2500\u2500 CardProps:291 \u2014 Props for individual sprint cards\n\u251c\u2500\u2500 SprintCard:297 \u2014 Component rendering sprint details in the popup\n\u251c\u2500\u2500 SprintPopup:331 \u2014 Container for the sprint details popup\n\u251c\u2500\u2500 ActionBtn:379 \u2014 Generic button for popup actions\n\u251c\u2500\u2500 PopupBtn:389 \u2014 Specialized button for popup actions\n\u2514\u2500\u2500 NodeDOMRef:406 \u2014 Type for node DOM element references",
+      "symbols": [
+        {
+          "name": "Props",
+          "line": 19,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "PopupState",
+          "line": 28,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "stateClass",
+          "line": 37,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "nodeLabelColor",
+          "line": 47,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "layoutGraph",
+          "line": 57,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "D0mmyNode",
+          "line": 69,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SprintGraph",
+          "line": 108,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "handler",
+          "line": 125,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "s",
+          "line": 193,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CardProps",
+          "line": 291,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "SprintCard",
+          "line": 297,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SprintPopup",
+          "line": 331,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ActionBtn",
+          "line": 379,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "PopupBtn",
+          "line": 389,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "NodeDOMRef",
+          "line": 406,
+          "kind": "interface",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "@xyflow/react",
+        "dagre",
+        "../ws",
+        "../types"
+      ]
+    },
+    "dashboard/src/components/ControlPanel.tsx": {
+      "path": "dashboard/src/components/ControlPanel.tsx",
+      "checksum": "b93065bc7d6ab690",
+      "tldr": "ControlPanel is a React component for managing the pipeline status, submitting intents, interrupts, and triggering indexing.",
+      "tree": "dashboard/src/components/ControlPanel.tsx\n\u251c\u2500\u2500 ControlPanel:7 \u2014 Main UI component for pipeline control\n\u2502   \u251c\u2500\u2500 submitIntent:15 \u2014 Sends user intent to the pipeline via WebSocket\n\u2502   \u251c\u2500\u2500 submitInterrupt:21 \u2014 Sends an interrupt constraint via WebSocket\n\u2502   \u251c\u2500\u2500 submitVerify:27 \u2014 Verifies a reference via API fetch\n\u2502   \u2514\u2500\u2500 runIndex:38 \u2014 Triggers the indexer run via POST request",
+      "symbols": [
+        {
+          "name": "Props",
+          "line": 5,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ControlPanel",
+          "line": 7,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "submitIntent",
+          "line": 15,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "submitInterrupt",
+          "line": 21,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "submitVerify",
+          "line": 27,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "runIndex",
+          "line": 38,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "../ws",
+        "../types"
+      ]
+    },
+    "dashboard/src/components/TerminalPanel.tsx": {
+      "path": "dashboard/src/components/TerminalPanel.tsx",
+      "checksum": "a04d133d633ce7ca",
+      "tldr": "TerminalPanel is a React component providing an integrated xterm.js terminal emulator with WebSocket connectivity to a backend shell.",
+      "tree": "dashboard/src/components/TerminalPanel.tsx\n\u251c\u2500\u2500 TerminalPanel:19 \u2014 Integrated terminal emulator component\n\u2502   \u251c\u2500\u2500 connect:87 \u2014 Establishes WebSocket connection to backend\n\u2502   \u2514\u2500\u2500 killProcess:131 \u2014 Sends kill signal to current running process\n\u2514\u2500\u2500 Props:15 \u2014 Component height prop definition",
+      "symbols": [
+        {
+          "name": "Props",
+          "line": 15,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "TerminalPanel",
+          "line": 19,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "connect",
+          "line": 87,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "killProcess",
+          "line": 131,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "@xterm/xterm",
+        "@xterm/addon-fit",
+        "@xterm/addon-web-links"
+      ]
+    },
+    "dashboard/src/components/ClarificationPanel.tsx": {
+      "path": "dashboard/src/components/ClarificationPanel.tsx",
+      "checksum": "b4014c9010112e50",
+      "tldr": "ClarificationPanel is a React component that provides a modal overlay for users to answer a set of clarification questions to refine a blueprint.",
+      "tree": "dashboard/src/components/ClarificationPanel.tsx\n\u251c\u2500\u2500 Props:5 \u2014 interface for component properties\n\u2514\u2500\u2500 ClarificationPanel:10 \u2014 modal panel for answering clarification questions",
+      "symbols": [
+        {
+          "name": "Props",
+          "line": 5,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ClarificationPanel",
+          "line": 10,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react",
+        "../ws",
+        "../types"
+      ]
+    },
+    "dashboard/src/components/Header.tsx": {
+      "path": "dashboard/src/components/Header.tsx",
+      "checksum": "d13a73ac5a087a04",
+      "tldr": "Header component for the dashboard, managing backend connection status and repository index statistics.",
+      "tree": "dashboard/src/components/Header.tsx\n\u251c\u2500\u2500 Header:12 \u2014 Main header component for dashboard status\n\u2502   \u251c\u2500\u2500 poll:23 \u2014 Continuously checks backend launcher status\n\u2502   \u251c\u2500\u2500 toggleBackend:47 \u2014 Starts or stops the backend server\n\u2502   \u2514\u2500\u2500 syncEnv:55 \u2014 Triggers environment synchronization\n\u2514\u2500\u2500 Props:3 \u2014 Configuration properties for Header component",
+      "symbols": [
+        {
+          "name": "Props",
+          "line": 3,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "Header",
+          "line": 12,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "poll",
+          "line": 23,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "toggleBackend",
+          "line": 47,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "syncEnv",
+          "line": 55,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "react"
+      ]
+    },
+    "vscode-extension/src/wsClient.ts": {
+      "path": "vscode-extension/src/wsClient.ts",
+      "checksum": "4d534da4e1b77fd0",
+      "tldr": "WsClient: A WebSocket client for communicating with a D0mmy backend, handling reconnection and message routing.",
+      "tree": "vscode-extension/src/wsClient.ts\n\u251c\u2500\u2500 WsClient:6 \u2014 WebSocket client for D0mmy backend\n\u2502   \u251c\u2500\u2500 connect:24 \u2014 Establishes connection and sets up listeners\n\u2502   \u251c\u2500\u2500 on:53 \u2014 Registers a handler for a specific message type\n\u2502   \u2514\u2500\u2500 send:59 \u2014 Sends a JSON message to the backend\n\u2502   \u2514\u2500\u2500 dispose:74 \u2014 Closes connection and cleans up resources\n\u2514\u2500\u2500 MessageHandler:4 \u2014 Type definition for message callback functions",
+      "symbols": [
+        {
+          "name": "MessageHandler",
+          "line": 4,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "WsClient",
+          "line": 6,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "constructor",
+          "line": 14,
+          "kind": "method",
+          "parent": "WsClient"
+        },
+        {
+          "name": "connect",
+          "line": 24,
+          "kind": "method",
+          "parent": "WsClient"
+        },
+        {
+          "name": "on",
+          "line": 53,
+          "kind": "method",
+          "parent": "WsClient"
+        },
+        {
+          "name": "send",
+          "line": 59,
+          "kind": "method",
+          "parent": "WsClient"
+        },
+        {
+          "name": "dispose",
+          "line": 74,
+          "kind": "method",
+          "parent": "WsClient"
+        }
+      ],
+      "imports": [
+        "ws",
+        "vscode"
+      ]
+    },
+    "vscode-extension/src/extension.ts": {
+      "path": "vscode-extension/src/extension.ts",
+      "checksum": "71e021fecc6781d1",
+      "tldr": "vscode-extension/src/extension.ts: The main entry point for the VS Code extension, managing WebSocket communication and diff handling.",
+      "tree": "vscode-extension/src/extension.ts\n\u251c\u2500\u2500 activate:9 \u2014 Initializes extension, WS client, and commands\n\u251c\u2500\u2500 _scheduleContext:86 \u2014 Throttles sending file context updates\n\u251c\u2500\u2500 sendFileContext:91 \u2014 Collects and sends active editor and workspace info\n\u2514\u2500\u2500 deactivate:127 \u2014 Cleans up WebSocket client on extension shutdown",
+      "symbols": [
+        {
+          "name": "activate",
+          "line": 9,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_scheduleContext",
+          "line": 86,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendFileContext",
+          "line": 91,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "deactivate",
+          "line": 127,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "vscode",
+        "path",
+        "./wsClient",
+        "./diffHandler"
+      ]
+    },
+    "vscode-extension/src/diffHandler.ts": {
+      "path": "vscode-extension/src/diffHandler.ts",
+      "checksum": "51f81f85413fd4c0",
+      "tldr": "DiffHandler: A VS Code extension class that manages diff views for proposed file changes, providing content for virtual documents and handling acceptance/rejection of changes.",
+      "tree": "vscode-extension/src/diffHandler.ts\n\u251c\u2500\u2500 PendingDiff:4 \u2014 Interface for pending diff state\n\u251c\u2500\u2500 ResultCallback:10 \u2014 Callback type for diff results\n\u2514\u2500\u2500 DiffHandler:12 \u2014 Manages VS Code diff views and content providers\n    \u2502   \u251c\u2500\u2500 setResultCallback:18 \u2014 Sets the result callback function\n    \u2502   \u251c\u2500\u2500 provideTextDocumentContent:24 \u2014 Provides content for virtual diff documents\n    \u2502   \u251c\u2500\u2500 showDiff:32 \u2014 Opens the VS Code diff editor\n    \u2502   \u251c\u2500\u2500 accept:59 \u2014 Applies the proposed changes to the file\n    \u2502   \u2514\u2500\u2500 reject:88 \u2014 Discards the proposed changes",
+      "symbols": [
+        {
+          "name": "PendingDiff",
+          "line": 4,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "ResultCallback",
+          "line": 10,
+          "kind": "interface",
+          "parent": null
+        },
+        {
+          "name": "DiffHandler",
+          "line": 12,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "setResultCallback",
+          "line": 18,
+          "kind": "method",
+          "parent": "DiffHandler"
+        },
+        {
+          "name": "provideTextDocumentContent",
+          "line": 24,
+          "kind": "method",
+          "parent": "DiffHandler"
+        },
+        {
+          "name": "showDiff",
+          "line": 32,
+          "kind": "method",
+          "parent": "DiffHandler"
+        },
+        {
+          "name": "accept",
+          "line": 59,
+          "kind": "method",
+          "parent": "DiffHandler"
+        },
+        {
+          "name": "reject",
+          "line": 88,
+          "kind": "method",
+          "parent": "DiffHandler"
+        }
+      ],
+      "imports": [
+        "vscode",
+        "path"
+      ]
+    }
+  },
+  "modules": [
+    {
+      "id": "backend/main-entry",
+      "name": "Main Entry",
+      "tldr": "Main FastAPI application entry point and global routing",
+      "files": [
+        {
+          "path": "backend/main.py"
+        }
+      ],
+      "deps": [
+        "backend/ws-manager",
+        "backend/memory/hdd",
+        "backend/memory/ram",
+        "backend/agents/version-oracle"
+      ]
+    },
+    {
+      "id": "backend/ws-manager",
+      "name": "WebSocket Manager",
+      "tldr": "Manages real-time client connections, heartbeats, and message broadcasting",
+      "files": [
+        {
+          "path": "backend/ws_manager.py"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "backend/config",
+      "name": "Configuration",
+      "tldr": "Application settings management using Pydantic",
+      "files": [
+        {
+          "path": "backend/config.py"
+        }
+      ],
+      "deps": [
+        "pydantic",
+        "pydantic_settings"
+      ]
+    },
+    {
+      "id": "backend/memory/hdd",
+      "name": "Long-term Memory (HDD)",
+      "tldr": "Vector storage management using ChromaDB and Google embeddings",
+      "files": [
+        {
+          "path": "backend/memory/hdd.py"
+        }
+      ],
+      "deps": [
+        "chromadb",
+        "backend/models/google"
+      ]
+    },
+    {
+      "id": "backend/memory/ram",
+      "name": "Short-term Memory (RAM)",
+      "tldr": "Scratchpad memory for session context with automatic summarization",
+      "files": [
+        {
+          "path": "backend/memory/ram.py"
+        }
+      ],
+      "deps": [
+        "backend/models/client"
+      ]
+    },
+    {
+      "id": "backend/memory/rom",
+      "name": "Template Memory (ROM)",
+      "tldr": "Cached loading of prompt templates and JSON schemas",
+      "files": [
+        {
+          "path": "backend/memory/rom.py"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "backend/models/client",
+      "name": "Model Client",
+      "tldr": "Unified LLM API caller with integrated monitoring and broadcasting",
+      "files": [
+        {
+          "path": "backend/models/client.py"
+        }
+      ],
+      "deps": [
+        "backend/models/google",
+        "backend/ws-manager"
+      ]
+    },
+    {
+      "id": "backend/models/google",
+      "name": "Google Gemini Interface",
+      "tldr": "Interface for Google Gemini API with model selection and retries",
+      "files": [
+        {
+          "path": "backend/models/google.py"
+        }
+      ],
+      "deps": [
+        "google.genai",
+        "backend/agents/version-hook"
+      ]
+    },
+    {
+      "id": "backend/agents/versioning",
+      "name": "Version Verification",
+      "tldr": "Resolves model names and package versions to canonical identifiers",
+      "files": [
+        {
+          "path": "backend/agents/version_hook.py"
+        },
+        {
+          "path": "backend/agents/version_oracle.py"
+        }
+      ],
+      "deps": [
+        "google.genai"
+      ]
+    },
+    {
+      "id": "backend/agents/intent-router",
+      "name": "Intent Router",
+      "tldr": "Zero-shot intent classification for routing requests to hardware or software paths",
+      "files": [
+        {
+          "path": "backend/agents/intent_router.py"
+        }
+      ],
+      "deps": [
+        "backend/models/client"
+      ]
+    },
+    {
+      "id": "backend/agents/clarifier",
+      "name": "Clarifier Agent",
+      "tldr": "Generates targeted clarifying questions to refine user intent",
+      "files": [
+        {
+          "path": "backend/agents/clarifier.py"
+        }
+      ],
+      "deps": [
+        "backend/models/client",
+        "backend/memory/rom"
+      ]
+    },
+    {
+      "id": "backend/agents/idea-builder",
+      "name": "Idea Builder",
+      "tldr": "Transforms user intent into an Application Blueprint DAG",
+      "files": [
+        {
+          "path": "backend/agents/idea_builder.py"
+        },
+        {
+          "path": "backend/agents/coordinator.py"
+        }
+      ],
+      "deps": [
+        "backend/models/client",
+        "backend/memory/rom",
+        "backend/memory/hdd",
+        "backend/agents/module-indexer/writer"
+      ]
+    },
+    {
+      "id": "backend/agents/module-indexer",
+      "name": "Module Indexer",
+      "tldr": "Scans workspaces to create AST-based symbol trees and module summaries",
+      "files": [
+        {
+          "path": "backend/agents/module_indexer/__init__.py"
+        },
+        {
+          "path": "backend/agents/module_indexer/ast_graph.py"
+        },
+        {
+          "path": "backend/agents/module_indexer/file_summarizer.py"
+        },
+        {
+          "path": "backend/agents/module_indexer/index_writer.py"
+        },
+        {
+          "path": "backend/agents/module_indexer/indexer.py"
+        },
+        {
+          "path": "backend/agents/module_indexer/module_grouper.py"
+        }
+      ],
+      "deps": [
+        "backend/models/client",
+        "backend/memory/rom"
+      ]
+    },
+    {
+      "id": "backend/agents/module-indexer/writer",
+      "name": "Index Writer",
+      "tldr": "Utility for managing the module index JSON and Markdown files",
+      "files": [
+        {
+          "path": "backend/agents/module_indexer/index_writer.py"
+        }
+      ],
+      "deps": [
+        "backend/config"
+      ]
+    },
+    {
+      "id": "backend/agents/scout",
+      "name": "Scout Agent",
+      "tldr": "Performs semantic search and technical research for Coder context",
+      "files": [
+        {
+          "path": "backend/agents/scout.py"
+        }
+      ],
+      "deps": [
+        "backend/memory/hdd",
+        "backend/models/client"
+      ]
+    },
+    {
+      "id": "backend/agents/coder",
+      "name": "Coder Agent",
+      "tldr": "Hierarchical code generation pipeline with complexity scoring and escalation",
+      "files": [
+        {
+          "path": "backend/agents/coder/__init__.py"
+        },
+        {
+          "path": "backend/agents/coder/complexity_scorer.py"
+        },
+        {
+          "path": "backend/agents/coder/critic.py"
+        },
+        {
+          "path": "backend/agents/coder/dispatcher.py"
+        },
+        {
+          "path": "backend/agents/coder/gemini_direct.py"
+        },
+        {
+          "path": "backend/agents/coder/module_coder.py"
+        },
+        {
+          "path": "backend/agents/coder/retriever.py"
+        }
+      ],
+      "deps": [
+        "backend/agents/scout",
+        "backend/models/client",
+        "backend/memory/rom"
+      ]
+    },
+    {
+      "id": "backend/pipelines",
+      "name": "Execution Pipelines",
+      "tldr": "Orchestrates flow from intent classification to roadmap and execution",
+      "files": [
+        {
+          "path": "backend/pipeline.py"
+        },
+        {
+          "path": "backend/exec_pipeline.py"
+        }
+      ],
+      "deps": [
+        "backend/ws-manager",
+        "backend/agents/intent-router",
+        "backend/agents/clarifier",
+        "backend/agents/idea-builder",
+        "backend/agents/coder",
+        "backend/agents/module-indexer"
+      ]
+    },
+    {
+      "id": "backend/apis",
+      "name": "Backend APIs",
+      "tldr": "FastAPI endpoints for index management, settings, and terminal access",
+      "files": [
+        {
+          "path": "backend/index_api.py"
+        },
+        {
+          "path": "backend/settings_api.py"
+        },
+        {
+          "path": "backend/terminal.py"
+        }
+      ],
+      "deps": [
+        "backend/agents/module-indexer",
+        "backend/ws-manager",
+        "backend/config"
+      ]
+    },
+    {
+      "id": "dashboard/core",
+      "name": "Dashboard Core",
+      "tldr": "Main React application entry and global state/WebSocket management",
+      "files": [
+        {
+          "path": "dashboard/src/App.tsx"
+        },
+        {
+          "path": "dashboard/src/main.tsx"
+        },
+        {
+          "path": "dashboard/src/ws.ts"
+        },
+        {
+          "path": "dashboard/src/types.ts"
+        }
+      ],
+      "deps": [
+        "@xyflow/react"
+      ]
+    },
+    {
+      "id": "dashboard/components",
+      "name": "Dashboard Components",
+      "tldr": "UI components for sprint graphs, API flows, and settings",
+      "files": [
+        {
+          "path": "dashboard/src/components/ApiFlowPanel.tsx"
+        },
+        {
+          "path": "dashboard/src/components/ClarificationPanel.tsx"
+        },
+        {
+          "path": "dashboard/src/components/ControlPanel.tsx"
+        },
+        {
+          "path": "dashboard/src/components/Header.tsx"
+        },
+        {
+          "path": "sprint_graph.tsx",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "path": "dashboard/src/components/SprintGraph.tsx"
+        },
+        {
+          "path": "dashboard/src/components/Settings.tsx"
+        },
+        {
+          "path": "dashboard/src/components/TerminalPanel.tsx"
+        }
+      ],
+      "deps": [
+        "@xyflow/react",
+        "dagre",
+        "@xterm/xterm"
+      ]
+    },
+    {
+      "id": "dashboard/config",
+      "name": "Dashboard Config",
+      "tldr": "Vite configuration for the frontend dashboard",
+      "files": [
+        {
+          "path": "dashboard/vite.config.ts"
+        }
+      ],
+      "deps": [
+        "@vitejs/plugin-react"
+      ]
+    },
+    {
+      "id": "vscode/extension",
+      "name": "VS Code Extension",
+      "tldr": "Manages WebSocket communication and diff views for file changes",
+      "files": [
+        {
+          "path": "vscode-extension/src/extension.ts"
+        },
+        {
+          "path": "vscode-extension/src/wsClient.ts"
+        },
+        {
+          "path": "vscode-extension/src/diffHandler.ts"
+        }
+      ],
+      "deps": [
+        "vscode"
+      ]
+    },
+    {
+      "id": "backend/init-files",
+      "name": "Initialization Files",
+      "tldr": "Python package initialization files",
+      "files": [
+        {
+          "path": "backend/__init__.py"
+        },
+        {
+          "path": "backend/agents/__init__.py"
+        },
+        {
+          "path": "backend/agents/coder/__init__.py"
+        },
+        {
+          "path": "backend/models/__init__.py"
+        },
+        {
+          "path": "backend/memory/__init__.py"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "scripts/utils",
+      "name": "Utility Scripts",
+      "tldr": "Project management, environment setup, and process launching",
+      "files": [
+        {
+          "path": "dev.py"
+        },
+        {
+          "path": "scripts/attach.py"
+        },
+        {
+          "path": "scripts/launcher.py"
+        },
+        {
+          "path": "scripts/projects.py"
+        },
+        {
+          "path": "scripts/setup_keys.py"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "extension/chrome",
+      "name": "Chrome Extension",
+      "tldr": "Service worker and content scripts for harvesting content from the browser",
+      "files": [
+        {
+          "path": "extension/background.js"
+        },
+        {
+          "path": "extension/content.js"
+        },
+        {
+          "path": "extension/popup.js"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "tests/ws",
+      "name": "name",
+      "tldr": "WebSocket client test script",
+      "files": [
+        {
+          "path": "scratch/test_ws.py"
+        }
+      ],
+      "deps": [
+        "websockets"
+      ]
+    }
+  ],
+  "last_indexed": "2026-04-22T05:00:08.003738+00:00",
+  "workspace_root": "/Users/xumic/Developer/D0mmy"
+}

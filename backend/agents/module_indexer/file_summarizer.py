@@ -63,6 +63,7 @@ async def summarize_file(rel_path: str, abs_path: Path) -> dict | None:
             schema=get_schema("file_summary"),
             agent="file_summarizer",
             goal=f"summarize {rel_path}",
+            run_version_hook=False,
         )
     except Exception as exc:
         logger.warning("file_summarizer failed for %s: %s", rel_path, exc)

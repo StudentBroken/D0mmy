@@ -62,7 +62,7 @@ async def index_workspace(workspace_root: str, force: bool = False) -> dict:
     """
     root = Path(workspace_root)
     all_files = _collect_files(root)
-    existing  = load_index()
+    existing  = load_index(workspace_root)
     cached    = existing.get("files", {})
 
     to_index = all_files if force else _stale_only(all_files, cached)
