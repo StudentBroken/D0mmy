@@ -118,10 +118,21 @@ A TypeScript extension that receives code diffs from the AI and presents them vi
 
 ## 🗺️ Roadmap
 
-- [x] **Phase 1**: Central Nervous System (FastAPI, WebSockets, Memory)
-- [x] **Phase 2**: Planning Engine (Idea Builder, Roadmap Creator)
-- [ ] **Phase 3**: Execution Engine (VS Code Bridge, Coder Pipeline)
+- [x] **Phase 1**: Central Nervous System (FastAPI, WebSockets, Memory) — **COMPLETE**
+- [x] **Phase 2**: Planning Engine (Idea Builder, Roadmap Creator) — **BUILT, pending live verification**
+- [ ] **Phase 3**: Execution Engine (VS Code Bridge, Coder Pipeline) — **IN PROGRESS** (Module Indexer complete)
 - [ ] **Phase 4**: Hardware Daemons (Serial I/O, Build Automation)
 - [ ] **Phase 5**: VSCodium Fork (Native IPC, Integrated Binary)
 
 See [roadmap.md](roadmap.md) for the detailed critical path.
+
+## 📈 Current Status
+
+**Phase 1**: ✅ Complete — Headless orchestrator with WebSocket event bus and deterministic memory layers.
+
+**Phase 2**: 🟡 Built, pending verification — Planning pipeline from intent to sprint graph, with HITL approval.
+
+**Next Steps**:
+1. Verify Checkpoint 1: Chrome harvest → ChromaDB roundtrip
+2. Verify Checkpoint 2: Intent → sprint graph on dashboard
+3. Begin Phase 3: Wire execution engine to VS Code extension
