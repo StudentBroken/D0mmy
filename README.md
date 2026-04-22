@@ -13,47 +13,63 @@
 D0mmy connects your browser, your code editor, and a powerful agentic backend into a unified engineering environment. The system operates through deterministic pipelines with specialized AI agents handling planning, coding, hardware debugging, and documentation.
 
 ```mermaid
-graph LR
-    GA[Google AI API<br/>Gemini/Gemma Models]
+graph TD
+    subgraph "Input Clients"
+        CE["📱 Chrome<br/>Harvesting"]
+        VSC["💻 VS Code<br/>Diffs & Context"]
+        DB["📊 Dashboard<br/>HITL Control"]
+    end
     
-    CE[Chrome Extension<br/>Harvesting]
-    VSC[VS Code Extension<br/>Diffs]
-    DB[Dashboard<br/>HITL Gate]
+    subgraph "Core Orchestrator"
+        FO["🎯 FastAPI<br/>WebSocket Hub"]
+    end
     
-    ce((FastAPI<br/>Orchestrator))
+    subgraph "Planning Pipeline"
+        IR["🔀 Intent<br/>Router"]
+        CL["❓ Clarifier<br/>Ask Questions"]
+        IB["💡 Idea<br/>Builder"]
+        RC["🗺️ Roadmap<br/>Creator"]
+    end
     
-    IR[Intent Router]
-    CL[Clarifier]
-    IB[Idea Builder]
-    RC[Roadmap Creator]
+    subgraph "Sprint Execution"
+        CO["🚀 Coordinator<br/>Sprint Runner"]
+        SC["🔍 Scout<br/>Context Gather"]
+        CS["📈 Complexity<br/>Scorer"]
+        DP["🔀 Dispatcher<br/>Route Task"]
+        MC["✏️ Module<br/>Coder"]
+        GD["🤖 Gemini<br/>Direct"]
+        CR["✅ Critic<br/>Review+Validate"]
+    end
     
-    CO[Coordinator]
-    SC[Scout]
-    CS[Complexity<br/>Scorer]
-    DP[Dispatcher]
-    MC[Module Coder]
-    GD[Gemini Direct]
-    CR[Critic]
+    subgraph "Support Systems"
+        MI["📑 Module<br/>Indexer"]
+        VO["🛡️ Version<br/>Oracle"]
+    end
     
-    MI[Module Indexer]
-    VO[Version Oracle]
+    subgraph "Memory & Storage"
+        ROM["📚 ROM<br/>Prompts/Schemas"]
+        RAM["⚡ RAM<br/>Scratchpad"]
+        HDD["💾 HDD<br/>ChromaDB"]
+        PD["📄 Project<br/>Data"]
+    end
     
-    ROM["ROM<br/>Prompts/Schemas"]
-    RAM["RAM<br/>Scratchpad"]
-    HDD["HDD<br/>ChromaDB"]
+    subgraph "External AI"
+        GA["🤖 Google AI API<br/>Gemini 3.1 Pro<br/>Gemma 4 Models<br/>Embeddings"]
+    end
     
-    PD["Project Data<br/>sprints.json"]
+    %% Input to Orchestrator
+    CE --> FO
+    VSC --> FO
+    DB --> FO
     
-    CE -->|WebSocket| ce
-    VSC -->|WebSocket| ce
-    DB -->|WebSocket| ce
-    
-    ce --> IR
+    %% Planning Pipeline
+    FO --> IR
     IR --> CL
     CL --> IB
     IB --> RC
-    
     RC --> CO
+    
+    %% Execution Pipeline
     CO --> SC
     SC --> CS
     CS --> DP
@@ -61,14 +77,19 @@ graph LR
     DP --> GD
     MC --> CR
     GD --> CR
+    CR --> VSC
     
-    ce --> MI
-    ce --> VO
-    ce --> ROM
-    ce --> RAM
-    ce --> HDD
-    ce --> PD
+    %% Memory Access
+    FO --> ROM
+    FO --> RAM
+    FO --> HDD
+    FO --> PD
     
+    %% Support Systems
+    FO --> MI
+    FO --> VO
+    
+    %% AI Service Connections
     GA --> IR
     GA --> CL
     GA --> IB
@@ -81,24 +102,29 @@ graph LR
     GA --> MI
     GA --> VO
     
-    style ce fill:#e1f5fe,stroke:#01579b,stroke-width:3px
-    style GA fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    style VSC fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    style DB fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style CE fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-    style IR fill:#fff9c4,stroke:#f9a825
-    style CL fill:#fff9c4,stroke:#f9a825
-    style IB fill:#fff9c4,stroke:#f9a825
-    style RC fill:#fff9c4,stroke:#f9a825
-    style CO fill:#bbdefb,stroke:#1976d2
-    style SC fill:#bbdefb,stroke:#1976d2
-    style CS fill:#bbdefb,stroke:#1976d2
-    style DP fill:#bbdefb,stroke:#1976d2
-    style MC fill:#bbdefb,stroke:#1976d2
-    style GD fill:#bbdefb,stroke:#1976d2
-    style CR fill:#bbdefb,stroke:#1976d2
-    style MI fill:#f1f8e9,stroke:#558b2f
-    style VO fill:#f1f8e9,stroke:#558b2f
+    %% Styling
+    style FO fill:#e1f5fe,stroke:#01579b,stroke-width:3px,color:#000
+    style GA fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000
+    style CE fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
+    style VSC fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px,color:#000
+    style DB fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
+    style IR fill:#fff9c4,stroke:#f9a825,color:#000
+    style CL fill:#fff9c4,stroke:#f9a825,color:#000
+    style IB fill:#fff9c4,stroke:#f9a825,color:#000
+    style RC fill:#fff9c4,stroke:#f9a825,color:#000
+    style CO fill:#c8e6c9,stroke:#388e3c,stroke-width:2px,color:#000
+    style SC fill:#bbdefb,stroke:#1976d2,color:#000
+    style CS fill:#bbdefb,stroke:#1976d2,color:#000
+    style DP fill:#bbdefb,stroke:#1976d2,color:#000
+    style MC fill:#bbdefb,stroke:#1976d2,color:#000
+    style GD fill:#bbdefb,stroke:#1976d2,color:#000
+    style CR fill:#ffccbc,stroke:#d84315,stroke-width:2px,color:#000
+    style MI fill:#f1f8e9,stroke:#558b2f,color:#000
+    style VO fill:#f1f8e9,stroke:#558b2f,color:#000
+    style ROM fill:#e0f2f1,stroke:#00695c,color:#000
+    style RAM fill:#e0f2f1,stroke:#00695c,color:#000
+    style HDD fill:#e0f2f1,stroke:#00695c,color:#000
+    style PD fill:#e0f2f1,stroke:#00695c,color:#000
 ```
 
 ## ✨ Key Features
