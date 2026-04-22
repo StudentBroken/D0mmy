@@ -77,7 +77,7 @@ _TS_IFACE   = re.compile(r"""(?:export\s+)?(?:interface|type)\s+(\w+)\s*[={<]"""
 _TS_METHOD  = re.compile(r"""^\s{2,}(?:async\s+)?(\w+)\s*\(""")
 
 
-    return FileGraph(rel_path, chk, symbols, list(dict.fromkeys(imports)))
+
 
 
 def _parse_typescript(rel_path: str, content: str) -> FileGraph:

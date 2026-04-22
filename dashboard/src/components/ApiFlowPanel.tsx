@@ -66,20 +66,44 @@ const TOPO_NODES: Node[] = [
     style: nodeStyle('#0a2a2a', '#1a5a5a'),
   },
   {
-    id: 'blueprint_synthesizer',
-    position: { x: 340, y: 200 },
-    data: { label: makeLabel('Blueprint Synth', 'Heavy', 'heavy') },
+    id: 'file_summarizer',
+    position: { x: 60, y: 510 },
+    data: { label: makeLabel('File Summarizer', 'Worker', 'worker') },
+    style: nodeStyle('#1a2a1a', '#2a5a2a'),
+  },
+  {
+    id: 'complexity_scorer',
+    position: { x: 600, y: 20 },
+    data: { label: makeLabel('Complexity Scorer', 'Daemon', 'daemon') },
+    style: nodeStyle('#1a1a3a', '#4a2a7a'),
+  },
+  {
+    id: 'module_coder',
+    position: { x: 600, y: 110 },
+    data: { label: makeLabel('Module Coder', 'Worker', 'worker') },
+    style: nodeStyle('#0a2a2a', '#1a5a5a'),
+  },
+  {
+    id: 'gemini_direct',
+    position: { x: 600, y: 200 },
+    data: { label: makeLabel('Direct Coder', 'Heavy', 'heavy') },
     style: nodeStyle('#2a1a0a', '#5a3a0a'),
   },
   {
+    id: 'code_critic',
+    position: { x: 600, y: 290 },
+    data: { label: makeLabel('Code Critic', 'Heavy', 'heavy') },
+    style: nodeStyle('#2a1a0a', '#5a3a0a', 160),
+  },
+  {
     id: 'time_estimator',
-    position: { x: 600, y: 200 },
+    position: { x: 600, y: 400 },
     data: { label: makeLabel('Time Estimator', 'Worker', 'worker') },
     style: nodeStyle('#0a2a2a', '#1a5a5a'),
   },
   {
     id: 'intersection_architect',
-    position: { x: 600, y: 300 },
+    position: { x: 600, y: 490 },
     data: { label: makeLabel('Intersect. Arch.', 'Worker', 'worker') },
     style: nodeStyle('#0a2a2a', '#1a5a5a'),
   },
@@ -94,6 +118,12 @@ const TOPO_NODES: Node[] = [
     position: { x: 340, y: 380 },
     data: { label: makeLabel('ChromaDB', '🗄 HDD Memory', '') },
     style: nodeStyle('#0a1a2a', '#1a3a4a'),
+  },
+  {
+    id: 'blueprint_synthesizer',
+    position: { x: 340, y: 200 },
+    data: { label: makeLabel('Blueprint Synth', 'Heavy', 'heavy') },
+    style: nodeStyle('#2a1a0a', '#5a3a0a'),
   },
 ]
 
@@ -125,6 +155,11 @@ const TOPO_EDGES: Edge[] = [
   topo('orchestrator', 'tech_harvester'),
   topo('orchestrator', 'rubric_aligner'),
   topo('orchestrator', 'risk_assassin'),
+  topo('orchestrator', 'file_summarizer'),
+  topo('orchestrator', 'complexity_scorer'),
+  topo('orchestrator', 'module_coder'),
+  topo('orchestrator', 'gemini_direct'),
+  topo('orchestrator', 'code_critic'),
   topo('orchestrator', 'blueprint_synthesizer'),
   topo('orchestrator', 'time_estimator'),
   topo('orchestrator', 'intersection_architect'),
@@ -133,6 +168,11 @@ const TOPO_EDGES: Edge[] = [
   topo('tech_harvester', 'google_api'),
   topo('rubric_aligner', 'google_api'),
   topo('risk_assassin', 'google_api'),
+  topo('file_summarizer', 'google_api'),
+  topo('complexity_scorer', 'google_api'),
+  topo('module_coder', 'google_api'),
+  topo('gemini_direct', 'google_api'),
+  topo('code_critic', 'google_api'),
   topo('blueprint_synthesizer', 'google_api'),
   topo('time_estimator', 'google_api'),
   topo('intersection_architect', 'google_api'),
@@ -166,10 +206,11 @@ export default function ApiFlowPanel({ calls, graph, dynAgents }: Props) {
       const isActive = c.status === 'start'
       const opacity = c.status === 'complete' ? 0.5 : 1
 
+      const isChroma = c.agent === 'chromadb'
       liveEdges.push({
         id: `call_${c.call_id}`,
         source: c.agent,
-        target: 'google_api',
+        target: isChroma ? 'orchestrator' : 'google_api',
         animated: isActive,
         style: {
           stroke: color,
@@ -213,7 +254,7 @@ export default function ApiFlowPanel({ calls, graph, dynAgents }: Props) {
     }
     const extra: Node[] = dynAgents.map((a, i) => ({
       id: a.agent_id,
-      position: { x: 60, y: 560 + i * 90 },
+      position: { x: 340, y: 560 + i * 90 },
       data: {
         label: makeLabel(
           a.agent_id.replace('dynamic_', ''),

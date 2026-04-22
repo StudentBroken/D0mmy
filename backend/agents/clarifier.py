@@ -6,16 +6,24 @@ from backend.memory.rom import get_prompt, get_schema
 logger = logging.getLogger(__name__)
 
 
-async def generate_questions(intent: str) -> list[dict]:
+async def generate_questions(intent: str, repo_map: str = "") -> list[dict]:
     """
     Daemon generates targeted clarifying questions for the given intent.
     Returns list of {id, question, hint} dicts.
+    repo_map: contents of module_index.md — clarifier must not ask about things already evident here.
     """
+    user_content = f"User intent: {intent}"
+    if repo_map:
+        user_content = (
+            f"--- EXISTING PROJECT INDEX ---\n{repo_map}\n\n"
+            f"--- USER INTENT ---\n{intent}"
+        )
+
     result = await call_model(
         role="daemon",
         messages=[
             {"role": "system", "content": get_prompt("clarifier")},
-            {"role": "user", "content": f"User intent: {intent}"},
+            {"role": "user", "content": user_content},
         ],
         schema=get_schema("clarification"),
         agent="clarifier",

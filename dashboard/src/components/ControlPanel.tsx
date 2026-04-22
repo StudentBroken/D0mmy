@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { send, sessionId } from '../ws'
 import type { VerifiedRef } from '../types'
 
-interface Props { status: string }
+interface Props { status: string; indexing: boolean; setIndexing: (v: boolean) => void }
 
-export default function ControlPanel({ status }: Props) {
+export default function ControlPanel({ status, indexing, setIndexing }: Props) {
   const [intent,       setIntent]       = useState('')
   const [interrupt,    setInterrupt]    = useState('')
   const [verifyName,   setVerifyName]   = useState('')
   const [verifyResult, setVerifyResult] = useState<VerifiedRef | null>(null)
   const [verifying,    setVerifying]    = useState(false)
-  const [indexing,     setIndexing]     = useState(false)
   const [indexStats,   setIndexStats]   = useState<{ modules?: number; total_files?: number; last_indexed?: string } | null>(null)
 
   function submitIntent() {
@@ -40,16 +39,24 @@ export default function ControlPanel({ status }: Props) {
     setIndexing(true)
     try {
       const r = await fetch('/index/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ force: false }) })
-      if (r.ok) {
-        await new Promise(res => setTimeout(res, 1500))
-        const s = await fetch('/index')
-        if (s.ok) {
-          const d = await s.json()
-          setIndexStats({ modules: d.modules?.length, total_files: d.total_files, last_indexed: d.last_indexed })
-        }
+      if (!r.ok) {
+        setIndexing(false)
+        console.error('Failed to start indexer:', await r.text())
       }
-    } finally { setIndexing(false) }
+    } catch (err) {
+      setIndexing(false)
+      console.error('Indexer error:', err)
+    }
   }
+
+  // Update stats whenever indexing finishes
+  useEffect(() => {
+    if (!indexing) {
+      fetch('/index').then(r => r.json()).then(d => {
+        setIndexStats({ modules: d.modules?.length, total_files: d.total_files, last_indexed: d.last_indexed })
+      }).catch(() => {})
+    }
+  }, [indexing])
 
   const statusColor =
     status.startsWith('Error')                                        ? 'var(--red)'

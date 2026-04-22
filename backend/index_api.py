@@ -25,6 +25,10 @@ _ROOT = Path(__file__).resolve().parent.parent   # project root
 
 
 def _workspace_root() -> str:
+    from backend.config import get_settings
+    cfg = get_settings()
+    if cfg.target_repo:
+        return cfg.target_repo
     return str(_ROOT)
 
 

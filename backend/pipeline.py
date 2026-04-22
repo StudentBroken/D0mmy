@@ -59,7 +59,13 @@ async def _run_pipeline(session_id: str, intent_text: str, extra_context: str = 
         # ── 2. Clarification questions ────────────────────────────────────────
         await _broadcast(session_id, "clarifying", "Generating clarifying questions…")
         try:
-            questions = await generate_questions(intent_text)
+            from backend.agents.module_indexer.index_writer import INDEX_MD
+            _repo_map = ""
+            if INDEX_MD.exists():
+                _repo_map = INDEX_MD.read_text(encoding="utf-8", errors="replace")
+                if len(_repo_map) > 12000:
+                    _repo_map = _repo_map[:12000] + "\n... (truncated)"
+            questions = await generate_questions(intent_text, repo_map=_repo_map)
         except Exception as exc:
             logger.warning("Clarifier failed (skipping): %s", exc)
             questions = []

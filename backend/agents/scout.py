@@ -66,7 +66,7 @@ def _relevant_modules(keywords: list[str], top_n: int = _MODULE_TOP) -> list[dic
 async def _repo_search(query: str, keywords: list[str]) -> tuple[list[dict], list[dict]]:
     """Returns (chroma_hits, relevant_modules) — pure data retrieval, no AI."""
     try:
-        hits = fetch_context(query, n_results=_CHROMA_N)
+        hits = await fetch_context(query, n_results=_CHROMA_N)
     except Exception as exc:
         logger.warning("ChromaDB query failed: %s", exc)
         hits = []

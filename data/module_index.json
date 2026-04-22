@@ -1,0 +1,4103 @@
+{
+  "version": 1,
+  "files": {
+    "update_batt.py": {
+      "path": "update_batt.py",
+      "checksum": "c24de424a617bdae",
+      "tldr": "update_batt.py: A script to inject battery monitoring logic and constants into an ESP32 C++ source file.",
+      "tree": "update_batt.py\n\u2514\u2500\u2500 (no symbols detected)",
+      "symbols": [],
+      "imports": []
+    },
+    "safereps/test/widget_test.dart": {
+      "path": "safereps/test/widget_test.dart",
+      "checksum": "90917d1351e10a77",
+      "tldr": "widget_test.dart: Integration test for SafeRepsApp to verify app boots without crashing.",
+      "tree": "safereps/test/widget_test.dart\n\u251c\u2500\u2500 testWidgets:6 \u2014 verifies app boots and renders the main title\n\u2514\u2500\u2500 SafeRepsApp:7 \u2014 root widget of the application\n\u2514\u2500\u2500 expect:8 \u2014 asserts that a specific widget is found",
+      "symbols": [
+        {
+          "name": "testWidgets",
+          "line": 6,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SafeRepsApp",
+          "line": 7,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "expect",
+          "line": 8,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "package:flutter_test/flutter_test.dart",
+        "package:safereps/main.dart"
+      ]
+    },
+    "safereps/lib/pose_painter.dart": {
+      "path": "safereps/lib/pose_painter.dart",
+      "checksum": "372fa539b92bb68a",
+      "tldr": "PosePainter is a CustomPainter that renders skeletons and joint angles onto a Flutter canvas based on frame metadata.",
+      "tree": "safereps/lib/pose_painter.dart\n\u251c\u2500\u2500 PosePainter:9 \u2014 CustomPainter for drawing pose skeletons\n\u2502   \u251c\u2500\u2500 paint:27 \u2014 Renders joints, bones, and angles\n\u2502   \u251c\u2500\u2500 _drawAngles:50 \u2014 Paints joint angle labels on canvas\n\u2502   \u251c\u2500\u2500 _project:68 \u2014 Maps landmark coordinates to canvas offset\n\u2502   \u251c\u2500\u2500 _tx:89 \u2014 Translates X coordinate based on rotation/lens\n\u2502   \u2514\u2500\u2500 _bonePaint:126 \u2014 Creates paint object for skeleton bones\n\u2514\u2500\u2500 FrameMeta:148 \u2014 Metadata for image size, rotation, and lens",
+      "symbols": [
+        {
+          "name": "PosePainter",
+          "line": 9,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "PosePainter",
+          "line": 10,
+          "kind": "method",
+          "parent": "PosePainter"
+        },
+        {
+          "name": "Paint",
+          "line": 27,
+          "kind": "method",
+          "parent": "PosePainter"
+        },
+        {
+          "name": "_project",
+          "line": 33,
+          "kind": "method",
+          "parent": "PosePainter"
+        },
+        {
+          "name": "_project",
+          "line": 34,
+          "kind": "method",
+          "parent": "PosePainter"
+        },
+        {
+          "name": "Offset",
+          "line": 41,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_drawAngles",
+          "line": 50,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_project",
+          "line": 68,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "TextPainter",
+          "line": 71,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ty",
+          "line": 89,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_bonePaint",
+          "line": 126,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FrameMeta",
+          "line": 148,
+          "kind": "class",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:io",
+        "package:camera/camera.dart",
+        "package:flutter/material.dart",
+        "analysis/joint_angles.dart",
+        "pose/skeleton.dart"
+      ]
+    },
+    "safereps/lib/shell.dart": {
+      "path": "safereps/lib/shell.dart",
+      "checksum": "09ebdbd8c6b4b015",
+      "tldr": "`MainShell` is a Flutter widget implementing a glassmorphism-style floating navigation shell for the app's main pages.",
+      "tree": "safereps/lib/shell.dart\n\u251c\u2500\u2500 MainShell:31 \u2014 Main app shell with PageView navigation\n\u2502   \u2514\u2500\u2500 createState:35 \u2014 Creates the shell state\n\u251c\u2500\u2500 _MainShellState:38 \u2014 State management for MainShell\n\u2502   \u2514\u2500\u2500 PageController:40 \u2014 Controller for page transitions\n\u251c\u2500\u2500 _FloatingNav:102 \u2014 Glassmorphism floating navigation bar\n\u2502   \u251c\u2500\u2500 BoxShadow:132 \u2014 Outer diffuse shadow\n\u2502   \u251c\u2500\u2500 BoxShadow:140 \u2014 iOS specific depth shadow\n\u2502   \u251c\u2500\u2500 BackdropFilter:153 \u2014 Background blur layer\n\u2502   \u251c\u2500\u2500 CustomPaint:167 \u2014 Specular and caustic effects\n\u2502   \u251c\u2500\u2500 Padding:170 \u2014 Layout for navigation bubble\n\u2502   \u251c\u2500\u2500 Padding:180 \u2014 Layout for navigation items\n\u2502   \u2514\u2500\u2500 Positioned:197 \u2014 Container for rep speed pill\n\u251c\u2500\u2500 _LiquidGlassPainter:215 \u2014 Custom painter for glass effects\n\u2502   \u251c\u2500\u2500 _paintIOS:227 \u2014 Renders iOS glass highlights\n\u2502   \u2514\u2500\u2500 _paintAndroid:229 \u2014 Renders Android glass highlights\n\u251c\u2500\u2500 _NavBubble:351 \u2014 Sliding indicator for the active nav item\n\u251c\u2500\u2500 _NavItem:409 \u2014 Individual navigation tab button\n\u2502   \u2514\u2500\u2500 createState:421 \u2014 Creates the item state\n\u251c\u2500\u2500 _NavItemState:424 \u2014 State for animation of nav items\n\u2502   \u2514\u2500\u2500 AnimationController:431 \u2014 Handles item transition animation\n\u2514\u2500\u2500 _RepSpeedPill:486 \u2014 Indicator for current repetition speed\n    \u2514\u2500\u2500 _colorForSpeed:492 \u2014 Returns color based on speed value",
+      "symbols": [
+        {
+          "name": "MainShell",
+          "line": 31,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 35,
+          "kind": "method",
+          "parent": "MainShell"
+        },
+        {
+          "name": "_MainShellState",
+          "line": 38,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "PageController",
+          "line": 40,
+          "kind": "method",
+          "parent": "_MainShellState"
+        },
+        {
+          "name": "setState",
+          "line": 50,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "PageView",
+          "line": 66,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "DashboardPage",
+          "line": 70,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "GoalsPage",
+          "line": 71,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SettingsPage",
+          "line": 72,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Positioned",
+          "line": 75,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_FloatingNav",
+          "line": 102,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "BoxShadow",
+          "line": 132,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "BoxShadow",
+          "line": 140,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "BackdropFilter",
+          "line": 153,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "CustomPaint",
+          "line": 167,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "Padding",
+          "line": 170,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "Padding",
+          "line": 180,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "Positioned",
+          "line": 197,
+          "kind": "method",
+          "parent": "_FloatingNav"
+        },
+        {
+          "name": "_LiquidGlassPainter",
+          "line": 215,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_paintIOS",
+          "line": 227,
+          "kind": "method",
+          "parent": "_LiquidGlassPainter"
+        },
+        {
+          "name": "_paintAndroid",
+          "line": 229,
+          "kind": "method",
+          "parent": "_LiquidGlassPainter"
+        },
+        {
+          "name": "Paint",
+          "line": 238,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Paint",
+          "line": 257,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Paint",
+          "line": 273,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 281,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 282,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 283,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 284,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 285,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Paint",
+          "line": 296,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Paint",
+          "line": 312,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Paint",
+          "line": 326,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Paint",
+          "line": 340,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_NavBubble",
+          "line": 351,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_NavItem",
+          "line": 409,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 421,
+          "kind": "method",
+          "parent": "_NavItem"
+        },
+        {
+          "name": "_NavItemState",
+          "line": 424,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "AnimationController",
+          "line": 431,
+          "kind": "method",
+          "parent": "_NavItemState"
+        },
+        {
+          "name": "_RepSpeedPill",
+          "line": 486,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_colorForSpeed",
+          "line": 492,
+          "kind": "method",
+          "parent": "_RepSpeedPill"
+        },
+        {
+          "name": "Color",
+          "line": 497,
+          "kind": "method",
+          "parent": "_RepSpeedPill"
+        },
+        {
+          "name": "Color",
+          "line": 499,
+          "kind": "method",
+          "parent": "_RepSpeedPill"
+        },
+        {
+          "name": "BoxShadow",
+          "line": 518,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:io",
+        "dart:math",
+        "dart:ui",
+        "package:flutter/foundation.dart",
+        "package:flutter/material.dart",
+        "package:flutter/services.dart",
+        "models/session_model.dart",
+        "pages/dashboard_page.dart",
+        "pages/goals_page.dart",
+        "pages/settings_page.dart",
+        "theme.dart"
+      ]
+    },
+    "safereps/lib/main.dart": {
+      "path": "safereps/lib/main.dart",
+      "checksum": "6ccfc28dd58616c7",
+      "tldr": "SafeRepsApp is the main entry point and root widget of the Flutter application, managing dependency injection via scopes.",
+      "tree": "safereps/lib/main.dart\n\u251c\u2500\u2500 main:15 \u2014 app entry point and dependency initialization\n\u2514\u2500\u2500 SafeRepsApp:61 \u2014 root app widget with theme management",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 15,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ThemeService",
+          "line": 19,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "availableCameras",
+          "line": 24,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "BleService",
+          "line": 30,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "GoalsModel",
+          "line": 31,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SessionModel",
+          "line": 34,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "HistoryModel",
+          "line": 35,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "runApp",
+          "line": 38,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ThemeScope",
+          "line": 39,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SafeRepsApp",
+          "line": 61,
+          "kind": "class",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "package:camera/camera.dart",
+        "package:flutter/material.dart",
+        "models/coach_settings.dart",
+        "models/goals_model.dart",
+        "models/history_model.dart",
+        "models/session_model.dart",
+        "services/ble_service.dart",
+        "services/theme_service.dart",
+        "shell.dart",
+        "theme.dart"
+      ]
+    },
+    "safereps/lib/pose_camera_page.dart": {
+      "path": "safereps/lib/pose_camera_page.dart",
+      "checksum": "17a98cbc7410d2c0",
+      "tldr": "PoseCameraPage is a Flutter StatefulWidget that manages real-time camera streaming, pose estimation, and exercise rep counting.",
+      "tree": "pose_camera_page.dart\n\u251c\u2500\u2500 PoseCameraPage:20 \u2014 Page widget for real-time pose tracking\n\u2502   \u2514\u2500\u2500 createState:26 \u2014 Creates the state for PoseCameraPage\n\u2514\u2500\u2500 _PoseCameraPageState:29 \u2014 State handler for camera and pose detection\n    \u251c\u2500\u2500 SkeletonSmoother:40 \u2014 Smoothes skeleton joint positions\n    \u251c\u2500\u2500 _bootstrap:73 \u2014 Initializes permissions and camera setup\n    \u251c\u2500\u2500 _setError:74 \u2014 Sets error state for UI display\n    \u251c\u2500\u2500 _startCamera:103 \u2014 Configures and starts the camera stream\n    \u251c\u2500\u2500 MlKitPoseEstimator:141 \u2014 Initializes the ML Kit pose detector\n    \u251c\u2500\u2500 availableCameras:156 \u2014 Queries available device cameras\n    \u251c\u2500\u2500 _switchCamera:206 \u2014 Toggles between available cameras\n    \u251c\u2500\u2500 RepCounter:220 \u2014 Manages rep counting for active exercise\n    \u251c\u2500\u2500 _copyAngles:231 \u2014 Updates current joint angles\n    \u251c\u2500\u2500 _onCameraImage:251 \u2014 Processes each camera frame for pose\n    \u251c\u2500\u2500 _buildFrameMeta:256 \u2014 Constructs frame metadata\n    \u251c\u2500\u2500 computeJointAngles:273 \u2014 Calculates angles between joints\n    \u2514\u2500\u2500 FrameMeta:274 \u2014 Data holder for frame-specific pose info\n\u2514\u2500\u2500 _ExercisePanel:482 \u2014 UI panel to select and display exercises\n\u2514\u2500\u2500 _ExerciseTile:528 \u2014 UI tile for individual exercise items",
+      "symbols": [
+        {
+          "name": "PoseCameraPage",
+          "line": 20,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 26,
+          "kind": "method",
+          "parent": "PoseCameraPage"
+        },
+        {
+          "name": "_PoseCameraPageState",
+          "line": 29,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "SkeletonSmoother",
+          "line": 40,
+          "kind": "method",
+          "parent": "_PoseCameraPageState"
+        },
+        {
+          "name": "_bootstrap",
+          "line": 73,
+          "kind": "method",
+          "parent": "_PoseCameraPageState"
+        },
+        {
+          "name": "_setError",
+          "line": 74,
+          "kind": "method",
+          "parent": "_PoseCameraPageState"
+        },
+        {
+          "name": "setState",
+          "line": 88,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 100,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_startCamera",
+          "line": 103,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_bootstrap",
+          "line": 107,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 109,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 115,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 122,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 131,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "MlKitPoseEstimator",
+          "line": 141,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 145,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "availableCameras",
+          "line": 156,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_startCamera",
+          "line": 162,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 172,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CameraController",
+          "line": 182,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 198,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 200,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_switchCamera",
+          "line": 206,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 213,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "RepCounter",
+          "line": 220,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 228,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_copyAngles",
+          "line": 231,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 235,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_onCameraImage",
+          "line": 251,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_buildFrameMeta",
+          "line": 256,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 271,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "computeJointAngles",
+          "line": 273,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FrameMeta",
+          "line": 274,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "IconButton",
+          "line": 354,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "IconButton",
+          "line": 360,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 385,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FilledButton",
+          "line": 392,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FilledButton",
+          "line": 397,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 399,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_bootstrap",
+          "line": 403,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_setError",
+          "line": 404,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CircularProgressIndicator",
+          "line": 416,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Center",
+          "line": 422,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CameraPreview",
+          "line": 428,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CustomPaint",
+          "line": 430,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Positioned",
+          "line": 443,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Icon",
+          "line": 455,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SizedBox",
+          "line": 456,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 457,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Positioned",
+          "line": 470,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ExercisePanel",
+          "line": 482,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 503,
+          "kind": "method",
+          "parent": "_ExercisePanel"
+        },
+        {
+          "name": "Expanded",
+          "line": 513,
+          "kind": "method",
+          "parent": "_ExercisePanel"
+        },
+        {
+          "name": "_ExerciseTile",
+          "line": 528,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_progress",
+          "line": 570,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SizedBox",
+          "line": 588,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CircularProgressIndicator",
+          "line": 594,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 601,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 613,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 618,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 625,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 635,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_phaseLabel",
+          "line": 636,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "IconButton",
+          "line": 645,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 659,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_FpsHud",
+          "line": 677,
+          "kind": "class",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:io",
+        "package:camera/camera.dart",
+        "package:flutter/foundation.dart",
+        "package:flutter/material.dart",
+        "package:flutter/services.dart",
+        "package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart",
+        "package:permission_handler/permission_handler.dart",
+        "pose/mlkit_pose_estimator.dart",
+        "pose/pose_estimator.dart",
+        "pose/skeleton_smoother.dart",
+        "pose_painter.dart",
+        "analysis/joint_angles.dart",
+        "analysis/exercise.dart",
+        "analysis/rep_counter.dart",
+        "models/session_model.dart"
+      ]
+    },
+    "safereps/lib/theme.dart": {
+      "path": "safereps/lib/theme.dart",
+      "checksum": "43e2d7475295ec55",
+      "tldr": "AppTheme and AppColors provide the application's color palettes, theme data and a custom BrandColors extension for the Flutter theme.",
+      "tree": "safereps/lib/theme.dart\n\u251c\u2500\u2500 AppColors:5 \u2014 Static constants for general and fallback pink theme colors\n\u2502   \u2514\u2500\u2500 Color:7 \u2014 Constant color values\n\u251c\u2500\u2500 AppTheme:23 \u2014 Theme configuration and factory methods\n\u2502   \u251c\u2500\u2500 fromFlavor:24 \u2014 Generates ThemeData based on ThemeFlavor\n\u2502   \u2514\u2500\u2500 colors:107 \u2014 Accesses BrandColors from the current context\n\u2514\u2500\u2500 BrandColors:113 \u2014 ThemeExtension for custom brand-specific colors",
+      "symbols": [
+        {
+          "name": "AppColors",
+          "line": 5,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 7,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 8,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 11,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 12,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 13,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 14,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 15,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 16,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 17,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 18,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 19,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "Color",
+          "line": 20,
+          "kind": "method",
+          "parent": "AppColors"
+        },
+        {
+          "name": "AppTheme",
+          "line": 23,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "fromFlavor",
+          "line": 24,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 28,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 29,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 30,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 31,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 32,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 34,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 35,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 36,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 38,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 39,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "Color",
+          "line": 40,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "BrandColors",
+          "line": 93,
+          "kind": "method",
+          "parent": "AppTheme"
+        },
+        {
+          "name": "colors",
+          "line": 107,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "fromFlavor",
+          "line": 110,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "BrandColors",
+          "line": 113,
+          "kind": "class",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "package:flutter/material.dart"
+      ]
+    },
+    "safereps/ios/Flutter/ephemeral/flutter_lldb_helper.py": {
+      "path": "safereps/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+      "checksum": "05cfe3977fdee593",
+      "tldr": "LLDB Python helper script for handling RX page notifications in Flutter iOS builds.",
+      "tree": "safereps/ios/Flutter/ephemeral/flutter_lldb_helper.py\n\u251c\u2500\u2500 handle_new_rx_page:7 \u2014 intercept RX pages and write identity marker\n\u2514\u2500\u2500 __lldb_init_module:24 \u2014 initialize LLDB breakpoint and script callback",
+      "symbols": [
+        {
+          "name": "handle_new_rx_page",
+          "line": 7,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "__lldb_init_module",
+          "line": 24,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "lldb"
+      ]
+    },
+    "safereps/lib/analysis/exercise.dart": {
+      "path": "safereps/lib/analysis/exercise.dart",
+      "checksum": "7c59c2cac0fc403f",
+      "tldr": "Exercise defines a declarative configuration for rep counting, including thresholds and joint angle selectors.",
+      "tree": "safereps/lib/analysis/exercise.dart\n\u251c\u2500\u2500 Exercise:8 \u2014 Configuration for a specific physical exercise\n\u2502   \u251c\u2500\u2500 Exercise:36 \u2014 Constructor\n\u2514\u2500\u2500 builtInExercises:83 \u2014 List of predefined Exercise configurations",
+      "symbols": [
+        {
+          "name": "Function",
+          "line": 4,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Exercise",
+          "line": 8,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Exercise",
+          "line": 36,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Exercise",
+          "line": 48,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Exercise",
+          "line": 60,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Exercise",
+          "line": 71,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Exercise",
+          "line": 83,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "joint_angles.dart"
+      ]
+    },
+    "safereps/lib/analysis/rep_counter.dart": {
+      "path": "safereps/lib/analysis/rep_counter.dart",
+      "checksum": "e73f503ab0509edf",
+      "tldr": "RepCounter provides stateful exercise repetition counting based on joint angle thresholds.",
+      "tree": "safereps/lib/analysis/rep_counter.dart\n\u251c\u2500\u2500 RepResult:21 \u2014 Result object containing rep count and current phase\n\u2514\u2500\u2500 RepCounter:37 \u2014 State machine for tracking exercise repetitions\n    \u251c\u2500\u2500 update:38 \u2014 Updates rep state based on current joint angles\n    \u2514\u2500\u2500 _nextPhase:57 \u2014 Transitions the state machine to the next rep phase",
+      "symbols": [
+        {
+          "name": "RepResult",
+          "line": 21,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "RepCounter",
+          "line": 37,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "RepCounter",
+          "line": 38,
+          "kind": "method",
+          "parent": "RepCounter"
+        },
+        {
+          "name": "_nextPhase",
+          "line": 57,
+          "kind": "method",
+          "parent": "RepCounter"
+        }
+      ],
+      "imports": [
+        "exercise.dart",
+        "joint_angles.dart"
+      ]
+    },
+    "safereps/lib/analysis/rep_form_tracker.dart": {
+      "path": "safereps/lib/analysis/rep_form_tracker.dart",
+      "checksum": "cf4009d9c6dbf8f2",
+      "tldr": "RepFormTracker handles IMU data analysis to calculate per-rep exercise form quality and detect violations.",
+      "tree": "safereps/lib/analysis/rep_form_tracker.dart\n\u251c\u2500\u2500 RepFormResult:4 \u2014 Data model for a single rep's form metrics\n\u2514\u2500\u2500 RepFormTracker:24 \u2014 Logic for tracking and deducting form quality",
+      "symbols": [
+        {
+          "name": "RepFormResult",
+          "line": 4,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "rotation",
+          "line": 18,
+          "kind": "method",
+          "parent": "RepFormResult"
+        },
+        {
+          "name": "supination",
+          "line": 19,
+          "kind": "method",
+          "parent": "RepFormResult"
+        },
+        {
+          "name": "RepFormTracker",
+          "line": 24,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "RepFormResult",
+          "line": 86,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "../services/ble_service.dart",
+        "exercise_imu_profile.dart"
+      ]
+    },
+    "safereps/lib/analysis/exercise_imu_profile.dart": {
+      "path": "safereps/lib/analysis/exercise_imu_profile.dart",
+      "checksum": "28bc13d2ee7b8cf3",
+      "tldr": "ExerciseImuProfile defines quality parameters for IMU sensors per exercise, including thresholds for tremor, swing, and axis deviations.",
+      "tree": "exercise_imu_profile.dart\n\u251c\u2500\u2500 ExerciseImuProfile:2 \u2014 IMU quality parameter configuration\n\u2502   \u2514\u2500\u2500 copyWith:26 \u2014 Creates a copy with updated thresholds\n\u251c\u2500\u2500 lateralRaiseImuProfile:42 \u2014 IMU profile for Lateral Raise\n\u251c\u2500\u2500 bicepCurlImuProfile:54 \u2014 IMU profile for Bicep Curl\n\u2514\u2500\u2500 imuProfileForExercise:67 \u2014 Maps exercise name to its IMU profile",
+      "symbols": [
+        {
+          "name": "ExerciseImuProfile",
+          "line": 2,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "plane",
+          "line": 20,
+          "kind": "method",
+          "parent": "ExerciseImuProfile"
+        },
+        {
+          "name": "neutral",
+          "line": 21,
+          "kind": "method",
+          "parent": "ExerciseImuProfile"
+        },
+        {
+          "name": "deviation",
+          "line": 22,
+          "kind": "method",
+          "parent": "ExerciseImuProfile"
+        },
+        {
+          "name": "ExerciseImuProfile",
+          "line": 26,
+          "kind": "method",
+          "parent": "ExerciseImuProfile"
+        },
+        {
+          "name": "ExerciseImuProfile",
+          "line": 42,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ExerciseImuProfile",
+          "line": 54,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": []
+    },
+    "safereps/lib/pages/dashboard_page.dart": {
+      "path": "safereps/lib/pages/dashboard_page.dart",
+      "checksum": "f615179edfd56381",
+      "tldr": "DashboardPage is a Flutter screen serving as the main hub for tracking exercise progress, BLE device connectivity, and starting training sessions.",
+      "tree": "dashboard_page.dart\n\u251c\u2500\u2500 DashboardPage:19 \u2014 Main dashboard screen widget\n\u2502   \u2514\u2500\u2500 createState:23 \u2014 Creates the state for DashboardPage\n\u251c\u2500\u2500 _DashboardPageState:26 \u2014 State for DashboardPage with pulse animation\n\u2502   \u251c\u2500\u2500 AnimationController:34 \u2014 Controls the start button pulse effect\n\u2502   \u2514\u2500\u2500 CurvedAnimation:39 \u2014 Defines the pulse animation curve\n\u251c\u2500\u2500 _DashHeader:151 \u2014 Header widget showing greetings and BLE status\n\u2502   \u2514\u2500\u2500 Expanded:162 \u2014 Layout wrapper for greeting text\n\u251c\u2500\u2500 _BlePill:175 \u2014 Connectivity status indicator for BLE device\n\u2502   \u2514\u2500\u2500 Color:194 \u2014 Determines pill color based on connection/battery\n\u251c\u2500\u2500 _BleConnectSheet:264 \u2014 Bottom sheet for managing BLE connections\n\u2502   \u2514\u2500\u2500 createState:269 \u2014 Creates the state for the connection sheet\n\u251c\u2500\u2500 _BleConnectSheetState:272 \u2014 State for managing BLE scan and connection\n\u251c\u2500\u2500 _SheetConnectedBody:399 \u2014 UI for currently connected BLE device\n\u2502   \u251c\u2500\u2500 _getBattColor:406 \u2014 Returns color based on battery voltage\n\u2502   \u251c\u2500\u2500 GlassCard:419 \u2014 Container for connection details\n\u2502   \u251c\u2500\u2500 Row:425 \u2014 Layout for battery/signal indicators\n\u2502   \u251c\u2500\u2500 Container:427 \u2014 Wrapper for status icon\n\u2502   \u251c\u2500\u2500 Expanded:434 \u2014 Space filler for layout\n\u2502   \u251c\u2500\u2500 Row:447 \u2014 Row for signal strength and battery\n\u2502   \u251c\u2500\u2500 Icon:449 \u2014 Signal strength indicator\n\u2502   \u251c\u2500\u2500 Expanded:451 \u2014 Space filler for layout\n\u2502   \u251c\u2500\u2500 Row:455 \u2014 Row for battery percentage/voltage\n\u2502   \u251c\u2500\u2500 Text:457 \u2014 Battery voltage display\n\u2502   \u251c\u2500\u2500 Text:465 \u2014 Connectivity status text\n\u2502   \u251c\u2500\u2500 _battLabel:466 \u2014 Helper for battery text label\n\u2502   \u251c\u2500\u2500 ClipRRect:476 \u2014 Visual wrapper for battery bar\n\u2502   \u251c\u2500\u2500 AlwaysStoppedAnimation:483 \u2014 Static value for battery progress\n\u2502   \u251c\u2500\u2500 Text:493 \u2014 Battery percentage text\n\u2502   \u2514\u2500\u2500 RoundedRectangleBorder:507 \u2014 Border for the battery card\n\u2514\u2500\u2500 _SheetReconnectBody:541 \u2014 UI for reconnecting to a BLE device\n    \u2514\u2500\u2500 SizedBox:554 \u2014 Spacer for layout",
+      "symbols": [
+        {
+          "name": "DashboardPage",
+          "line": 19,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 23,
+          "kind": "method",
+          "parent": "DashboardPage"
+        },
+        {
+          "name": "_DashboardPageState",
+          "line": 26,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "AnimationController",
+          "line": 34,
+          "kind": "method",
+          "parent": "_DashboardPageState"
+        },
+        {
+          "name": "CurvedAnimation",
+          "line": 39,
+          "kind": "method",
+          "parent": "_DashboardPageState"
+        },
+        {
+          "name": "_DashHeader",
+          "line": 61,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SizedBox",
+          "line": 64,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 68,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 72,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Padding",
+          "line": 80,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 90,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 92,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 98,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Center",
+          "line": 109,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "PageRouteBuilder",
+          "line": 117,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SessionPage",
+          "line": 119,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CurvedAnimation",
+          "line": 121,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ProgressPillsCard",
+          "line": 143,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_DashHeader",
+          "line": 151,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 162,
+          "kind": "method",
+          "parent": "_DashHeader"
+        },
+        {
+          "name": "_BlePill",
+          "line": 175,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 194,
+          "kind": "method",
+          "parent": "_BlePill"
+        },
+        {
+          "name": "Color",
+          "line": 198,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Color",
+          "line": 201,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "AnimatedContainer",
+          "line": 222,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "BoxShadow",
+          "line": 230,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "AnimatedDefaultTextStyle",
+          "line": 239,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "showModalBottomSheet",
+          "line": 255,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_BleConnectSheet",
+          "line": 264,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 269,
+          "kind": "method",
+          "parent": "_BleConnectSheet"
+        },
+        {
+          "name": "_BleConnectSheetState",
+          "line": 272,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Center",
+          "line": 323,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 335,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Container",
+          "line": 337,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Column",
+          "line": 357,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 360,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 369,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_SheetConnectedBody",
+          "line": 381,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_SheetReconnectBody",
+          "line": 383,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_SheetScanBody",
+          "line": 385,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_SheetConnectedBody",
+          "line": 399,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_getBattColor",
+          "line": 406,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "GlassCard",
+          "line": 419,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Row",
+          "line": 425,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Container",
+          "line": 427,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Expanded",
+          "line": 434,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Row",
+          "line": 447,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Icon",
+          "line": 449,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Expanded",
+          "line": 451,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Row",
+          "line": 455,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Text",
+          "line": 457,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Text",
+          "line": 465,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "_battLabel",
+          "line": 466,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "ClipRRect",
+          "line": 476,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "AlwaysStoppedAnimation",
+          "line": 483,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Text",
+          "line": 493,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "RoundedRectangleBorder",
+          "line": 507,
+          "kind": "method",
+          "parent": "_SheetConnectedBody"
+        },
+        {
+          "name": "Color",
+          "line": 523,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_SheetReconnectBody",
+          "line": 541,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "SizedBox",
+          "line": 554,
+          "kind": "method",
+          "parent": "_SheetReconnectBody"
+        },
+        {
+          "name": "Text",
+          "line": 561,
+          "kind": "method",
+          "parent": "_SheetReconnectBody"
+        },
+        {
+          "name": "Text",
+          "line": 569,
+          "kind": "method",
+          "parent": "_SheetReconnectBody"
+        },
+        {
+          "name": "Row",
+          "line": 574,
+          "kind": "method",
+          "parent": "_SheetReconnectBody"
+        },
+        {
+          "name": "Expanded",
+          "line": 576,
+          "kind": "method",
+          "parent": "_SheetReconnectBody"
+        },
+        {
+          "name": "Expanded",
+          "line": 589,
+          "kind": "method",
+          "parent": "_SheetReconnectBody"
+        },
+        {
+          "name": "_SheetScanBody",
+          "line": 609,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "GlassCard",
+          "line": 623,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "Container",
+          "line": 628,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "Expanded",
+          "line": 639,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "Text",
+          "line": 643,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "Text",
+          "line": 650,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "TextButton",
+          "line": 660,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "FilledButton",
+          "line": 671,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "Text",
+          "line": 718,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "GlassCard",
+          "line": 727,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "_ScanDeviceTile",
+          "line": 736,
+          "kind": "method",
+          "parent": "_SheetScanBody"
+        },
+        {
+          "name": "_ScanDeviceTile",
+          "line": 752,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_ProgressRingCard",
+          "line": 801,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 815,
+          "kind": "method",
+          "parent": "_ProgressRingCard"
+        },
+        {
+          "name": "Text",
+          "line": 825,
+          "kind": "method",
+          "parent": "_ProgressRingCard"
+        },
+        {
+          "name": "Text",
+          "line": 835,
+          "kind": "method",
+          "parent": "_ProgressRingCard"
+        },
+        {
+          "name": "Text",
+          "line": 850,
+          "kind": "method",
+          "parent": "_ProgressRingCard"
+        },
+        {
+          "name": "_RingPainter",
+          "line": 864,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Offset",
+          "line": 871,
+          "kind": "method",
+          "parent": "_RingPainter"
+        },
+        {
+          "name": "Paint",
+          "line": 877,
+          "kind": "method",
+          "parent": "_RingPainter"
+        },
+        {
+          "name": "Paint",
+          "line": 889,
+          "kind": "method",
+          "parent": "_RingPainter"
+        },
+        {
+          "name": "Color",
+          "line": 907,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_FormCheckCard",
+          "line": 917,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 921,
+          "kind": "method",
+          "parent": "_FormCheckCard"
+        },
+        {
+          "name": "_FormCheckCardState",
+          "line": 924,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "AnimationController",
+          "line": 933,
+          "kind": "method",
+          "parent": "_FormCheckCardState"
+        },
+        {
+          "name": "CurvedAnimation",
+          "line": 938,
+          "kind": "method",
+          "parent": "_FormCheckCardState"
+        },
+        {
+          "name": "CurvedAnimation",
+          "line": 941,
+          "kind": "method",
+          "parent": "_FormCheckCardState"
+        },
+        {
+          "name": "_todayAvgForm",
+          "line": 967,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_formQualityColor",
+          "line": 970,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_formFaceIcon",
+          "line": 971,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 978,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 987,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Shadow",
+          "line": 999,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1030,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ProgressPillsCard",
+          "line": 1045,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1056,
+          "kind": "method",
+          "parent": "_ProgressPillsCard"
+        },
+        {
+          "name": "_PillBar",
+          "line": 1075,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1093,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "Text",
+          "line": 1096,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "Row",
+          "line": 1104,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "Text",
+          "line": 1107,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "Text",
+          "line": 1115,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "Container",
+          "line": 1123,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "ClipRRect",
+          "line": 1144,
+          "kind": "method",
+          "parent": "_PillBar"
+        },
+        {
+          "name": "_WarmupCard",
+          "line": 1160,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_WarmupSlide",
+          "line": 1165,
+          "kind": "method",
+          "parent": "_WarmupCard"
+        },
+        {
+          "name": "_WarmupSlide",
+          "line": 1170,
+          "kind": "method",
+          "parent": "_WarmupCard"
+        },
+        {
+          "name": "_WarmupSlide",
+          "line": 1175,
+          "kind": "method",
+          "parent": "_WarmupCard"
+        },
+        {
+          "name": "Container",
+          "line": 1192,
+          "kind": "method",
+          "parent": "_WarmupCard"
+        },
+        {
+          "name": "Text",
+          "line": 1203,
+          "kind": "method",
+          "parent": "_WarmupCard"
+        },
+        {
+          "name": "Text",
+          "line": 1213,
+          "kind": "method",
+          "parent": "_WarmupCard"
+        },
+        {
+          "name": "showDialog",
+          "line": 1224,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_WarmupSlide",
+          "line": 1232,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_WarmupCarouselDialog",
+          "line": 1243,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 1248,
+          "kind": "method",
+          "parent": "_WarmupCarouselDialog"
+        },
+        {
+          "name": "_WarmupCarouselDialogState",
+          "line": 1251,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "AnimationController",
+          "line": 1260,
+          "kind": "method",
+          "parent": "_WarmupCarouselDialogState"
+        },
+        {
+          "name": "_go",
+          "line": 1274,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 1277,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1302,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Container",
+          "line": 1304,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1315,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "GestureDetector",
+          "line": 1324,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1334,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ArrowBtn",
+          "line": 1337,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 1345,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ArrowBtn",
+          "line": 1369,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FadeTransition",
+          "line": 1379,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1383,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1392,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1406,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ArrowBtn",
+          "line": 1431,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_ProperFormExercise",
+          "line": 1465,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_ProperFormExercise",
+          "line": 1480,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ProperFormExercise",
+          "line": 1486,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_SafetyCard",
+          "line": 1494,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Container",
+          "line": 1515,
+          "kind": "method",
+          "parent": "_SafetyCard"
+        },
+        {
+          "name": "Text",
+          "line": 1525,
+          "kind": "method",
+          "parent": "_SafetyCard"
+        },
+        {
+          "name": "Text",
+          "line": 1535,
+          "kind": "method",
+          "parent": "_SafetyCard"
+        },
+        {
+          "name": "showModalBottomSheet",
+          "line": 1550,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1562,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Container",
+          "line": 1564,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1574,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1585,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "showDialog",
+          "line": 1598,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ProperFormViewerDialog",
+          "line": 1602,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ExerciseTile",
+          "line": 1617,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Container",
+          "line": 1637,
+          "kind": "method",
+          "parent": "_ExerciseTile"
+        },
+        {
+          "name": "Expanded",
+          "line": 1647,
+          "kind": "method",
+          "parent": "_ExerciseTile"
+        },
+        {
+          "name": "Icon",
+          "line": 1657,
+          "kind": "method",
+          "parent": "_ExerciseTile"
+        },
+        {
+          "name": "_ProperFormViewerDialog",
+          "line": 1667,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 1672,
+          "kind": "method",
+          "parent": "_ProperFormViewerDialog"
+        },
+        {
+          "name": "_ProperFormViewerDialogState",
+          "line": 1673,
+          "kind": "method",
+          "parent": "_ProperFormViewerDialog"
+        },
+        {
+          "name": "_ProperFormViewerDialogState",
+          "line": 1676,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "AnimationController",
+          "line": 1691,
+          "kind": "method",
+          "parent": "_ProperFormViewerDialogState"
+        },
+        {
+          "name": "_initVideo",
+          "line": 1700,
+          "kind": "method",
+          "parent": "_ProperFormViewerDialogState"
+        },
+        {
+          "name": "_initVideo",
+          "line": 1711,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 1713,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 1721,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "debugPrint",
+          "line": 1729,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 1730,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_go",
+          "line": 1734,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 1738,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_initVideo",
+          "line": 1739,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1760,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Container",
+          "line": 1762,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 1772,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "GestureDetector",
+          "line": 1782,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1792,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ArrowBtn",
+          "line": 1795,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 1801,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 1824,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "VideoPlayer",
+          "line": 1833,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "AnimatedOpacity",
+          "line": 1834,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_initVideo",
+          "line": 1860,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Icon",
+          "line": 1868,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1871,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ArrowBtn",
+          "line": 1892,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 1902,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Padding",
+          "line": 1911,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "TextStyle",
+          "line": 1916,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 1920,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_StartButton",
+          "line": 1946,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "BoxShadow",
+          "line": 1970,
+          "kind": "method",
+          "parent": "_StartButton"
+        },
+        {
+          "name": "Icon",
+          "line": 1981,
+          "kind": "method",
+          "parent": "_StartButton"
+        },
+        {
+          "name": "SizedBox",
+          "line": 1983,
+          "kind": "method",
+          "parent": "_StartButton"
+        },
+        {
+          "name": "Text",
+          "line": 1984,
+          "kind": "method",
+          "parent": "_StartButton"
+        }
+      ],
+      "imports": [
+        "dart:math",
+        "dart:ui",
+        "package:flutter/material.dart",
+        "package:flutter_blue_plus/flutter_blue_plus.dart",
+        "package:video_player/video_player.dart",
+        "../models/goals_model.dart",
+        "../models/history_model.dart",
+        "../services/ble_service.dart",
+        "../shell.dart",
+        "../theme.dart",
+        "../widgets/glass_card.dart",
+        "session_page.dart"
+      ]
+    },
+    "safereps/lib/pages/game67_page.dart": {
+      "path": "safereps/lib/pages/game67_page.dart",
+      "checksum": "b3672d0d7e15ca3a",
+      "tldr": "Game67Page is a Flutter page implementing a game that tracks hand movements using either IMU (BLE) or ML-based pose detection via the camera.",
+      "tree": "safereps/lib/pages/game67_page.dart\n\u251c\u2500\u2500 _HandTracker:41 \u2014 Tracks hand raise/return cycles for ML mode\n\u251c\u2500\u2500 Game67Page:61 \u2014 StatefulWidget for the game interface\n\u2514\u2500\u2500 _Game67PageState:68 \u2014 State manager for camera, pose, and game logic\n    \u251c\u2500\u2500 SkeletonSmoother:79 \u2014 Smooths skeletal pose data\n    \u251c\u2500\u2500 _loadBest:122 \u2014 Loads best score from preferences\n    \u251c\u2500\u2500 _bootstrap:123 \u2014 Initializes permissions and camera\n    \u251c\u2500\u2500 _saveBest:170 \u2014 Saves high score to preferences\n    \u251c\u2500\u2500 _queryCameras:198 \u2014 Fetches available camera devices\n    \u251c\u2500\u2500 MlKitPoseEstimator:208 \u2014 Initializes the ML Kit pose estimator\n    \u251c\u2500\u2500 _startCamera:224 \u2014 Configures and starts camera stream\n    \u251c\u2500\u2500 _onFrame:261 \u2014 Processes camera frames for pose detection\n    \u251c\u2500\u2500 _buildMeta:265 \u2014 Generates metadata for the current frame\n    \u251c\u2500\u2500 _calcElevation:283 \u2014 Calculates relative wrist height\n    \u251c\u2500\u2500 _maybeUpdateBest:307 \u2014 Updates best score if current is higher\n    \u251c\u2500\u2500 _buildHud:462 \u2014 Builds the game HUD overlay\n    \u251c\u2500\u2500 _ModeToggle:476 \u2014 UI widget to toggle between IMU and ML modes\n    \u251c\u2500\u2500 _PitchBar:534 \u2014 Visual indicator for pitch tracking\n    \u251c\u2500\u2500 _HandBars:545 \u2014 Visual indicator for hand elevations\n    \u2514\u2500\u2500 _HudButton:558 \u2014 Generic HUD action button",
+      "symbols": [
+        {
+          "name": "_HandTracker",
+          "line": 41,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Game67Page",
+          "line": 61,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "createState",
+          "line": 65,
+          "kind": "method",
+          "parent": "Game67Page"
+        },
+        {
+          "name": "_Game67PageState",
+          "line": 68,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "SkeletonSmoother",
+          "line": 79,
+          "kind": "method",
+          "parent": "_Game67PageState"
+        },
+        {
+          "name": "_HandTracker",
+          "line": 106,
+          "kind": "method",
+          "parent": "_Game67PageState"
+        },
+        {
+          "name": "_HandTracker",
+          "line": 107,
+          "kind": "method",
+          "parent": "_Game67PageState"
+        },
+        {
+          "name": "_loadBest",
+          "line": 122,
+          "kind": "method",
+          "parent": "_Game67PageState"
+        },
+        {
+          "name": "_bootstrap",
+          "line": 123,
+          "kind": "method",
+          "parent": "_Game67PageState"
+        },
+        {
+          "name": "setState",
+          "line": 124,
+          "kind": "method",
+          "parent": "_Game67PageState"
+        },
+        {
+          "name": "setState",
+          "line": 156,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_startCamera",
+          "line": 159,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_loadBest",
+          "line": 165,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 167,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_saveBest",
+          "line": 170,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_saveBest",
+          "line": 178,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_bootstrap",
+          "line": 184,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 186,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 191,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 195,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_queryCameras",
+          "line": 198,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 200,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "MlKitPoseEstimator",
+          "line": 208,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 212,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_startCamera",
+          "line": 224,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 234,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CameraController",
+          "line": 241,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 253,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 255,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_onFrame",
+          "line": 261,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_buildMeta",
+          "line": 265,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_calcElevation",
+          "line": 283,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_calcElevation",
+          "line": 284,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 293,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "FrameMeta",
+          "line": 295,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_maybeUpdateBest",
+          "line": 307,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_maybeUpdateBest",
+          "line": 384,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 385,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_maybeUpdateBest",
+          "line": 388,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 389,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 402,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Duration",
+          "line": 409,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 411,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setState",
+          "line": 425,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "IconButton",
+          "line": 450,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 461,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_buildHud",
+          "line": 462,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ModeToggle",
+          "line": 476,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 486,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Column",
+          "line": 489,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 492,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 495,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 498,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "SizedBox",
+          "line": 502,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CircularProgressIndicator",
+          "line": 508,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 518,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_PitchBar",
+          "line": 534,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 541,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_HandBars",
+          "line": 545,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_HudButton",
+          "line": 558,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Text",
+          "line": 569,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CircularProgressIndicator",
+          "line": 591,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Center",
+          "line": 597,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CameraPreview",
+          "line": 603,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "CustomPaint",
+          "line": 605,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Positioned",
+          "line": 617,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_ModeToggle",
+          "line": 629,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "_Tab",
+          "line": 650,
+          "kind": "method",
+          "parent": "_ModeToggle"
+        },
+        {
+          "name": "_Tab",
+          "line": 652,
+          "kind": "method",
+          "parent": "_ModeToggle"
+        },
+        {
+          "name": "_Tab",
+          "line": 660,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Icon",
+          "line": 693,
+          "kind": "method",
+          "parent": "_Tab"
+        },
+        {
+          "name": "Text",
+          "line": 696,
+          "kind": "method",
+          "parent": "_Tab"
+        },
+        {
+          "name": "_HandBars",
+          "line": 712,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Expanded",
+          "line": 733,
+          "kind": "method",
+          "parent": "_HandBars"
+        },
+        {
+          "name": "Expanded",
+          "line": 736,
+          "kind": "method",
+          "parent": "_HandBars"
+        },
+        {
+          "name": "_HandBar",
+          "line": 743,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 766,
+          "kind": "method",
+          "parent": "_HandBar"
+        },
+        {
+          "name": "Text",
+          "line": 769,
+          "kind": "method",
+          "parent": "_HandBar"
+        },
+        {
+          "name": "Text",
+          "line": 774,
+          "kind": "method",
+          "parent": "_HandBar"
+        },
+        {
+          "name": "LayoutBuilder",
+          "line": 782,
+          "kind": "method",
+          "parent": "_HandBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 798,
+          "kind": "method",
+          "parent": "_HandBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 810,
+          "kind": "method",
+          "parent": "_HandBar"
+        },
+        {
+          "name": "_PitchBar",
+          "line": 825,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Row",
+          "line": 847,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Text",
+          "line": 850,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Text",
+          "line": 853,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Text",
+          "line": 855,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "LayoutBuilder",
+          "line": 861,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 878,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 891,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 894,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 897,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "Positioned",
+          "line": 900,
+          "kind": "method",
+          "parent": "_PitchBar"
+        },
+        {
+          "name": "_HudButton",
+          "line": 920,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "Icon",
+          "line": 953,
+          "kind": "method",
+          "parent": "_HudButton"
+        },
+        {
+          "name": "Text",
+          "line": 956,
+          "kind": "method",
+          "parent": "_HudButton"
+        },
+        {
+          "name": "_FpsChip",
+          "line": 970,
+          "kind": "class",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:async",
+        "dart:io",
+        "package:shared_preferences/shared_preferences.dart",
+        "package:camera/camera.dart",
+        "package:flutter/foundation.dart",
+        "package:flutter/material.dart",
+        "package:flutter/services.dart",
+        "package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart",
+        "package:permission_handler/permission_handler.dart",
+        "../main.dart",
+        "../pose/mlkit_pose_estimator.dart",
+        "../pose/pose_estimator.dart",
+        "../pose/skeleton_smoother.dart",
+        "../pose_painter.dart",
+        "../services/ble_service.dart"
+      ]
+    },
+    "safereps/lib/services/voice_coach_service.dart": {
+      "path": "safereps/lib/services/voice_coach_service.dart",
+      "checksum": "adacbf490768227e",
+      "tldr": "VoiceCoachService handles audio cue playback for fitness coaching, managing randomized, non-repeating track pools per category.",
+      "tree": "safereps/lib/services/voice_coach_service.dart\n\u251c\u2500\u2500 CueCategory:16 \u2014 Enum for audio trigger categories\n\u2514\u2500\u2500 VoiceCoachService:421\n    \u251c\u2500\u2500 play:449 \u2014 Plays a cue from a specific category\n    \u251c\u2500\u2500 _nextTrack:466 \u2014 Selects next non-repeating track in pool\n    \u251c\u2500\u2500 _toSentenceCase:475 \u2014 Formats track names for UI display\n    \u251c\u2500\u2500 playCorrection:504 \u2014 Plays a correction cue based on exercise\n    \u2514\u2500\u2500 playMandatory:508 \u2014 Plays a required audio cue",
+      "symbols": [
+        {
+          "name": "VoiceCoachService",
+          "line": 421,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "VoiceCoachService",
+          "line": 422,
+          "kind": "method",
+          "parent": "VoiceCoachService"
+        },
+        {
+          "name": "AudioPlayer",
+          "line": 429,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Random",
+          "line": 430,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "play",
+          "line": 449,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_nextTrack",
+          "line": 466,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_toSentenceCase",
+          "line": 475,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 476,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Duration",
+          "line": 497,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 499,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "playCorrection",
+          "line": 504,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "play",
+          "line": 505,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "playMandatory",
+          "line": 508,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "play",
+          "line": 509,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:async",
+        "dart:math",
+        "package:audioplayers/audioplayers.dart",
+        "package:flutter/foundation.dart",
+        "../models/coach_settings.dart"
+      ]
+    },
+    "safereps/lib/services/theme_service.dart": {
+      "path": "safereps/lib/services/theme_service.dart",
+      "checksum": "c5c5e42cede34e66",
+      "tldr": "ThemeService manages the application's theme flavor and persists it using SharedPreferences.",
+      "tree": "safereps/lib/services/theme_service.dart\n\u251c\u2500\u2500 ThemeService:5 \u2014 Manages and persists application theme flavor\n\u2502   \u251c\u2500\u2500 init:11 \u2014 Loads saved theme flavor from SharedPreferences\n\u2502   \u2514\u2500\u2500 setFlavor:23 \u2014 Updates theme flavor and persists it\n\u2514\u2500\u2500 ThemeScope:33 \u2014 InheritedNotifier for providing ThemeService to the widget tree\n    \u2514\u2500\u2500 of:40 \u2014 Returns the ThemeService instance from context",
+      "symbols": [
+        {
+          "name": "ThemeService",
+          "line": 5,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "init",
+          "line": 11,
+          "kind": "method",
+          "parent": "ThemeService"
+        },
+        {
+          "name": "notifyListeners",
+          "line": 19,
+          "kind": "method",
+          "parent": "ThemeService"
+        },
+        {
+          "name": "setFlavor",
+          "line": 23,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 26,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "ThemeScope",
+          "line": 33,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "of",
+          "line": 40,
+          "kind": "method",
+          "parent": "ThemeScope"
+        }
+      ],
+      "imports": [
+        "package:flutter/material.dart",
+        "package:shared_preferences/shared_preferences.dart",
+        "../theme.dart"
+      ]
+    },
+    "safereps/lib/services/ble_service.dart": {
+      "path": "safereps/lib/services/ble_service.dart",
+      "checksum": "dc0aabc8eb73ac55",
+      "tldr": "BleService manages Bluetooth Low Energy (BLE) connectivity, device discovery, and IMU data streaming for wearable sensors.",
+      "tree": "safereps/lib/services/ble_service.dart\n\u251c\u2500\u2500 ImuData:10 \u2014 Data model for IMU sensor readings and battery\n\u2514\u2500\u2500 BleService:77 \u2014 Manages BLE connections and IMU data streams\n    \u251c\u2500\u2500 _init:113 \u2014 Initializes saved device and starts auto-reconnect\n    \u251c\u2500\u2500 _persistDevice:131 \u2014 Saves device ID and name to shared preferences\n    \u251c\u2500\u2500 forgetDevice:142 \u2014 Removes saved device and disconnects\n    \u251c\u2500\u2500 _cancelReconnect:148 \u2014 Stops the auto-reconnection loop\n    \u251c\u2500\u2500 startScan:157 \u2014 Scans for available BLE devices\n    \u251c\u2500\u2500 stopScan:180 \u2014 Stops the BLE scan\n    \u251c\u2500\u2500 connect:190 \u2014 Initiates a connection to a specific device\n    \u251c\u2500\u2500 _doConnect:197 \u2014 Low-level BLE connection and service discovery\n    \u251c\u2500\u2500 disconnect:209 \u2014 Disconnects from the current BLE device\n    \u251c\u2500\u2500 _onLinkLost:233 \u2014 Handles unexpected connection loss\n    \u251c\u2500\u2500 _startAutoReconnect:300 \u2014 Loop for reconnecting with exponential backoff\n    \u251c\u2500\u2500 _cancellableSleep:339 \u2014 Sleep utility for reconnection loops\n    \u251c\u2500\u2500 _hardDisconnect:346 \u2014 Cleans up connection and subscriptions\n    \u251c\u2500\u2500 sendCommand:393 \u2014 Sends a text command to the BLE device\n    \u251c\u2500\u2500 toggleStream:400 \u2014 Toggles the IMU data stream\n    \u251c\u2500\u2500 startImuStream:406 \u2014 Starts streaming IMU data\n    \u251c\u2500\u2500 stopImuStream:413 \u2014 Stops streaming IMU data\n    \u251c\u2500\u2500 zero:420 \u2014 Sends zeroing command to device\n    \u251c\u2500\u2500 resetCalibration:422 \u2014 Sends calibration reset command\n    \u251c\u2500\u2500 setTremorHp:424 \u2014 Sets the high-pass filter for tremor\n    \u251c\u2500\u2500 setTremorEma:427 \u2014 Sets the exponential moving average for tremor\n    \u2514\u2500\u2500 setCheatEps:430 \u2014 Sets the epsilon for cheat detection",
+      "symbols": [
+        {
+          "name": "ImuData",
+          "line": 10,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "BleService",
+          "line": 77,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "BleService",
+          "line": 112,
+          "kind": "method",
+          "parent": "BleService"
+        },
+        {
+          "name": "_init",
+          "line": 113,
+          "kind": "method",
+          "parent": "BleService"
+        },
+        {
+          "name": "_init",
+          "line": 116,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 124,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "unawaited",
+          "line": 125,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_persistDevice",
+          "line": 131,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "forgetDevice",
+          "line": 142,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_cancelReconnect",
+          "line": 148,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 152,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "startScan",
+          "line": 157,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_cancelReconnect",
+          "line": 159,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 163,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 168,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Duration",
+          "line": 171,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 176,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "stopScan",
+          "line": 180,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 184,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "connect",
+          "line": 190,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_cancelReconnect",
+          "line": 191,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 195,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_doConnect",
+          "line": 197,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 201,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "disconnect",
+          "line": 209,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_cancelReconnect",
+          "line": 210,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 214,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_doConnect",
+          "line": 219,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "Duration",
+          "line": 221,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 228,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_onLinkLost",
+          "line": 233,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 256,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 262,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 271,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "unawaited",
+          "line": 290,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 295,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_startAutoReconnect",
+          "line": 300,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 311,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 317,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "DeviceIdentifier",
+          "line": 319,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_doConnect",
+          "line": 320,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_cancellableSleep",
+          "line": 339,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_hardDisconnect",
+          "line": 346,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "jsonDecode",
+          "line": 367,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 385,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 393,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "toggleStream",
+          "line": 400,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 402,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "startImuStream",
+          "line": 406,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 409,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "stopImuStream",
+          "line": 413,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 416,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "zero",
+          "line": 420,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "resetCalibration",
+          "line": 422,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setTremorHp",
+          "line": 424,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 425,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setTremorEma",
+          "line": 427,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 428,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setCheatEps",
+          "line": 430,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 431,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setCheatEma",
+          "line": 433,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 434,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "setMountAngle",
+          "line": 436,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 437,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "startMountCal",
+          "line": 439,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "sendCommand",
+          "line": 440,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "calibrate",
+          "line": 447,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 450,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "notifyListeners",
+          "line": 458,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "_cancelReconnect",
+          "line": 467,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "BleScope",
+          "line": 480,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "of",
+          "line": 484,
+          "kind": "method",
+          "parent": "BleScope"
+        }
+      ],
+      "imports": [
+        "dart:async",
+        "dart:convert",
+        "package:flutter/widgets.dart",
+        "package:flutter_blue_plus/flutter_blue_plus.dart",
+        "package:shared_preferences/shared_preferences.dart"
+      ]
+    },
+    "safereps/lib/widgets/glass_card.dart": {
+      "path": "safereps/lib/widgets/glass_card.dart",
+      "checksum": "1960bc1a3ccca709",
+      "tldr": "GlassCard: A Flutter widget providing a frosted-glass morphism effect with customizable blurring, padding, and borders.",
+      "tree": "safereps/lib/widgets/glass_card.dart\n\u251c\u2500\u2500 GlassCard:8 \u2014 Frosted-glass morphism card widget",
+      "symbols": [
+        {
+          "name": "GlassCard",
+          "line": 8,
+          "kind": "class",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:ui",
+        "package:flutter/material.dart",
+        "../theme.dart"
+      ]
+    },
+    "safereps/.dart_tool/flutter_build/dart_plugin_registrant.dart": {
+      "path": "safereps/.dart_tool/flutter_build/dart_plugin_registrant.dart",
+      "checksum": "6a5365c033955c7d",
+      "tldr": "_PluginRegistrant is a generated file that registers Flutter plugins for various platforms (Android, iOS, Linux, Windows).",
+      "tree": "safereps/.dart_tool/flutter_build/dart_plugin_registrant.dart\n\u251c\u2500\u2500 _PluginRegistrant:35 \u2014 Generated class to register platform plugins\n\u2502   \u251c\u2500\u2500 register:38 \u2014 Registers plugins based on the current platform\n\u2502   \u2514\u2500\u2500 print:43 \u2014 Logs plugin registration errors",
+      "symbols": [
+        {
+          "name": "_PluginRegistrant",
+          "line": 35,
+          "kind": "class",
+          "parent": null
+        },
+        {
+          "name": "register",
+          "line": 38,
+          "kind": "method",
+          "parent": "_PluginRegistrant"
+        },
+        {
+          "name": "print",
+          "line": 43,
+          "kind": "method",
+          "parent": "_PluginRegistrant"
+        },
+        {
+          "name": "print",
+          "line": 52,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 61,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 70,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 79,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 89,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 98,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 107,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 116,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 125,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 135,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 144,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 153,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 162,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 171,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 181,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 190,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 199,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 208,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 217,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 227,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 236,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 245,
+          "kind": "function",
+          "parent": null
+        },
+        {
+          "name": "print",
+          "line": 254,
+          "kind": "function",
+          "parent": null
+        }
+      ],
+      "imports": [
+        "dart:io",
+        "package:camera_android_camerax/camera_android_camerax.dart",
+        "package:flutter_blue_plus_android/flutter_blue_plus_android.dart",
+        "package:path_provider_android/path_provider_android.dart",
+        "package:shared_preferences_android/shared_preferences_android.dart",
+        "package:video_player_android/video_player_android.dart",
+        "package:camera_avfoundation/camera_avfoundation.dart",
+        "package:flutter_blue_plus_darwin/flutter_blue_plus_darwin.dart",
+        "package:path_provider_foundation/path_provider_foundation.dart",
+        "package:shared_preferences_foundation/shared_preferences_foundation.dart",
+        "package:video_player_avfoundation/video_player_avfoundation.dart",
+        "package:flutter_blue_plus_linux/flutter_blue_plus_linux.dart",
+        "package:package_info_plus/package_info_plus.dart",
+        "package:path_provider_linux/path_provider_linux.dart",
+        "package:shared_preferences_linux/shared_preferences_linux.dart",
+        "package:wakelock_plus/wakelock_plus.dart",
+        "package:path_provider_windows/path_provider_windows.dart",
+        "package:shared_preferences_windows/shared_preferences_windows.dart"
+      ]
+    },
+    "safereps/.dart_tool/dartpad/web_plugin_registrant.dart": {
+      "path": "safereps/.dart_tool/dartpad/web_plugin_registrant.dart",
+      "checksum": "5378ab8cbd9c8207",
+      "tldr": "Generated Flutter web plugin registrant file that registers various platform-specific web plugins via the registerPlugins function.",
+      "tree": "safereps/.dart_tool/dartpad/web_plugin_registrant.dart\n\u2514\u2500\u2500 registerPlugins:18 \u2014 Registers all web-specific plugins for the application",
+      "symbols": [],
+      "imports": [
+        "package:audioplayers_web/audioplayers_web.dart",
+        "package:camera_web/camera_web.dart",
+        "package:flutter_blue_plus_web/flutter_blue_plus_web.dart",
+        "package:package_info_plus/src/package_info_plus_web.dart",
+        "package:permission_handler_html/permission_handler_html.dart",
+        "package:shared_preferences_web/shared_preferences_web.dart",
+        "package:video_player_web/video_player_web.dart",
+        "package:wakelock_plus/src/wakelock_plus_web_plugin.dart",
+        "package:flutter_web_plugins/flutter_web_plugins.dart"
+      ]
+    }
+  },
+  "modules": [
+    {
+      "id": "analysis/exercise-logic",
+      "name": "Exercise Logic",
+      "tldr": "Defines exercise configurations, rep counting logic, and joint angle selectors for movement analysis.",
+      "files": [
+        {
+          "path": "safereps/lib/analysis/exercise.dart"
+        },
+        {
+          "path": "safereps/lib/analysis/rep_counter.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "analysis/imu-form-tracking",
+      "name": "IMU Form Tracking",
+      "tldr": "Analyzes IMU data from wearable sensors to track exercise form quality and detect violations.",
+      "files": [
+        {
+          "path": "safereps/lib/analysis/exercise_imu_profile.dart"
+        },
+        {
+          "path": "safereps/lib/analysis/rep_form_tracker.dart"
+        }
+      ],
+      "deps": [
+        "services/ble-service"
+      ]
+    },
+    {
+      "id": "pose/camera-analysis",
+      "name": "Pose Camera Analysis",
+      "tldr": "Manages real-time camera streaming, pose estimation, and skeleton rendering for exercise tracking.",
+      "files": [
+        {
+          "path": "safereps/lib/pose_camera_page.dart"
+        },
+        {
+          "path": "safereps/lib/pose_painter.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "pages/dashboard",
+      "name": "Dashboard",
+      "tldr": "Main hub for tracking exercise progress, device connectivity, and starting training sessions.",
+      "files": [
+        {
+          "path": "safereps/lib/pages/dashboard_page.dart"
+        }
+      ],
+      "deps": [
+        "services/ble-service"
+      ]
+    },
+    {
+      "id": "pages/games",
+      "name": "Exercise Games",
+      "tldr": "Implements game-based exercises using IMU or ML-based pose detection.",
+      "files": [
+        {
+          "path": "safereps/lib/pages/game67_page.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "services/ble-service",
+      "name": "BLE Service",
+      "tldr": "Handles Bluetooth Low Energy connectivity, device discovery, and IMU data streaming.",
+      "files": [
+        {
+          "path": "safereps/lib/services/ble_service.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "services/theme-service",
+      "name": "Theme Service",
+      "tldr": "Manages application theme flavor and persistence.",
+      "files": [
+        {
+          "path": "safereps/lib/services/theme_service.dart"
+        },
+        {
+          "path": "safereps/lib/theme.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "services/voice-coach",
+      "name": "Voice Coach Service",
+      "tldr": "Handles audio cue playback and coaching track management.",
+      "files": [
+        {
+          "path": "safereps/lib/services/voice_coach_service.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "ui/shell-and-layout",
+      "name": "Shell and Layout",
+      "tldr": "Implements the app's main navigation shell and reusable glassmorphism UI components.",
+      "files": [
+        {
+          "path": "safereps/lib/shell.dart"
+        },
+        {
+          "path": "safereps/lib/widgets/glass_card.dart"
+        }
+      ],
+      "deps": [
+        "pages/dashboard",
+        "services/theme-service"
+      ]
+    },
+    {
+      "id": "app/core",
+      "name": "App Core",
+      "tldr": "Main entry point and root widget managing dependency injection and application bootstrap.",
+      "files": [
+        {
+          "path": "safereps/lib/main.dart"
+        }
+      ],
+      "deps": [
+        "services/ble-service",
+        "services/theme-service"
+      ]
+    },
+    {
+      "id": "build/generated-plugins",
+      "name": "Generated Plugins",
+      "tldr": "Generated files for registering Flutter plugins across different platforms.",
+      "files": [
+        {
+          "path": "safereps/.dart_tool/dartpad/web_plugin_registrant.dart"
+        },
+        {
+          "path": "safereps/.dart_tool/flutter_build/dart_plugin_registrant.dart"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "tooling/ios-helpers",
+      "name": "iOS Helpers",
+      "tldr": "LLDB Python helper script for Flutter iOS build debugging.",
+      "files": [
+        {
+          "path": "safereps/ios/Flutter/ephemeral/flutter_lldb_helper.py"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "tooling/esp32-scripts",
+      "name": "ESP32 Scripts",
+      "tldr": "Script to inject battery monitoring logic into ESP32 C++ source code.",
+      "files": [
+        {
+          "path": "update_batt.py"
+        }
+      ],
+      "deps": []
+    },
+    {
+      "id": "test/integration",
+      "name": "Integration Tests",
+      "tldr": "Widget tests to verify the basic application boot sequence.",
+      "files": [
+        {
+          "path": "safereps/test/widget_test.dart"
+        }
+      ],
+      "deps": [
+        "app/core"
+      ]
+    }
+  ],
+  "last_indexed": "2026-04-22T04:36:21.013925+00:00",
+  "workspace_root": "/Users/xumic/Developer/SafeReps"
+}

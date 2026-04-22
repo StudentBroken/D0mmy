@@ -28,6 +28,7 @@ export default function App() {
   const [apiCalls,     setApiCalls]     = useState<ApiCallEvent[]>([])
   const [clarification,setClarification]= useState<ClarificationState | null>(null)
   const [dynAgents,    setDynAgents]    = useState<AgentSpawnEvent[]>([])
+  const [indexing,     setIndexing]     = useState(false)
 
   const callsRef  = useRef<Map<string, ApiCallEvent>>(new Map())
   const dragging  = useRef(false)
@@ -51,6 +52,12 @@ export default function App() {
           })
         } else if (s === 'sprint_running') {
           setStatus(`Sprint ${p.sprint_id} running…`)
+        } else if (s === 'indexing') {
+          setIndexing(true)
+          setStatus(p.detail || 'Indexing codebase…')
+        } else if (s === 'index_complete') {
+          setIndexing(false)
+          setStatus(p.detail || 'Indexing complete')
         } else {
           setStatus(p.detail || s)
         }
@@ -69,6 +76,7 @@ export default function App() {
       if (msg.type === 'error') {
         const p = msg.payload as { detail: string }
         setStatus(`Error: ${p.detail}`)
+        setIndexing(false)
       }
 
       if (msg.type === 'clarification_needed') {
@@ -205,7 +213,7 @@ export default function App() {
           </div>
         </div>
 
-        <ControlPanel status={status} />
+        <ControlPanel status={status} indexing={indexing} setIndexing={setIndexing} />
       </div>
 
       {/* Terminal drag handle */}

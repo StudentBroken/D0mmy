@@ -9,6 +9,7 @@ export default defineConfig({
       '/health':   { target: 'http://localhost:8000', changeOrigin: true },
       '/verify':   { target: 'http://localhost:8000', changeOrigin: true },
       '/settings': { target: 'http://localhost:8000', changeOrigin: true },
+      '/index':    { target: 'http://localhost:8000', changeOrigin: true },
       // Launcher proxy (separate process on 8001)
       '/launcher': {
         target: 'http://localhost:8001',

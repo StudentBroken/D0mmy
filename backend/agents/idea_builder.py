@@ -103,7 +103,8 @@ async def run(intent: str, session_id: str = "", on_status=None) -> tuple[dict, 
 
     await _emit(on_status, "Fetching context from knowledge base…")
 
-    context_docs = fetch_context(intent, n_results=8)
+    context_docs = await fetch_context(intent, n_results=8)
+    
 
     if on_status:
         await _emit(on_status, "Running parallel analysis agents…")
