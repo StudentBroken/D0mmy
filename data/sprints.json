@@ -1,0 +1,274 @@
+{
+  "blueprint": {
+    "project_name": "Local Weather Station",
+    "intent": "Build a weather station with an ESP32 and a DHT11 sensor. Local OLED display only. USB powered. ESP32-C3 SuperMini.",
+    "hardware_constraints": [
+      "Resolve R001 MCU Mismatch in BOM",
+      "Acquire missing DHT11 Sensor",
+      "Acquire missing 0.91 inch OLED Display",
+      "USB Powered"
+    ],
+    "nodes": [
+      {
+        "id": "update_bom_mcu",
+        "label": "Update BOM to fix Risk R001 MCU Mismatch",
+        "type": "task",
+        "estimated_hours": 0.5,
+        "depends_on": [],
+        "agent": "human"
+      },
+      {
+        "id": "acquire_sensors",
+        "label": "Acquire missing DHT11 Sensor and OLED Display",
+        "type": "milestone",
+        "estimated_hours": 48,
+        "depends_on": [],
+        "agent": "human"
+      },
+      {
+        "id": "scaffold_project",
+        "label": "Initialize Project Scaffolding",
+        "type": "task",
+        "estimated_hours": 1,
+        "depends_on": [
+          "update_bom_mcu"
+        ],
+        "agent": "daemon"
+      },
+      {
+        "id": "wire_hardware",
+        "label": "Assemble acquired hardware and MCU",
+        "type": "task",
+        "estimated_hours": 2,
+        "depends_on": [
+          "acquire_sensors",
+          "scaffold_project"
+        ],
+        "agent": "human"
+      },
+      {
+        "id": "test_flashing",
+        "label": "Hardware Integration and Flashing Test",
+        "type": "hard_stop",
+        "estimated_hours": 1,
+        "depends_on": [
+          "wire_hardware"
+        ],
+        "agent": "human"
+      },
+      {
+        "id": "implement_dht11",
+        "label": "Implement DHT11 Driver",
+        "type": "task",
+        "estimated_hours": 2,
+        "depends_on": [
+          "test_flashing"
+        ],
+        "agent": "worker"
+      },
+      {
+        "id": "implement_oled",
+        "label": "Implement OLED Driver",
+        "type": "task",
+        "estimated_hours": 2,
+        "depends_on": [
+          "test_flashing"
+        ],
+        "agent": "worker"
+      },
+      {
+        "id": "main_app_loop",
+        "label": "Develop Main Application Loop",
+        "type": "task",
+        "estimated_hours": 3,
+        "depends_on": [
+          "implement_dht11",
+          "implement_oled"
+        ],
+        "agent": "heavy"
+      },
+      {
+        "id": "final_test",
+        "label": "Test Full System Functionality",
+        "type": "hard_stop",
+        "estimated_hours": 1,
+        "depends_on": [
+          "main_app_loop"
+        ],
+        "agent": "human"
+      },
+      {
+        "id": "project_complete",
+        "label": "Weather Station Delivered",
+        "type": "milestone",
+        "estimated_hours": 0,
+        "depends_on": [
+          "final_test"
+        ],
+        "agent": "human"
+      }
+    ],
+    "edges": [
+      {
+        "from": "update_bom_mcu",
+        "to": "scaffold_project"
+      },
+      {
+        "from": "acquire_sensors",
+        "to": "wire_hardware"
+      },
+      {
+        "from": "scaffold_project",
+        "to": "wire_hardware"
+      },
+      {
+        "from": "wire_hardware",
+        "to": "test_flashing"
+      },
+      {
+        "from": "test_flashing",
+        "to": "implement_dht11"
+      },
+      {
+        "from": "test_flashing",
+        "to": "implement_oled"
+      },
+      {
+        "from": "implement_dht11",
+        "to": "main_app_loop"
+      },
+      {
+        "from": "implement_oled",
+        "to": "main_app_loop"
+      },
+      {
+        "from": "main_app_loop",
+        "to": "final_test"
+      },
+      {
+        "from": "final_test",
+        "to": "project_complete"
+      }
+    ],
+    "sprints": [
+      {
+        "sprint_id": 1,
+        "title": "Preparation and Setup",
+        "node_ids": [
+          "update_bom_mcu",
+          "acquire_sensors",
+          "scaffold_project"
+        ],
+        "estimated_hours": 49.5,
+        "hard_stop": false
+      },
+      {
+        "sprint_id": 2,
+        "title": "Hardware Assembly",
+        "node_ids": [
+          "wire_hardware",
+          "test_flashing"
+        ],
+        "estimated_hours": 3,
+        "hard_stop": true
+      },
+      {
+        "sprint_id": 3,
+        "title": "Software Implementation",
+        "node_ids": [
+          "implement_dht11",
+          "implement_oled",
+          "main_app_loop"
+        ],
+        "estimated_hours": 7,
+        "hard_stop": false
+      },
+      {
+        "sprint_id": 4,
+        "title": "Final Testing",
+        "node_ids": [
+          "final_test",
+          "project_complete"
+        ],
+        "estimated_hours": 1,
+        "hard_stop": true
+      }
+    ]
+  },
+  "sprints": [
+    {
+      "sprint_id": 1,
+      "title": "Initial Setup and Procurement",
+      "node_ids": [
+        "update_bom_mcu",
+        "acquire_sensors"
+      ],
+      "estimated_hours": 48.5,
+      "hard_stop": false
+    },
+    {
+      "sprint_id": 2,
+      "title": "Project Scaffolding",
+      "node_ids": [
+        "scaffold_project"
+      ],
+      "estimated_hours": 1.0,
+      "hard_stop": false
+    },
+    {
+      "sprint_id": 3,
+      "title": "Hardware Assembly",
+      "node_ids": [
+        "wire_hardware"
+      ],
+      "estimated_hours": 2.0,
+      "hard_stop": false
+    },
+    {
+      "sprint_id": 4,
+      "title": "Hardware Integration Test",
+      "node_ids": [
+        "test_flashing"
+      ],
+      "estimated_hours": 0.5,
+      "hard_stop": true
+    },
+    {
+      "sprint_id": 5,
+      "title": "Driver Implementation",
+      "node_ids": [
+        "implement_dht11",
+        "implement_oled"
+      ],
+      "estimated_hours": 12.0,
+      "hard_stop": false
+    },
+    {
+      "sprint_id": 6,
+      "title": "Application Development",
+      "node_ids": [
+        "main_app_loop"
+      ],
+      "estimated_hours": 3.0,
+      "hard_stop": false
+    },
+    {
+      "sprint_id": 7,
+      "title": "Final System Testing",
+      "node_ids": [
+        "final_test"
+      ],
+      "estimated_hours": 0.5,
+      "hard_stop": true
+    },
+    {
+      "sprint_id": 8,
+      "title": "Project Delivery",
+      "node_ids": [
+        "project_complete"
+      ],
+      "estimated_hours": 0.0,
+      "hard_stop": false
+    }
+  ]
+}

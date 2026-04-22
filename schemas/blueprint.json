@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApplicationBlueprintDAG",
+  "type": "object",
+  "required": ["project_name", "intent", "nodes", "edges", "sprints"],
+  "properties": {
+    "project_name": { "type": "string" },
+    "intent": { "type": "string" },
+    "hardware_constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "type", "estimated_hours"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "type": "string", "enum": ["task", "hard_stop", "milestone"] },
+          "estimated_hours": { "type": "number" },
+          "depends_on": { "type": "array", "items": { "type": "string" } },
+          "agent": { "type": "string", "enum": ["heavy", "worker", "daemon", "human"] }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" }
+        }
+      }
+    },
+    "sprints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sprint_id", "title", "node_ids", "estimated_hours"],
+        "properties": {
+          "sprint_id": { "type": "integer" },
+          "title": { "type": "string" },
+          "node_ids": { "type": "array", "items": { "type": "string" } },
+          "estimated_hours": { "type": "number" },
+          "hard_stop": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

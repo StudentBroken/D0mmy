@@ -1,0 +1,53 @@
+{
+  "name": "d0mmy-vscode",
+  "displayName": "D0mmy",
+  "description": "D0mmy autonomous agent bridge — receives AI diffs, sends file context",
+  "version": "0.1.0",
+  "publisher": "d0mmy",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "D0mmy",
+      "properties": {
+        "d0mmy.backendUrl": {
+          "type": "string",
+          "default": "ws://localhost:8000",
+          "description": "D0mmy backend WebSocket base URL (without path). Override per-workspace to target a specific D0mmy instance."
+        }
+      }
+    },
+    "commands": [
+      { "command": "d0mmy.acceptDiff", "title": "D0mmy: Accept Diff" },
+      { "command": "d0mmy.rejectDiff",  "title": "D0mmy: Reject Diff"  },
+      { "command": "d0mmy.sendContext", "title": "D0mmy: Send File Context" }
+    ],
+    "keybindings": [
+      {
+        "command": "d0mmy.acceptDiff",
+        "key": "tab",
+        "when": "d0mmy.diffPending"
+      },
+      {
+        "command": "d0mmy.rejectDiff",
+        "key": "escape",
+        "when": "d0mmy.diffPending"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch":   "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node":   "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "@types/ws":     "^8.5.10",
+    "typescript":    "^5.4.5"
+  },
+  "dependencies": {
+    "ws": "^8.17.1"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["analysis_sufficient", "spawn_agents"],
+  "properties": {
+    "analysis_sufficient": {
+      "type": "boolean",
+      "description": "True if existing analysis is enough to synthesize a high-quality blueprint"
+    },
+    "rationale": {
+      "type": "string",
+      "description": "One sentence explaining the routing decision"
+    },
+    "spawn_agents": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "goal", "focus", "input"],
+        "properties": {
+          "id": { "type": "string", "description": "Short unique slug, e.g. 'perf_analyzer'" },
+          "goal": { "type": "string", "description": "What this agent should produce" },
+          "focus": { "type": "string", "description": "Specific technical question to answer" },
+          "input": { "type": "string", "description": "Relevant context to pass to this agent" }
+        }
+      }
+    }
+  }
+}

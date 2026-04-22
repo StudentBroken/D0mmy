@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "required": ["modules"],
+  "properties": {
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "tldr", "files"],
+        "properties": {
+          "id":   { "type": "string" },
+          "name": { "type": "string" },
+          "tldr": { "type": "string" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path"],
+              "properties": {
+                "path":  { "type": "string" },
+                "start": { "type": "integer" },
+                "end":   { "type": "integer" }
+              }
+            }
+          },
+          "deps": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

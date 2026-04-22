@@ -1,0 +1,21 @@
+{
+  "_comment": "Hardware Bill of Materials. Every AI agent that generates code is checked against this. Add your actual hardware before starting Phase 2.",
+  "project": "D0mmy Hardware Platform",
+  "microcontrollers": [
+    { "id": "esp32-wroom-32", "label": "ESP32-WROOM-32", "interfaces": ["UART", "SPI", "I2C", "PWM", "ADC"], "flash_kb": 4096, "ram_kb": 520 }
+  ],
+  "motor_controllers": [
+    { "id": "vesc6", "label": "VESC 6.x", "protocol": "UART", "can_bus": true }
+  ],
+  "sensors": [],
+  "communication": [
+    { "id": "usb-serial", "label": "USB-to-Serial adapter", "baud_rates": [9600, 115200, 460800] }
+  ],
+  "power": [],
+  "peripherals": [],
+  "com_ports": {
+    "esp32": "COM3",
+    "vesc": "COM4",
+    "_note": "Update these to your actual COM port assignments"
+  }
+}

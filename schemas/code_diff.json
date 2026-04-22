@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["file_path", "content", "summary"],
+  "properties": {
+    "file_path": { "type": "string" },
+    "content":   { "type": "string" },
+    "summary":   { "type": "string" }
+  }
+}

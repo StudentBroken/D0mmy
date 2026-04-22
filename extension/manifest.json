@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "D0mmy Harvester",
+  "version": "0.1.0",
+  "description": "Highlights text in Chrome and sends it to the D0mmy knowledge base.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "harvest": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Send highlighted text to D0mmy"
+    }
+  },
+  "action": {
+    "default_title": "D0mmy Harvester",
+    "default_popup": "popup.html"
+  }
+}

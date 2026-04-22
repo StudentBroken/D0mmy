@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RiskReport",
+  "type": "object",
+  "required": ["risks", "blocking_risks", "summary"],
+  "properties": {
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description", "probability", "impact", "mitigation"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "probability": { "type": "string", "enum": ["high", "medium", "low"] },
+          "impact": { "type": "string", "enum": ["critical", "major", "minor"] },
+          "mitigation": { "type": "string" }
+        }
+      }
+    },
+    "blocking_risks": { "type": "array", "items": { "type": "string" } },
+    "summary": { "type": "string" }
+  }
+}

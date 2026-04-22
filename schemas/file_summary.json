@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "required": ["tldr", "tree"],
+  "properties": {
+    "tldr": { "type": "string" },
+    "tree": { "type": "string" }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "convergence_node_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of node IDs that are convergence points (shared dependencies)."
+    },
+    "sprints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sprint_id": { "type": "integer" },
+          "title": { "type": "string" },
+          "node_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "estimated_hours": { "type": "number" },
+          "hard_stop": { "type": "boolean" }
+        },
+        "required": ["sprint_id", "title", "node_ids", "estimated_hours", "hard_stop"]
+      }
+    }
+  },
+  "required": ["convergence_node_ids", "sprints"]
+}
