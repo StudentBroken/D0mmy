@@ -77,6 +77,9 @@ _TS_IFACE   = re.compile(r"""(?:export\s+)?(?:interface|type)\s+(\w+)\s*[={<]"""
 _TS_METHOD  = re.compile(r"""^\s{2,}(?:async\s+)?(\w+)\s*\(""")
 
 
+    return FileGraph(rel_path, chk, symbols, list(dict.fromkeys(imports)))
+
+
 def _parse_typescript(rel_path: str, content: str) -> FileGraph:
     chk = _checksum(content.encode())
     symbols: list[Symbol] = []
@@ -108,14 +111,48 @@ def _parse_typescript(rel_path: str, content: str) -> FileGraph:
     return FileGraph(rel_path, chk, symbols, list(dict.fromkeys(imports)))
 
 
+# ── Dart ──────────────────────────────────────────────────────────────────────
+
+_DART_IMPORT = re.compile(r"""import\s+['"]([^'"]+)['"]""")
+_DART_CLASS  = re.compile(r"""(?:abstract\s+)?class\s+(\w+)""")
+_DART_FUNC   = re.compile(r"""^(?:\w+[\s<][^>]*>?\s+)?(\w+)\s*\(""")
+
+
+def _parse_dart(rel_path: str, content: str) -> FileGraph:
+    chk = _checksum(content.encode())
+    symbols: list[Symbol] = []
+    imports: list[str] = []
+    current_class: str | None = None
+
+    for i, line in enumerate(content.splitlines(), start=1):
+        line_trim = line.strip()
+        if m := _DART_IMPORT.search(line):
+            imports.append(m.group(1))
+
+        if m := _DART_CLASS.search(line):
+            current_class = m.group(1)
+            symbols.append(Symbol(current_class, i, "class"))
+        elif m := _DART_FUNC.search(line_trim):
+            name = m.group(1)
+            if name not in {"if", "for", "while", "switch", "return", "void", "else", "try", "catch"}:
+                kind = "method" if current_class else "function"
+                symbols.append(Symbol(name, i, kind, parent=current_class))
+
+        if current_class and line_trim == "}":
+            current_class = None
+
+    return FileGraph(rel_path, chk, symbols, list(dict.fromkeys(imports)))
+
+
 # ── Dispatcher ────────────────────────────────────────────────────────────────
 
 _PARSERS = {
-    ".py":  _parse_python,
-    ".ts":  _parse_typescript,
-    ".tsx": _parse_typescript,
-    ".js":  _parse_typescript,
-    ".jsx": _parse_typescript,
+    ".py":   _parse_python,
+    ".ts":   _parse_typescript,
+    ".tsx":  _parse_typescript,
+    ".js":   _parse_typescript,
+    ".jsx":  _parse_typescript,
+    ".dart": _parse_dart,
 }
 
 

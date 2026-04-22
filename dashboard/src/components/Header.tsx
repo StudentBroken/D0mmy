@@ -16,6 +16,7 @@ export default function Header({ connected, status, terminalOpen, onToggleTermin
   const [busy,           setBusy]           = useState(false)
   const [copied,         setCopied]         = useState(false)
   const [targetRepo,     setTargetRepo]     = useState<string | null>(null)
+  const [indexStats,     setIndexStats]     = useState<{ last_indexed?: string; total_files?: number } | null>(null)
 
   useEffect(() => {
     let alive = true
@@ -37,7 +38,11 @@ export default function Header({ connected, status, terminalOpen, onToggleTermin
     fetch('/settings').then(r => r.ok ? r.json() : null).then(d => {
       if (d?.settings?.TARGET_REPO) setTargetRepo(d.settings.TARGET_REPO)
     }).catch(() => {})
-  }, [backendOn])
+
+    fetch('/index').then(r => r.ok ? r.json() : null).then(d => {
+      if (d) setIndexStats({ last_indexed: d.last_indexed, total_files: d.total_files })
+    }).catch(() => {})
+  }, [backendOn, status])
 
   async function toggleBackend() {
     setBusy(true)
@@ -100,18 +105,49 @@ export default function Header({ connected, status, terminalOpen, onToggleTermin
         </div>
 
         {/* Repo badge */}
-        {repoName && (
+        {targetRepo && (
           <>
             <div style={{ width: 1, height: 14, background: 'var(--border-hi)', flexShrink: 0 }} />
-            <span style={{
-              fontSize: 11, color: 'var(--text-muted)',
-              fontFamily: 'var(--mono)', maxWidth: 200,
-              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-            }} title={targetRepo ?? ''}>
-              /{repoName}
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{
+                fontSize: 10, fontWeight: 700, letterSpacing: '.05em', color: 'var(--text-muted)',
+                textTransform: 'uppercase', flexShrink: 0
+              }}>
+                Repo:
+              </span>
+              <span style={{
+                fontSize: 11, color: 'var(--text-2)',
+                fontFamily: 'var(--mono)', maxWidth: 260,
+                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                background: 'var(--bg-input)', padding: '2px 6px', borderRadius: 4,
+                border: '1px solid var(--border)',
+              }} title={targetRepo}>
+                {targetRepo}
+              </span>
+            </div>
           </>
         )}
+
+        {/* Index Status */}
+        <div style={{ width: 1, height: 14, background: 'var(--border-hi)', flexShrink: 0 }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+           <span style={{
+                fontSize: 10, fontWeight: 700, letterSpacing: '.05em', color: 'var(--text-muted)',
+                textTransform: 'uppercase', flexShrink: 0
+              }}>
+                Index:
+              </span>
+          {indexStats?.last_indexed ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <span className="badge badge-green" style={{ fontSize: 9, padding: '0 5px' }}>✓ Indexed</span>
+              <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>
+                {indexStats.total_files} files
+              </span>
+            </div>
+          ) : (
+            <span className="badge badge-red" style={{ fontSize: 9, padding: '0 5px' }}>✗ Unindexed</span>
+          )}
+        </div>
 
         {/* Status */}
         <span style={{

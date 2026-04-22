@@ -14,10 +14,37 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
+def kill_port_processes(port: int):
+    """Find and kill processes using the specified port."""
+    try:
+        # Get PIDs using the port
+        cmd = ["lsof", "-t", f"-i:{port}"]
+        pids = subprocess.check_output(cmd).decode().strip().split('\n')
+        pids = [p for p in pids if p]
+        
+        if pids:
+            print(f"\x1b[33m[!] Port {port} in use by PID(s): {', '.join(pids)}. Cleaning up...\x1b[0m")
+            for pid in pids:
+                try:
+                    os.kill(int(pid), signal.SIGTERM)
+                    time.sleep(0.5)
+                    # Check if still alive
+                    os.kill(int(pid), 0)
+                    os.kill(int(pid), signal.SIGKILL)
+                except OSError:
+                    pass # Process already dead
+    except (subprocess.CalledProcessError, ValueError):
+        pass # Port not in use
+
 def main():
     print("\x1b[34m" + "="*50)
     print(" D0MMY DEV BOOTSTRAPPER")
     print("="*50 + "\x1b[0m")
+
+    # 0. Cleanup old processes
+    print("\x1b[32m[0/3] Checking for conflicting processes...\x1b[0m")
+    kill_port_processes(8000)
+    kill_port_processes(8001)
 
     # 1. Start the launcher
     print("\x1b[32m[1/2] Starting process launcher...\x1b[0m")

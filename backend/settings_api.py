@@ -31,6 +31,8 @@ _ALLOWED_KEYS = {
     "BACKEND_HOST",
     "BACKEND_PORT",
     "CHROMA_PERSIST_DIR",
+    "TARGET_REPO",
+    "SPRINTS_PATH",
     "LOG_LEVEL",
 }
 

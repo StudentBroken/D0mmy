@@ -15,7 +15,7 @@ from backend.agents.module_indexer.index_writer import load_index, write_index
 
 logger = logging.getLogger(__name__)
 
-_SUPPORTED   = {".py", ".ts", ".tsx", ".js", ".jsx"}
+_SUPPORTED   = {".py", ".ts", ".tsx", ".js", ".jsx", ".dart"}
 _EXCLUDE_DIRS = frozenset({
     "node_modules", ".git", "__pycache__", "out", ".venv",
     "dist", "build", "data", ".vscode-test",

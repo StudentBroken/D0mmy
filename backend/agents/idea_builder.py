@@ -7,6 +7,7 @@ from pathlib import Path
 from backend.models.client import call_model
 from backend.memory.rom import get_prompt, get_schema
 from backend.memory.hdd import fetch_context
+from backend.agents.module_indexer.index_writer import INDEX_MD
 
 logger = logging.getLogger(__name__)
 
@@ -19,11 +20,14 @@ def load_bom() -> dict:
     return json.loads(_BOM_PATH.read_text())
 
 
-async def _tech_harvester(intent: str, context_docs: list[dict]) -> dict:
+async def _tech_harvester(intent: str, context_docs: list[dict], repo_map: str = "") -> dict:
     context_text = "\n\n".join(
         f"[Source: {d['metadata'].get('source', 'local')}]\n{d['text']}"
         for d in context_docs
     )
+    if repo_map:
+        context_text = f"--- EXISTING PROJECT STRUCTURE ---\n{repo_map}\n\n" + context_text
+
     result = await call_model(
         role="worker",
         messages=[
@@ -89,6 +93,14 @@ async def run(intent: str, session_id: str = "", on_status=None) -> tuple[dict, 
 
     bom = load_bom() if hardware_mode else {}
 
+    # Load local project map if indexed
+    repo_map = ""
+    if INDEX_MD.exists():
+        repo_map = INDEX_MD.read_text(encoding="utf-8", errors="replace")
+        # Cap at 15k chars for planning safety; Phase 3 execution handles full file reads
+        if len(repo_map) > 15000:
+            repo_map = repo_map[:15000] + "\n... (project map truncated)"
+
     await _emit(on_status, "Fetching context from knowledge base…")
 
     context_docs = fetch_context(intent, n_results=8)
@@ -98,7 +110,7 @@ async def run(intent: str, session_id: str = "", on_status=None) -> tuple[dict, 
 
     if hardware_mode:
         tech_report, rubric = await asyncio.gather(
-            _tech_harvester(intent, context_docs),
+            _tech_harvester(intent, context_docs, repo_map=repo_map),
             _rubric_aligner(intent, bom),
         )
         if on_status:
@@ -127,6 +139,7 @@ async def run(intent: str, session_id: str = "", on_status=None) -> tuple[dict, 
         "intent": intent,
         "tech_report": tech_report,
         "risks": risks,
+        "existing_repo_map": repo_map,
     }
     if hardware_mode:
         synthesis_payload["bom"] = bom
